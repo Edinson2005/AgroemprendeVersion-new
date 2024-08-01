@@ -12,14 +12,19 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.edinson.agroemnew.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_proyecto"
+        android:name="com.edinson.agroemnew.ui.proyecto.ProyectoFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_proyecto" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.edinson.agroemnew.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_perfil"
+        android:name="com.edinson.agroemnew.ui.perfil.PerfilFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/navigation_cerrar"
+        android:name="com.edinson.agroemnew.ui.perfil.PerfilFragment"
+        android:label="Cerrar Sesion"
+        tools:layout="@layout/fragment_perfil" />
 </navigation>
