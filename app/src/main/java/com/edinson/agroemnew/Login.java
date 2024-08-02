@@ -3,6 +3,8 @@ package com.edinson.agroemnew;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,8 +44,14 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
+
+        //desactivar actionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -69,7 +77,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void startMainActivity() {
-        Intent intent = new Intent(Login.this, HomeFragment.class);
+        Intent intent = new Intent(Login.this, MainActivity.class);
         startActivity(intent);
         finish(); // Cierra la actividad de login
     }
