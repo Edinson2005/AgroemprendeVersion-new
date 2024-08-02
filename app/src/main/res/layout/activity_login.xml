@@ -9,13 +9,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:text="Inicio de sesión"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,10 +35,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 android:layout_width="330dp"
-                android:drawableStart="@drawable/gmail"
                 android:layout_height="match_parent"
+                android:drawableStart="@drawable/gmail"
                 android:drawablePadding="12dp"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/black"
+                android:background="@drawable/custom_edittext_background" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -52,18 +56,18 @@
                 android:layout_height="match_parent"
                 android:drawableStart="@drawable/password"
                 android:drawablePadding="12dp"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:background="@drawable/custom_edittext_background" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/purple"
             android:text="Inicia sesión"
             android:onClick="onLoginClick" />
-
-
     </LinearLayout>
 
     <TextView
@@ -73,17 +77,20 @@
         android:text="¿Olvidaste tu contraseña?"
         android:layout_marginTop="16dp"
         android:textStyle="bold"
-        android:textColor="@color/azul"/>
+        android:textColor="@color/azul" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="¿No tienes cuenta?"
             android:layout_marginTop="16dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/Registrarse"
             android:layout_marginLeft="10dp"
@@ -92,13 +99,13 @@
             android:text="Regístrate"
             android:layout_marginTop="16dp"
             android:textStyle="bold"
-            android:textColor="@color/azul"/>
+            android:textColor="@color/azul" />
     </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

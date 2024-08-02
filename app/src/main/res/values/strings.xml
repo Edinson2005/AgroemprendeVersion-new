@@ -2,5 +2,6 @@
     <string name="app_name">AgroemNew</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="MenuTitulo">Agro Emprende</string>
     <string name="title_notifications">Notifications</string>
 </resources>
