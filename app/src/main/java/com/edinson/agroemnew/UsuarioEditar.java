@@ -1,5 +1,6 @@
 package com.edinson.agroemnew;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -55,8 +56,14 @@ public class UsuarioEditar extends AppCompatActivity {
         edtNumIdentificacion = findViewById(R.id.edtNumIdentificacion);
         edtTelefono = findViewById(R.id.edtTelefono);
         edtNacimiento = findViewById(R.id.edtNacimiento);
+        // Asegúrate de que esta vista esté en tu layout
         btnguardardatos = findViewById(R.id.btnguardardatos);
         btnEditEmail = findViewById(R.id.btnEditarEmail);
+        Log.d("UsuarioEditar", "Views initialized: edtNombre = " + edtNombre + ", edtApellido = " + edtApellido +
+                ", edtEmail = " + edtEmail + ", edtNumIdentificacion = " + edtNumIdentificacion +
+                ", edtTelefono = " + edtTelefono + ", edtNacimiento = " + edtNacimiento +
+                ", edtCaracterizacion = " + edtCaracterizacion + ", btnguardardatos = " + btnguardardatos +
+                ", btnEditEmail = " + btnEditEmail);
     }
 
     private void setupListeners() {
@@ -74,6 +81,8 @@ public class UsuarioEditar extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateUserInterface();
+        cargarDatosUsuario();
+        loadDataFromSharedPreferences();
     }
 
     private void updateUserInterface() {
@@ -114,6 +123,7 @@ public class UsuarioEditar extends AppCompatActivity {
         String userId = sharedPreferences.getString("UserId", null);
 
         if (userId != null) {
+            //Toast.makeText(this, "ID del usuario guardado: " + userId, Toast.LENGTH_SHORT).show();
             Log.d("UsuarioEditar", "ID del usuario recuperado: " + userId);
         } else {
             Toast.makeText(this, "ID del usuario no encontrado", Toast.LENGTH_SHORT).show();
@@ -131,15 +141,18 @@ public class UsuarioEditar extends AppCompatActivity {
         }
         apiService = new ApiLogin().getRetrofitInstance().create(ApiService.class);
         Call<UserDetails> call = apiService.getUserDetails("Bearer " + token);
+        Log.d("EditarPerfilUsuario", "Llamada a la API con token: " + token);
         call.enqueue(new Callback<UserDetails>() {
             @Override
             public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
+                Log.d("EditarPerfilUsuario", "Código de respuesta: " + response.code());
                 if (response.isSuccessful()) {
                     UserDetails userDetails = response.body();
                     if (userDetails != null) {
-                        Log.d("EditarPerfilUsuario", "Respuesta del API: " + new Gson().toJson(userDetails));
+                        Log.d("EditarPerfilUsuario", "Respuesta completa: " + new Gson().toJson(userDetails));
                         UserDetails.Sub sub = userDetails.getSub();
                         if (sub != null) {
+                            Log.d("EditarPerfilUsuario", "ID del usuario en respuesta: " + sub.get_id());
                             runOnUiThread(() -> mostrarDatosEnUI(sub));
                         } else {
                             Log.e("EditarPerfilUsuario", "Objeto 'sub' es null en la respuesta");
@@ -151,7 +164,6 @@ public class UsuarioEditar extends AppCompatActivity {
                     handleApiError(response);
                 }
             }
-
             @Override
             public void onFailure(Call<UserDetails> call, Throwable t) {
                 Log.e("EditarPerfilUsuario", "Error de conexión: " + t.getMessage(), t);
@@ -168,6 +180,7 @@ public class UsuarioEditar extends AppCompatActivity {
         if (edtNumIdentificacion != null && sub.getNumIdentificacion() != null) edtNumIdentificacion.setText(sub.getNumIdentificacion());
         if (edtTelefono != null && sub.getTelefono() != null) edtTelefono.setText(sub.getTelefono());
         if (edtNacimiento != null && sub.getFechaNacimiento() != null) {
+            // Extrae la fecha en el formato deseado
             String fechaNacimiento = sub.getFechaNacimiento().substring(0, 10);
             edtNacimiento.setText(fechaNacimiento);
         }
@@ -180,7 +193,7 @@ public class UsuarioEditar extends AppCompatActivity {
         String userId = sharedPreferences.getString("UserId", null);
 
         if (token == null || userId == null) {
-            Toast.makeText(this, "Información de usuario no encontrado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Información de usuario no encontrada", Toast.LENGTH_SHORT).show();
             Log.e("ActualizarDatosUsuario", "Token o ID de usuario no encontrado");
             return;
         }
@@ -189,17 +202,22 @@ public class UsuarioEditar extends AppCompatActivity {
 
         apiService = new ApiLogin().getRetrofitInstance().create(ApiService.class);
         Call<Void> call = apiService.updateUserProfile(userId, "Bearer " + token, userUpdate);
+        Log.d("ActualizarDatosUsuario", "Llamada a la API para actualizar datos con ID: " + userId);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("ActualizarDatosUsuario", "Código de respuesta: " + response.code());
                 if (response.isSuccessful()) {
-                    updateSharedPreferences(userUpdate);
+                    Log.d("ActualizarDatosUsuario", "Actualización exitosa");
+                    updateSharedPreferences(userUpdate); // Actualizar SharedPreferences
                     Toast.makeText(UsuarioEditar.this, "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
+
+                    // Enviar resultado a PerfilFragment
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("DATOS_ACTUALIZADOS", true);
-                    setResult(RESULT_OK, resultIntent);
-                    finish(); // Volver a PerfilUsuario
+                    setResult(Activity.RESULT_OK, resultIntent);
+                    finish(); // Volver a PerfilFragment
                 } else {
                     Log.e("ActualizarDatosUsuario", "Error en la actualización: " + response.message());
                     handleApiError(response);
@@ -214,6 +232,7 @@ public class UsuarioEditar extends AppCompatActivity {
         });
     }
 
+
     private UserUpdate createUserUpdateObject() {
         UserUpdate userUpdate = new UserUpdate();
         userUpdate.setNombre(edtNombre.getText().toString());
@@ -221,29 +240,47 @@ public class UsuarioEditar extends AppCompatActivity {
         userUpdate.setNumIdentificacion(edtNumIdentificacion.getText().toString());
         userUpdate.setTelefono(edtTelefono.getText().toString());
 
+        // Formatear la fecha correctamente
+        String inputDate = edtNacimiento.getText().toString();
+        try {
+            LocalDate date = LocalDate.parse(inputDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String isoDate = date.format(DateTimeFormatter.ISO_DATE);
+            userUpdate.setFechaNacimiento(isoDate);
+        } catch (Exception e) {
+            Log.e("ActualizarDatosUsuario", "Error al formatear la fecha: " + e.getMessage());
+            // Manejar el error, tal vez mostrar un Toast al usuario
+        }
+
         if (isEmailEditable) {
             userUpdate.setEmail(edtEmail.getText().toString());
         }
 
-        userUpdate.setFechaNacimiento(edtNacimiento.getText().toString());
+        Log.d("ActualizarDatosUsuario", "Datos a enviar: " + new Gson().toJson(userUpdate));
         return userUpdate;
     }
 
     private void updateSharedPreferences(UserUpdate updatedUser) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("UserNombre", updatedUser.getNombre());
-        editor.putString("UserApellido", updatedUser.getApellido());
+        editor.putString("UserName", updatedUser.getNombre() + " " + updatedUser.getApellido());
         if (isEmailEditable) {
             editor.putString("UserEmail", updatedUser.getEmail());
         }
-        editor.putString("UserTelefono", updatedUser.getTelefono());
+        editor.putString("UserPhone", updatedUser.getTelefono());
+        editor.putString("UserNumIdentificacion", updatedUser.getNumIdentificacion());
+        editor.putString("UserBirthDate", updatedUser.getFechaNacimiento());
         editor.putLong("LastUpdateTime", System.currentTimeMillis());
-        editor.apply(); // Asegúrate de usar apply() para cambios en segundo plano
+        editor.apply();
     }
 
     private void handleApiError(Response<?> response) {
-        String errorMessage = "Error en la conexión: " + response.message();
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+        Log.e("ApiError", "Código de respuesta: " + response.code() + ", Mensaje: " + response.message());
+        try {
+            String errorBody = response.errorBody() != null ? response.errorBody().string() : "Sin cuerpo de error";
+            Log.e("ApiError", "Cuerpo del error: " + errorBody);
+            Toast.makeText(this, "Error: " + errorBody, Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Log.e("ApiError", "Error al leer el cuerpo del error", e);
+        }
     }
 }

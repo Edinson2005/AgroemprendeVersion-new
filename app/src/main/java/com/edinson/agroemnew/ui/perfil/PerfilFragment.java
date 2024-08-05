@@ -33,7 +33,6 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     @Override
@@ -47,7 +46,6 @@ public class PerfilFragment extends Fragment {
                 activity.getSupportActionBar().hide();
             }
         }
-
 
         setupObservers();
         setupListeners();

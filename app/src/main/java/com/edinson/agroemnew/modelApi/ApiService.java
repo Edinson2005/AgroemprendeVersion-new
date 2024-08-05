@@ -19,7 +19,8 @@ public interface ApiService {
             @Field("email") String email,
             @Field("contrasena") String contrasena);
 
-
+    @POST("auth/usuario")
+    Call<Void> registerUser (@Body RegisterRequest registerRequest);
     @GET("auth/profile")
     Call<UserDetails> getUserDetails(@Header("Authorization") String token);
 

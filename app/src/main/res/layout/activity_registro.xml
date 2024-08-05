@@ -116,6 +116,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/etTelefono"
             android:layout_width="276dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -212,6 +213,12 @@
             android:backgroundTint="@color/colortexto"
 
             android:text="Registrarse" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
     </androidx.cardview.widget.CardView>
 
 
