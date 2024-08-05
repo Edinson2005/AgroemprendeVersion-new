@@ -1,16 +1,24 @@
 package com.edinson.agroemnew.ui.perfil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.edinson.agroemnew.MainActivity;
+import com.edinson.agroemnew.UsuarioEditar;
 import com.edinson.agroemnew.databinding.FragmentPerfilBinding;
 import com.edinson.agroemnew.modelApi.UserDetails;
 
@@ -19,11 +27,13 @@ public class PerfilFragment extends Fragment {
 
     private FragmentPerfilBinding binding;
     private PerfilViewModel perfilViewModel;
+    private static final int EDITAR_USUARIO_REQUEST = 1;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
     }
 
     @Override
@@ -31,10 +41,17 @@ public class PerfilFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
 
+        if (getActivity() != null) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            if (activity.getSupportActionBar() != null) {
+                activity.getSupportActionBar().hide();
+            }
+        }
+
+
         setupObservers();
         setupListeners();
-
-        perfilViewModel.updateUserInterface();
+        perfilViewModel.updateUserInterface(false);
     }
 
     private void setupObservers() {
@@ -43,9 +60,11 @@ public class PerfilFragment extends Fragment {
     }
 
     private void updateUI(UserDetails.Sub userData) {
+        Log.d("PerfilFragment", "Actualizando UI con datos: " + userData.toString());
         binding.tvNombre.setText(userData.getNombre() + " " + userData.getApellido());
         binding.tvEmail.setText(userData.getEmail());
         binding.tvTelefono.setText(userData.getTelefono());
+        // Actualiza otros campos si es necesario
     }
 
     private void showError(String errorMessage) {
@@ -54,16 +73,26 @@ public class PerfilFragment extends Fragment {
 
     private void setupListeners() {
         binding.btnEditar.setOnClickListener(v -> {
-            // Implementar la navegación a la pantalla de edición de usuario
-            // Por ejemplo:
-            // Navigation.findNavController(v).navigate(R.id.action_perfilFragment_to_usuarioEditarFragment);
+            Intent intent = new Intent(getActivity(), UsuarioEditar.class);
+            startActivityForResult(intent, EDITAR_USUARIO_REQUEST);
         });
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EDITAR_USUARIO_REQUEST && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getBooleanExtra("DATOS_ACTUALIZADOS", false)) {
+                perfilViewModel.updateUserInterface(true); // Forzar actualización de la interfaz
+            }
+        }
+    }
+
+
+    @Override
     public void onResume() {
         super.onResume();
-        perfilViewModel.updateUserInterface();
+        perfilViewModel.updateUserInterface(false);
     }
 
     @Override

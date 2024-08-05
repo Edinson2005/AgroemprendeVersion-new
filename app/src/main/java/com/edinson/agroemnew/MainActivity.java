@@ -17,6 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.edinson.agroemnew.databinding.ActivityMainBinding;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.navigation_cerrar) {
                     // Handle logout logic here
-                    logout();
+                    logoutUser();
                     return true;
                 }
                 return NavigationUI.onNavDestinationSelected(item, navController)
@@ -54,19 +56,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void logout() {
-        // Clear user data from SharedPreferences or other storage
-        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+    private void logoutUser() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
+        editor.clear(); // Borra todas las preferencias
         editor.apply();
-
-        // Display a toast message
-        Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
-
-        // Redirect to login screen
-        Intent intent = new Intent(MainActivity.this, Login.class);
-        startActivity(intent);
-        finish(); // Close MainActivity
+        Intent intent = new Intent(getApplication(), Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getApplication().startActivity(intent);
+        // Redirige al usuario a la pantalla de inicio de sesión u otra pantalla
     }
+
+
+
 }
