@@ -6,26 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.perfil.PerfilFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="419dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="221dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="315dp"
         android:layout_height="530dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         app:cardCornerRadius="23dp">
 
         <ImageButton
@@ -97,13 +83,6 @@
             android:textSize="18sp" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
     </androidx.cardview.widget.CardView>
 
     <ImageView
@@ -119,9 +98,15 @@
         android:layout_width="184dp"
         android:layout_height="130dp"
         android:layout_marginLeft="43dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="50dp"
         android:text="Perfil"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.textfield.TextInputLayout>
 </RelativeLayout>

@@ -22,14 +22,14 @@ public interface ApiService {
 
     @GET("auth/profile")
     Call<UserDetails> getUserDetails(@Header("Authorization") String token);
-/*
+
     @HTTP(method = "PATCH", path = "auth/usuario/{userId}", hasBody = true)
     Call<Void> updateUserProfile(
             @Path("userId") String userId, // Usa "userId" para coincidir con el parámetro en la URL
             @Header("Authorization") String token,
             @Body UserUpdate userUpdateRequest
     );
-
+/*
     ////Proyectos
     @POST ("/proyectos")
     Call<Void> registerProyecto(
@@ -37,8 +37,7 @@ public interface ApiService {
             @Body ProyectRegister proyectRegister );
 
 
-
-}*/
+*/
 
 
 }
