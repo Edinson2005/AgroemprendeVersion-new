@@ -13,7 +13,7 @@
         android:layout_marginTop="93dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        app:srcCompat="@drawable/img_4" />
+        app:srcCompat="@drawable/img_1" />
 
     <TextView
         android:id="@+id/tvNombre"

@@ -17,7 +17,7 @@
         android:text="Inicio de sesión"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/black" />
+        android:textColor="@color/colortexto" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple"
+            android:backgroundTint="@color/colortexto"
             android:text="Inicia sesión"
             android:onClick="onLoginClick" />
     </LinearLayout>
@@ -77,7 +77,7 @@
         android:text="¿Olvidaste tu contraseña?"
         android:layout_marginTop="16dp"
         android:textStyle="bold"
-        android:textColor="@color/azul" />
+        android:textColor="@color/colortexto" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
             android:text="Regístrate"
             android:layout_marginTop="16dp"
             android:textStyle="bold"
-            android:textColor="@color/azul" />
+            android:textColor="@color/colortexto" />
     </LinearLayout>
 
     <ProgressBar

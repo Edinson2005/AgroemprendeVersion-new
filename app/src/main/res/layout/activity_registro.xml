@@ -9,19 +9,21 @@
     tools:context=".Registro">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="752dp"
+        android:layout_width="320dp"
+        android:layout_height="685dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="40dp"
-        app:cardCornerRadius="23dp">
+        app:cardCornerRadius="10dp">
 
         <TextView
             android:id="@+id/tvNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="-327dp"
+            android:layout_marginTop="-317dp"
+            android:textColor="@color/colortexto"
+            android:textStyle="bold"
             android:fontFamily="@font/montserrat"
             android:text="Registro"
             android:textSize="26sp" />
@@ -101,36 +103,12 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/registrocedula"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:layout_marginTop="330dp"
-            android:font="@font/montserrat_bold"
-            android:text="Cedula"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:layout_marginTop="354dp"
-            android:layout_marginRight="19dp"
-            android:background="@drawable/text_background"
-            android:ems="10"
-            android:inputType="phone"
-            android:padding="14dp"
-            android:textColor="#555555"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/registrotelefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="160dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="332dp"
             android:font="@font/montserrat_bold"
             android:text="Teléfono"
@@ -138,39 +116,14 @@
             android:textStyle="bold" />
 
         <EditText
-            android:layout_width="133dp"
+            android:layout_width="276dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="160dp"
-            android:layout_marginTop="354dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="357dp"
             android:layout_marginRight="19dp"
             android:background="@drawable/text_background"
             android:ems="10"
             android:inputType="phone"
-            android:padding="14dp"
-            android:textColor="#555555"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/registrofechadenacimiento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="415dp"
-            android:font="@font/montserrat_bold"
-            android:text="Fecha de nacimiento"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/edtNacimiento"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:layout_marginTop="438dp"
-            android:background="@drawable/text_background"
-            android:ems="10"
-            android:inputType="date"
             android:padding="14dp"
             android:textColor="#555555"
             android:textSize="18sp"
@@ -182,7 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="499dp"
+            android:layout_marginTop="419dp"
             android:font="@font/montserrat_bold"
             android:text="Contraseña"
             android:textSize="15sp"
@@ -193,7 +146,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="19dp"
-            android:layout_marginTop="519dp"
+            android:layout_marginTop="445dp"
             android:layout_marginRight="19dp"
             android:background="@drawable/text_background"
             android:ems="10"
@@ -208,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="576dp"
+            android:layout_marginTop="509dp"
             android:font="@font/montserrat_bold"
             android:text="Confirmar contraseña"
             android:textSize="15sp"
@@ -219,7 +172,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="19dp"
-            android:layout_marginTop="599dp"
+            android:layout_marginTop="535dp"
             android:layout_marginRight="19dp"
             android:background="@drawable/text_background"
             android:ems="10"
@@ -233,7 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="53dp"
-            android:layout_marginTop="666dp"
+            android:layout_marginTop="604dp"
             android:layout_marginRight="53dp"
             android:text="¿Ya tienes cuenta?"
             android:textStyle="bold" />
@@ -242,10 +195,10 @@
             android:id="@+id/Registrarse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="185dp"
-            android:layout_marginTop="666dp"
+            android:layout_marginLeft="178dp"
+            android:layout_marginTop="604dp"
             android:text=" Inicia sesión"
-            android:textColor="@color/azul"
+            android:textColor="@color/colortexto"
             android:textStyle="bold" />
 
         <Button
@@ -253,9 +206,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="79dp"
-            android:layout_marginTop="693dp"
+            android:layout_marginTop="626dp"
             android:layout_marginRight="79dp"
             android:elevation="23dp"
+            android:backgroundTint="@color/colortexto"
+
             android:text="Registrarse" />
     </androidx.cardview.widget.CardView>
 

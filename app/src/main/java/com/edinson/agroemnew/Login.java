@@ -38,6 +38,7 @@ public class Login extends AppCompatActivity {
     private TextInputEditText etPassword;
     private Button btnLogin;
     private TextView registrarse;
+    private TextView olvidarPassword;
     private ProgressBar progressBar;
     private static final String TAG = "MainActivity";
 
@@ -57,10 +58,26 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         registrarse = findViewById(R.id.Registrarse);
         progressBar = findViewById(R.id.progressBar);
+        olvidarPassword = findViewById(R.id.olvidarPassword);
 
+        registrarse.setOnClickListener(view -> goToRegisterActivity());
 
         btnLogin.setOnClickListener(view -> performLogin());
+
+        olvidarPassword.setOnClickListener(view -> goToRecuperarPasswordActivity());
+
     }
+    private void goToRegisterActivity() {
+        Intent intent = new Intent(Login.this, Registro.class);
+        startActivity(intent);
+    }
+
+    private void goToRecuperarPasswordActivity() {
+        Intent intent = new Intent(Login.this, RecuperarPassword.class);
+        startActivity(intent);
+    }
+
+
     private void saveToken(String token) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
