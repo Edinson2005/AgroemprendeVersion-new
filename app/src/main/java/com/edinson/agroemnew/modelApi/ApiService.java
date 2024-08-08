@@ -30,15 +30,10 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Body UserUpdate userUpdateRequest
     );
-/*
-    ////Proyectos
-    @POST ("/proyectos")
-    Call<Void> registerProyecto(
-            @Header("Authorization") String token,
-            @Body ProyectRegister proyectRegister );
+    //RECUPERAR CONTRASEÑA
+    @POST ("auth/forgot-password")
+    Call<Forgot> forgotPassword(@Body Forgot forgot);
 
-
-*/
 
 
 }
