@@ -8,6 +8,16 @@
     android:layout_height="match_parent"
     tools:context=".Notificaciones">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notificaciones"
+        android:textStyle="bold"
+        android:textColor="@color/colortexto"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="match_parent"
@@ -35,9 +45,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    android:textStyle="bold"
                     android:text="Convocatoria para cultivar plantas"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
                     android:textSize="18sp" />
+
+
 
             </LinearLayout>
 
@@ -49,11 +62,13 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="2dp"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="-3dp"
                     android:text="¡Únete a nuestra iniciativa de cultivo de plantas! Buscamos entusiastas de la jardinería, amantes de la naturaleza y todos aquellos interesados en aprender sobre el cuidado de las plantas. Esta convocatoria tiene como objetivo promover la sostenibilidad y el respeto por el medio ambiente a través del cultivo de plantas nativas y ornamentales."
                     android:textAppearance="?attr/textAppearanceBodyMedium"

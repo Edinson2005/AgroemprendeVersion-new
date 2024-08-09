@@ -45,6 +45,10 @@ public class Registro extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_registro);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         etNombre = findViewById(R.id.etNombre);
         etApellido = findViewById(R.id.etApellido);
         etEmail = findViewById(R.id.etCorreoElectronico);

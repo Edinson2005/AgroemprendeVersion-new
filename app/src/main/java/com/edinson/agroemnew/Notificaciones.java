@@ -19,6 +19,9 @@ public class Notificaciones extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificaciones);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         card = findViewById(R.id.card);
         expandableContent = findViewById(R.id.expandableContent);
