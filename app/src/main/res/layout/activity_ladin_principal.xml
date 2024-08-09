@@ -8,6 +8,12 @@
     android:layout_height="match_parent"
     tools:context=".LadinPrincipal">
 
+    <ImageView
+        android:layout_width="668dp"
+        android:layout_height="999dp"
+        android:layout_marginLeft="-33dp"
+        android:layout_marginTop="-123dp"
+        android:src="@drawable/img_8" />
 
     <TextView
         android:id="@+id/textView2"
@@ -37,11 +43,11 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="201dp"
-        android:layout_height="382dp"
-        android:layout_marginLeft="220dp"
-        android:layout_marginTop="-313dp"
-        android:layout_marginRight="13dp"
+        android:layout_width="261dp"
+        android:layout_height="405dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="-933dp"
         android:background="@android:color/transparent"
         android:src="@drawable/img_5" />
 
@@ -49,11 +55,15 @@
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        android:layout_marginLeft="220dp"
-        android:layout_marginTop="118dp"
+        android:layout_height="51dp"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="110dp"
         android:backgroundTint="@color/colortexto"
-        android:text="Inicia sesion" />
+        android:text="Inicia sesion"
+        app:cornerRadius="14dp" />
+
+
 
 
 </LinearLayout>
