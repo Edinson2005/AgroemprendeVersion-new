@@ -37,12 +37,16 @@
             }
 
             public void updateUserInterface(boolean forceUpdate) {
-                long lastUpdateTime = sharedPreferences.getLong("LastUpdateTime", 0);
-                boolean shouldFetchFromApi = forceUpdate || System.currentTimeMillis() - lastUpdateTime > CACHE_DURATION;
-                if (shouldFetchFromApi) {
+                if (forceUpdate) {
                     fetchUserDetails();
                 } else {
-                    loadDataFromSharedPreferences();
+                    long lastUpdateTime = sharedPreferences.getLong("LastUpdateTime", 0);
+                    boolean shouldFetchFromApi = System.currentTimeMillis() - lastUpdateTime > CACHE_DURATION;
+                    if (shouldFetchFromApi) {
+                        fetchUserDetails();
+                    } else {
+                        loadDataFromSharedPreferences();
+                    }
                 }
             }
 
