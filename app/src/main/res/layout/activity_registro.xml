@@ -12,7 +12,7 @@
         android:layout_width="320dp"
         android:layout_height="685dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="120dp"
         android:layout_marginRight="40dp"
         app:cardCornerRadius="10dp">
 
@@ -196,7 +196,7 @@
             android:id="@+id/Registrarse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="178dp"
+            android:layout_marginLeft="188dp"
             android:layout_marginTop="604dp"
             android:text=" Inicia sesión"
             android:textColor="@color/colortexto"

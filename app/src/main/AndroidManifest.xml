@@ -17,7 +17,21 @@
         android:theme="@style/Theme.AgroemNew"
         tools:targetApi="31">
         <activity
+            android:name=".Notificaciones"
+            android:exported="false"/>
+
+
+
+
+        <activity
             android:name=".LadinPrincipal"
+            android:exported="false" />
+
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,20 +40,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".Registro"
-            android:exported="false"/>
-
-        <activity android:name=".RecuperarPassword"
-            android:exported="false"/>
-        <activity android:name=".UsuarioEditar"
-            android:exported="false"/>
-
+            android:exported="false" />
+        <activity
+            android:name=".RecuperarPassword"
+            android:exported="false" />
+        <activity
+            android:name=".UsuarioEditar"
+            android:exported="false" />
     </application>
 
 </manifest>

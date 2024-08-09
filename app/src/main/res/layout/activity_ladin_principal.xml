@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="199dp"
+        android:layout_width="357dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="145dp"
@@ -45,21 +45,13 @@
         android:background="@android:color/transparent"
         android:src="@drawable/img_5" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="214dp"
-        android:layout_height="83dp"
-
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="123dp"
-        app:srcCompat="@drawable/img_6" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginLeft="240dp"
-        android:layout_marginTop="-58dp"
+        android:layout_height="47dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="118dp"
         android:backgroundTint="@color/colortexto"
         android:text="Inicia sesion" />
 
