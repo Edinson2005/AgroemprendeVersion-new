@@ -76,12 +76,19 @@ public class PerfilFragment extends Fragment {
         });
     }
 
+
+
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EDITAR_USUARIO_REQUEST && resultCode == Activity.RESULT_OK) {
             if (data != null && data.getBooleanExtra("DATOS_ACTUALIZADOS", false)) {
-                perfilViewModel.updateUserInterface(true); // Forzar actualización de la interfaz
+                // Forzar una actualización inmediata desde la API
+                perfilViewModel.updateUserInterface(true);
+                Toast.makeText(getContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
             }
         }
     }

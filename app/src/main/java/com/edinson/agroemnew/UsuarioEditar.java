@@ -213,11 +213,7 @@ public class UsuarioEditar extends AppCompatActivity {
                     updateSharedPreferences(userUpdate); // Actualizar SharedPreferences
                     Toast.makeText(UsuarioEditar.this, "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
 
-                    // Enviar resultado a PerfilFragment
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra("DATOS_ACTUALIZADOS", true);
-                    setResult(Activity.RESULT_OK, resultIntent);
-                    finish(); // Volver a PerfilFragment
+                    obtenerDatosActualizados();
                 } else {
                     Log.e("ActualizarDatosUsuario", "Error en la actualización: " + response.message());
                     handleApiError(response);
@@ -231,6 +227,56 @@ public class UsuarioEditar extends AppCompatActivity {
             }
         });
     }
+
+    private void obtenerDatosActualizados() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+        String token = sharedPreferences.getString("UserToken", null);
+
+        if (token == null) {
+            Toast.makeText(this, "Token no encontrado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ApiService apiService = new ApiLogin().getRetrofitInstance().create(ApiService.class);
+        Call<UserDetails> call = apiService.getUserDetails("Bearer " + token);
+
+        call.enqueue(new Callback<UserDetails>() {
+            @Override
+            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserDetails.Sub sub = response.body().getSub();
+                    if (sub != null) {
+                        actualizarSharedPreferences(sub);
+                        setResult(Activity.RESULT_OK);
+                        finish();
+                    } else {
+                        Toast.makeText(UsuarioEditar.this, "Datos de usuario no disponibles", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(UsuarioEditar.this, "Error al obtener datos actualizados", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDetails> call, Throwable t) {
+                Toast.makeText(UsuarioEditar.this, "Error de conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void actualizarSharedPreferences(UserDetails.Sub sub) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("UserName", sub.getNombre() + " " + sub.getApellido());
+        editor.putString("UserEmail", sub.getEmail());
+        editor.putString("UserPhone", sub.getTelefono());
+        editor.putString("UserNumIdentificacion", sub.getNumIdentificacion());
+        editor.putString("UserBirthDate", sub.getFechaNacimiento());
+        editor.putLong("LastUpdateTime", System.currentTimeMillis());
+        editor.apply();
+    }
+
+
+
 
 
     private UserUpdate createUserUpdateObject() {
