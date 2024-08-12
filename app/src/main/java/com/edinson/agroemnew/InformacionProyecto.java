@@ -18,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InformacionProyecto extends AppCompatActivity {
+public class InformacionProyecto  extends AppCompatActivity {
 
     private static final String TAG = "InformacionProyecto";
 
@@ -28,11 +28,13 @@ public class InformacionProyecto extends AppCompatActivity {
     private TextView descripcionTextView;
     private RecyclerView seccionesRecyclerView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_proyecto);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         // Inicializar los TextViews
         tituloTextView = findViewById(R.id.tituloTextView);
@@ -41,18 +43,14 @@ public class InformacionProyecto extends AppCompatActivity {
         descripcionTextView = findViewById(R.id.descripcioTextView);
         seccionesRecyclerView = findViewById(R.id.seccionesRecyclerView);
 
-        //configuracion de recyclerview
+        // Configuración de RecyclerView
         seccionesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
         // Obtener el ID del proyecto desde SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         String projectId = sharedPreferences.getString("SelectID", null);
 
         if (projectId != null) {
-            // Imprime el ID del proyecto en los logs
-            Log.d(TAG, "ID del proyecto guardado: " + projectId);
-
             // Llamar a la API para obtener los detalles del proyecto
             loadProjectDetails(projectId);
         } else {
@@ -106,14 +104,5 @@ public class InformacionProyecto extends AppCompatActivity {
 
         SeccionAdapter adapter = new SeccionAdapter(proyecto.getSecciones());
         seccionesRecyclerView.setAdapter(adapter);
-
-        // Obtener información del usuario
-        /*
-        if (proyecto.getUsuarioId() != null) {
-            String usuarioInfo = "Nombre: " + proyecto.getUsuarioId().getNombre() + " " + proyecto.getUsuarioId().getApellido() +
-                    "\nEmail: " + proyecto.getUsuarioId().getEmail() +
-                    "\nTeléfono: " + proyecto.getUsuarioId().getTelefono();
-            Toast.makeText(this, usuarioInfo, Toast.LENGTH_LONG).show();
-        }*/
     }
 }
