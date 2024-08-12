@@ -3,6 +3,7 @@ package com.edinson.agroemnew.ui.proyecto;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,9 +16,15 @@ import java.util.List;
 
 public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHolder> {
     private List<Proyecto> proyectos;
+    private OnItemClickListener onItemClickListener;
 
-    public ProyectoAdapter(List<Proyecto> proyectos) {
+    public interface OnItemClickListener {
+        void onItemClick(String projectId);
+    }
+
+    public ProyectoAdapter(List<Proyecto> proyectos, OnItemClickListener onItemClickListener) {
         this.proyectos = proyectos;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -34,6 +41,9 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
         holder.fechaTextView.setText(proyecto.getFecha());
         holder.estadoTextView.setText(proyecto.getEstado());
         holder.descripcionTextView.setText(proyecto.getDescripcion());
+
+        // Configura el clic
+        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(proyecto.get_id()));
     }
 
     @Override
