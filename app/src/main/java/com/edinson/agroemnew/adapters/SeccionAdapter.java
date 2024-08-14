@@ -1,4 +1,4 @@
-package com.edinson.agroemnew;
+package com.edinson.agroemnew.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.edinson.agroemnew.modelApi.ProyectoDetails;
+import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.Seccion;
 
 import java.util.List;

@@ -2,7 +2,6 @@ package com.edinson.agroemnew;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edinson.agroemnew.adapters.RevisionAdapter;
+import com.edinson.agroemnew.adapters.SeccionAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.ProyectoDetails;
@@ -27,6 +28,7 @@ public class InformacionProyecto  extends AppCompatActivity {
     private TextView estadoTextView;
     private TextView descripcionTextView;
     private RecyclerView seccionesRecyclerView;
+    private RecyclerView revisionesRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +44,11 @@ public class InformacionProyecto  extends AppCompatActivity {
         estadoTextView = findViewById(R.id.estadoTextView);
         descripcionTextView = findViewById(R.id.descripcioTextView);
         seccionesRecyclerView = findViewById(R.id.seccionesRecyclerView);
+        revisionesRecyclerView = findViewById(R.id.revisionesRecyclerView);
 
         // Configuración de RecyclerView
         seccionesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        revisionesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Obtener el ID del proyecto desde SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         String projectId = sharedPreferences.getString("SelectID", null);
@@ -104,5 +107,8 @@ public class InformacionProyecto  extends AppCompatActivity {
 
         SeccionAdapter adapter = new SeccionAdapter(proyecto.getSecciones());
         seccionesRecyclerView.setAdapter(adapter);
+
+        RevisionAdapter revisionAdapter = new RevisionAdapter(proyecto.getRevisiones());
+        revisionesRecyclerView.setAdapter(revisionAdapter);
     }
 }

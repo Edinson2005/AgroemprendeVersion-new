@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ProyectoDetails {
+
     @SerializedName("_id")
     private String id;
 
@@ -30,7 +31,7 @@ public class ProyectoDetails {
     private List<Seccion> secciones;
 
     @SerializedName("revisiones")
-    private List<String> revisiones;
+    private List<Revision> revisiones;
 
     @SerializedName("__v")
     private int version;
@@ -101,11 +102,11 @@ public class ProyectoDetails {
         this.secciones = secciones;
     }
 
-    public List<String> getRevisiones() {
+    public List<Revision> getRevisiones() {
         return revisiones;
     }
 
-    public void setRevisiones(List<String> revisiones) {
+    public void setRevisiones(List<Revision> revisiones) {
         this.revisiones = revisiones;
     }
 
