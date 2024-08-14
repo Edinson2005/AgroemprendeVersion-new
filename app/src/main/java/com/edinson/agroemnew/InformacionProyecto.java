@@ -2,6 +2,7 @@ package com.edinson.agroemnew;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,8 @@ public class InformacionProyecto  extends AppCompatActivity {
         descripcionTextView = findViewById(R.id.descripcioTextView);
         seccionesRecyclerView = findViewById(R.id.seccionesRecyclerView);
         revisionesRecyclerView = findViewById(R.id.revisionesRecyclerView);
+
+
 
         // Configuración de RecyclerView
         seccionesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -104,6 +107,18 @@ public class InformacionProyecto  extends AppCompatActivity {
         fechaTextView.setText(proyecto.getFecha());
         estadoTextView.setText(proyecto.getEstado());
         descripcionTextView.setText(proyecto.getDescripcion());
+
+        //cambiar el color al estado
+        String estado = proyecto.getEstado().toLowerCase();
+        Log.d(TAG, "Estado del proyecto: " + estado);
+        if (estado.contains("en progreso")) {
+            estadoTextView.setTextColor(getResources().getColor(R.color.En_progreso));
+        } else if (estado.contains("revisado")) {
+            estadoTextView.setTextColor(getResources().getColor(R.color.revisado));
+        } else {
+            estadoTextView.setTextColor(getResources().getColor(R.color.black));
+        }
+
 
         SeccionAdapter adapter = new SeccionAdapter(proyecto.getSecciones());
         seccionesRecyclerView.setAdapter(adapter);

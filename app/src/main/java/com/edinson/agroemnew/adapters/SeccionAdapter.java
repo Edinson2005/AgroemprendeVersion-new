@@ -43,8 +43,9 @@ public class SeccionAdapter extends RecyclerView.Adapter<SeccionAdapter.SeccionV
             }
         }
 
-        // Como 'nombre' no está en 'Seccion', posiblemente quieras mostrar otra información aquí
-        holder.nombreTextView.setText(seccion.getProyecto() != null ? seccion.getProyecto() : "Nombre no disponible");
+        // Aquí, podrías querer mostrar otro tipo de información en lugar de 'proyecto'
+        // Asegúrate de usar el campo correcto para 'nombre' si se refiere a algo distinto
+        holder.nombreTextView.setText("Secciones del proyecto:");  // Cambia esto según lo que quieras mostrar
         holder.contenidoTextView.setText(contenido.toString());
     }
 
