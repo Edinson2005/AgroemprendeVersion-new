@@ -1,62 +1,81 @@
-package com.edinson.agroemnew.adapters;
+        package com.edinson.agroemnew.adapters;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+        import androidx.annotation.NonNull;
+        import androidx.core.content.ContextCompat;
+        import androidx.recyclerview.widget.RecyclerView;
 
-import com.edinson.agroemnew.R;
-import com.edinson.agroemnew.modelApi.Revision;
+        import com.edinson.agroemnew.R;
+        import com.edinson.agroemnew.modelApi.Revision;
 
-import java.util.List;
+        import java.util.List;
 
-public class RevisionAdapter extends RecyclerView.Adapter<RevisionAdapter.RevisionViewHolder> {
-    private List<Revision> revisiones;
+        public class RevisionAdapter extends RecyclerView.Adapter<RevisionAdapter.RevisionViewHolder> {
+            private List<Revision> revisiones;
 
-    public RevisionAdapter(List<Revision> revisiones) {
-        this.revisiones = revisiones;
-    }
+            public RevisionAdapter(List<Revision> revisiones) {
+                this.revisiones = revisiones;
+            }
 
-    @NonNull
-    @Override
-    public RevisionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_revision, parent, false);
-        return new RevisionViewHolder(view);
-    }
+            @NonNull
+            @Override
+            public RevisionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_revision, parent, false);
+                return new RevisionViewHolder(view);
+            }
 
-    @Override
-    public void onBindViewHolder(@NonNull RevisionViewHolder holder, int position) {
-        Revision revision = revisiones.get(position);
-        holder.estadoTextView.setText(revision.getEstado());
-        holder.tituloTextView.setText(revision.getTitulo());
-        holder.sugerenciaTextView.setText(revision.getSugerencia());
-        holder.descripcionTextView.setText(revision.getDescripcion());
-        holder.fechaRevisionTextView.setText(revision.getFechaRevision());
-    }
+            @Override
+            public void onBindViewHolder(@NonNull RevisionViewHolder holder, int position) {
+                Revision revision = revisiones.get(position);
+                holder.estadoTextView.setText(revision.getEstado());
+                holder.tituloTextView.setText(revision.getTitulo());
+                holder.sugerenciaTextView.setText(revision.getSugerencia());
+                holder.descripcionTextView.setText(revision.getDescripcion());
+                holder.fechaRevisionTextView.setText(revision.getFechaRevision());
 
-    @Override
-    public int getItemCount() {
-        return revisiones.size();
-    }
+                //Cmabiar el color del fondo segun su estado (Aprovado-Rechazado)
 
-    public static class RevisionViewHolder extends RecyclerView.ViewHolder {
-        TextView estadoTextView;
-        TextView tituloTextView;
-        TextView sugerenciaTextView;
-        TextView descripcionTextView;
-        TextView fechaRevisionTextView;
+                String estado = revision.getEstado().toLowerCase();
+                Log.d("RevisionAdapter", "Estado: " + estado);  // Añade este log
 
-        public RevisionViewHolder(@NonNull View itemView) {
-            super(itemView);
-            estadoTextView = itemView.findViewById(R.id.estadoTextView);
-            tituloTextView = itemView.findViewById(R.id.tituloTextView);
-            sugerenciaTextView = itemView.findViewById(R.id.sugerenciaTextView);
-            descripcionTextView = itemView.findViewById(R.id.descripcionTextView);
-            fechaRevisionTextView = itemView.findViewById(R.id.fechaRevisionTextView);
+                int color;
+                if (estado.contains("aprobado")) {
+                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.Aprovado);
+                } else if (estado.contains("desaprobado")) {
+                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.purple_700);
+                } else {
+                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.white);
+                }
+
+                holder.itemView.setBackgroundColor(color);
+                Log.d("RevisionAdapter", "Color aplicado: " + color);
+            }
+
+            @Override
+            public int getItemCount() {
+                return revisiones.size();
+            }
+
+            public static class RevisionViewHolder extends RecyclerView.ViewHolder {
+                TextView estadoTextView;
+                TextView tituloTextView;
+                TextView sugerenciaTextView;
+                TextView descripcionTextView;
+                TextView fechaRevisionTextView;
+
+                public RevisionViewHolder(@NonNull View itemView) {
+                    super(itemView);
+                    estadoTextView = itemView.findViewById(R.id.estadoTextView);
+                    tituloTextView = itemView.findViewById(R.id.tituloTextView);
+                    sugerenciaTextView = itemView.findViewById(R.id.sugerenciaTextView);
+                    descripcionTextView = itemView.findViewById(R.id.descripcionTextView);
+                    fechaRevisionTextView = itemView.findViewById(R.id.fechaRevisionTextView);
+                }
+            }
         }
-    }
-}

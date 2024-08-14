@@ -10,7 +10,10 @@
     <color name="azul">#BA79EC</color>
     <color name="purple">#B691D2</color>
     <color name="colortexto">#A78BFA</color>
-    <color name="nieve"> #FFFAFA</color>
-    <color name="En_progreso"> #B0B0B0  </color>
-    <color name="revisado"> #1E90FF</color>
+    <color name="nieve">#FFFAFA</color>
+    <color name="En_progreso">#B0B0B0  </color>
+    <color name="revisado">#1E90FF</color>
+    <color name="Aprovado">#E3E9EF</color>
+    <color name="Rechazado">#EC4F4F</color>
+
 </resources>

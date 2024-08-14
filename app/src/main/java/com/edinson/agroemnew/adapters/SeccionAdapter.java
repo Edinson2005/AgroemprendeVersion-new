@@ -45,7 +45,7 @@ public class SeccionAdapter extends RecyclerView.Adapter<SeccionAdapter.SeccionV
 
         // Aquí, podrías querer mostrar otro tipo de información en lugar de 'proyecto'
         // Asegúrate de usar el campo correcto para 'nombre' si se refiere a algo distinto
-        holder.nombreTextView.setText("Secciones del proyecto:");  // Cambia esto según lo que quieras mostrar
+        holder.nombreTextView.setText("");  // Cambia esto según lo que quieras mostrar
         holder.contenidoTextView.setText(contenido.toString());
     }
 
