@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.edinson.agroemnew.Notificaciones;
+import com.edinson.agroemnew.NtfProyectos;
 import com.edinson.agroemnew.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -37,19 +40,27 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-      //  final TextView textView = binding.tvNombre;
-       // homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        // Assuming you have an ImageButton in your layout with id 'imageButton'
+
+
         ImageButton imageButton = binding.btnNotificaciones;
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        imageButton.setOnClickListener(v -> {
+
+            Intent intent = new Intent(getActivity(), NtfProyectos.class);
+            startActivity(intent);
+        });
+
+// Configura el segundo botón
+        Button btnOtraActividad = binding.Buttonconvocatoria;
+        btnOtraActividad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an Intent to start the new activity
-                Intent intent = new Intent(getActivity(), Notificaciones.class);
+                // Crear un Intent para iniciar la otra actividad
+                Intent intent = new Intent(getActivity(), Notificaciones.class); // Reemplaza con la actividad deseada
                 startActivity(intent);
             }
         });
+
 
         return root;
     }

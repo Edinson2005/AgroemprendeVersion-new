@@ -8,11 +8,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Notificaciones">
-
+    tools:context=".NtfProyectos">
 
     <TextView
-        android:id="@+id/texttitulonotificacion"
+        android:id="@+id/textproyectos"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
@@ -20,13 +19,12 @@
         android:layout_marginTop="23dp"
         android:layout_marginBottom="8dp"
         android:textColor="@color/colortexto"
-        android:text="Convocatorias"
+        android:text="Notificaciones"
         android:textSize="25sp"
         android:textStyle="bold" />
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewNotificacion"
+        android:id="@+id/recyclerviewntfproyectos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

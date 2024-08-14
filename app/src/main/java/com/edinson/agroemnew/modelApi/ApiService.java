@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import java.util.List;
 import retrofit2.http.Path;
 
 public interface ApiService {
@@ -36,4 +37,30 @@ public interface ApiService {
 
 
 
+
+
+
+    // Métodos para Notificaciones
+    @GET("notificaciones/convocatoria")
+    Call<List<Notificacion>> getNotificaciones(@Header("Authorization") String token);
+
+    @GET("notificaciones/{id}")
+    Call<Notificacion> getNotificacionById(
+            @Path("id") String id,
+            @Header("Authorization") String token
+    );
+
+    @POST("notificaciones")
+    Call<Notificacion> createNotificacion(
+            @Body Notificacion notificacion,
+            @Header("Authorization") String token
+    );
+
+
+
+    @GET("/notificaciones/mis-proyectos")
+    Call<List<ProyectoNot>> getProyectos(@Header("Authorization") String token);
+
+    @GET("/notificaciones/mis-proyectos/{id}")
+    Call<ProyectoNot> getProyectoById(@Header("Authorization") String token, @Path("id") String id);
 }

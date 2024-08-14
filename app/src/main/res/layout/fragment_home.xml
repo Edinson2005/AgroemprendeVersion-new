@@ -40,5 +40,17 @@
             android:layout_marginRight="313dp"
             app:srcCompat="@drawable/notificaciones" />
 
+
+
+        <Button
+            android:id="@+id/Buttonconvocatoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="36dp"
+            android:backgroundTint="@color/colortexto"
+            android:text="Convocatorias"/>
+
+
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
