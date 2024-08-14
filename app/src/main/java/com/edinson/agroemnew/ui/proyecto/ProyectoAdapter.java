@@ -6,7 +6,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import androidx.annotation.ContentView;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edinson.agroemnew.R;
@@ -41,6 +43,16 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
         holder.fechaTextView.setText(proyecto.getFecha());
         holder.estadoTextView.setText(proyecto.getEstado());
         holder.descripcionTextView.setText(proyecto.getDescripcion());
+
+        //Configuracion para cambiar el color de (En progreso/ Revisado)
+        switch (proyecto.getEstado()){
+            case "En progreso":
+                holder.estadoTextView.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.En_progreso));
+                break;
+            case "Revisado":
+                holder.estadoTextView.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.revisado));
+                break;
+        }
 
         // Configura el clic
         holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(proyecto.get_id()));
