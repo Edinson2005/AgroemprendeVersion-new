@@ -1,5 +1,6 @@
 package com.edinson.agroemnew.ui.proyecto;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edinson.agroemnew.InformacionProyecto;
 import com.edinson.agroemnew.databinding.FragmentProyectoBinding;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
@@ -63,7 +65,17 @@ public class ProyectoFragment extends Fragment {
                     UserDetails userDetails = response.body();
                     if (userDetails.getSub() != null && userDetails.getSub().getProyectos() != null) {
                         List<Proyecto> proyectos = userDetails.getSub().getProyectos();
-                        adapter = new ProyectoAdapter(proyectos);
+                        adapter = new ProyectoAdapter(proyectos, projectId -> {
+
+                            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("MyApp", getContext().MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("SelectID", projectId);
+                            editor.apply();
+
+                            Intent intent = new Intent(getContext(), InformacionProyecto.class);
+                            startActivity(intent);
+
+                        });
                         recyclerView.setAdapter(adapter);
                     } else {
                         Toast.makeText(getContext(), "No se encontraron proyectos", Toast.LENGTH_SHORT).show();

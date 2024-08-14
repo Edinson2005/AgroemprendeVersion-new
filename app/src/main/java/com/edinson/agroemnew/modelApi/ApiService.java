@@ -36,6 +36,13 @@ public interface ApiService {
     Call<Forgot> forgotPassword(@Body Forgot forgot);
 
 
+    ////PROYECTOS
+    @GET("proyectos/{id}")
+    Call<ProyectoDetails> getProjectDetails(
+            @Header("Authorization") String token,
+            @Path("id") String projectId
+    );
+
 
 
 
