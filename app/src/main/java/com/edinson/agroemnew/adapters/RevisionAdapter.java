@@ -42,15 +42,18 @@
                 //Cmabiar el color del fondo segun su estado (Aprovado-Rechazado)
 
                 String estado = revision.getEstado().toLowerCase();
-                Log.d("RevisionAdapter", "Estado: " + estado);  // Añade este log
+                Log.d("RevisionAdapter", "Estado: " + estado);
 
                 int color;
-                if (estado.contains("aprobado")) {
+                if (estado.equalsIgnoreCase("aprobado")) {
                     color = ContextCompat.getColor(holder.itemView.getContext(), R.color.Aprovado);
-                } else if (estado.contains("desaprobado")) {
-                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.purple_700);
+                    Log.d("RevisionAdapter", "Aplicando color Aprobado");
+                } else if (estado.equalsIgnoreCase("desaprobado")) {
+                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.Rechazado);
+                    Log.d("RevisionAdapter", "Aplicando color Desaprobado");
                 } else {
                     color = ContextCompat.getColor(holder.itemView.getContext(), R.color.white);
+                    Log.d("RevisionAdapter", "Aplicando color por defecto (blanco)");
                 }
 
                 holder.itemView.setBackgroundColor(color);
