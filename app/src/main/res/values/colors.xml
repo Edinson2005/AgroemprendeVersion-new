@@ -15,5 +15,6 @@
     <color name="revisado">#1E90FF</color>
     <color name="Aprovado">#E3E9EF</color>
     <color name="Rechazado">#E49191</color>
-
+    <color name="colorVista">#E49191</color>
+    <color name="colorNoVista">#E49191</color>
 </resources>

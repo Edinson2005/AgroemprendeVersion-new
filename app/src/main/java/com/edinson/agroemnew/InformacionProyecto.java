@@ -1,8 +1,10 @@
 package com.edinson.agroemnew;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,8 @@ public class InformacionProyecto  extends AppCompatActivity {
     private TextView fechaTextView;
     private TextView estadoTextView;
     private TextView descripcionTextView;
+    private ImageButton revisionesButton;
+
     private RecyclerView seccionesRecyclerView;
     private RecyclerView revisionesRecyclerView;
 
@@ -45,13 +49,13 @@ public class InformacionProyecto  extends AppCompatActivity {
         estadoTextView = findViewById(R.id.estadoTextView);
         descripcionTextView = findViewById(R.id.descripcioTextView);
         seccionesRecyclerView = findViewById(R.id.seccionesRecyclerView);
-        revisionesRecyclerView = findViewById(R.id.revisionesRecyclerView);
+        //revisionesRecyclerView = findViewById(R.id.revisionesRecyclerView);
+        revisionesButton = findViewById(R.id.revisionesButton);
 
 
 
         // Configuración de RecyclerView
         seccionesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        revisionesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Obtener el ID del proyecto desde SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         String projectId = sharedPreferences.getString("SelectID", null);
@@ -62,6 +66,12 @@ public class InformacionProyecto  extends AppCompatActivity {
         } else {
             Toast.makeText(this, "ID de proyecto no encontrado", Toast.LENGTH_SHORT).show();
         }
+        // Configurar el OnClickListener para el botón de revisiones
+        revisionesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(InformacionProyecto.this, Revisiones.class);
+            intent.putExtra("projectId", projectId);
+            startActivity(intent);
+        });
     }
 
     private void loadProjectDetails(String projectId) {
@@ -123,7 +133,6 @@ public class InformacionProyecto  extends AppCompatActivity {
         SeccionAdapter adapter = new SeccionAdapter(proyecto.getSecciones());
         seccionesRecyclerView.setAdapter(adapter);
 
-        RevisionAdapter revisionAdapter = new RevisionAdapter(proyecto.getRevisiones());
-        revisionesRecyclerView.setAdapter(revisionAdapter);
+
     }
 }
