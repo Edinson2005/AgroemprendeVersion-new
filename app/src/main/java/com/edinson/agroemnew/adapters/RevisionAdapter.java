@@ -13,6 +13,12 @@
         import com.edinson.agroemnew.R;
         import com.edinson.agroemnew.modelApi.Revision;
 
+        import java.text.ParseException;
+        import java.text.SimpleDateFormat;
+        import java.util.Date;
+        import java.util.Locale;
+
+
         import java.util.List;
 
         public class RevisionAdapter extends RecyclerView.Adapter<RevisionAdapter.RevisionViewHolder> {
@@ -39,8 +45,12 @@
                 holder.descripcionTextView.setText(revision.getDescripcion());
                 holder.fechaRevisionTextView.setText(revision.getFechaRevision());
 
-                //Cmabiar el color del fondo segun su estado (Aprovado-Rechazado)
+                //Formatear fecha
+                String fechaRevision = revision.getFechaRevision();
+                String fechaFormateada = formatFecha(fechaRevision);
+                holder.fechaRevisionTextView.setText(fechaFormateada);
 
+                //Cambiar el color del fondo segun su estado (Aprovado-Rechazado)
                 String estado = revision.getEstado().toLowerCase();
                 Log.d("RevisionAdapter", "Estado: " + estado);
 
@@ -80,5 +90,19 @@
                     descripcionTextView = itemView.findViewById(R.id.descripcionTextView);
                     fechaRevisionTextView = itemView.findViewById(R.id.fechaRevisionTextView);
                 }
+            }
+
+            public String formatFecha(String fecha){
+                SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                SimpleDateFormat formatoSalida = new SimpleDateFormat("yyy-MM-dd", Locale.getDefault());
+                try{
+                    Date fechaDate = formatoEntrada.parse(fecha);
+                    if (fechaDate != null){
+                        return formatoSalida.format(fechaDate);
+                    }
+                }catch (ParseException e){
+                    e.printStackTrace();
+                }
+                return fecha;
             }
         }
