@@ -21,11 +21,12 @@
             private final MutableLiveData<UserDetails.Sub> _userData = new MutableLiveData<>();
             private final MutableLiveData<String> _errorMessage = new MutableLiveData<>();
             private final SharedPreferences sharedPreferences;
-
+            private final ApiService apiService;
 
             public PerfilViewModel(@NonNull Application application) {
                 super(application);
                 sharedPreferences = application.getSharedPreferences("MyApp", Application.MODE_PRIVATE);
+                apiService = new ApiLogin().getRetrofitInstance().create(ApiService.class);
             }
 
             public LiveData<UserDetails.Sub> getUserData() {
@@ -37,13 +38,10 @@
             }
 
             public void updateUserInterface(boolean forceUpdate) {
-                fetchUserDetails();
-
-
-
+                fetchUserDetails(forceUpdate);
             }
 
-            private void fetchUserDetails() {
+            private void fetchUserDetails(boolean forceUpdate) {
                 String token = sharedPreferences.getString("UserToken", null);
 
                 if (token == null) {
@@ -51,7 +49,6 @@
                     return;
                 }
 
-                ApiService apiService = new ApiLogin().getRetrofitInstance().create(ApiService.class);
                 Call<UserDetails> call = apiService.getUserDetails("Bearer " + token);
 
                 call.enqueue(new Callback<UserDetails>() {
@@ -76,5 +73,4 @@
                     }
                 });
             }
-
         }
