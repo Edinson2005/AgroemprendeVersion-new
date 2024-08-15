@@ -22,9 +22,9 @@
             private final MutableLiveData<String> _errorMessage = new MutableLiveData<>();
             private final SharedPreferences sharedPreferences;
 
+
             public PerfilViewModel(@NonNull Application application) {
                 super(application);
-                // Inicializar SharedPreferences
                 sharedPreferences = application.getSharedPreferences("MyApp", Application.MODE_PRIVATE);
             }
 
@@ -37,8 +37,10 @@
             }
 
             public void updateUserInterface(boolean forceUpdate) {
-                // Siempre obtener datos desde la API
                 fetchUserDetails();
+
+
+
             }
 
             private void fetchUserDetails() {
@@ -74,4 +76,5 @@
                     }
                 });
             }
+
         }
