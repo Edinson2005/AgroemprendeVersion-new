@@ -47,9 +47,9 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
 
             // Cambiar el color del fondo según el estado 'vista'
             if (vista) {
-                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorVista)); // Color cuando se ha visto
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.black)); // Color cuando se ha visto
             } else {
-                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorNoVista)); // Color cuando no se ha visto
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorVista)); // Color cuando no se ha visto
             }
 
             // Evento click para marcar la notificación como vista

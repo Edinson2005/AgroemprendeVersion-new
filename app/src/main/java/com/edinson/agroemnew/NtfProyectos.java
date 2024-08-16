@@ -50,6 +50,7 @@ public class NtfProyectos extends AppCompatActivity {
 
         if (token.isEmpty()) {
             Log.e("NtfProyectos", "Token de autenticación no encontrado.");
+            Toast.makeText(this, "Error de autenticación. Por favor, inicia sesión nuevamente.", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -66,13 +67,16 @@ public class NtfProyectos extends AppCompatActivity {
                     mostrarProyectos(proyectos);
                 } else {
                     Log.e("NtfProyectos", "Error al obtener los proyectos: " + response.message());
+                    Toast.makeText(NtfProyectos.this, "Error al obtener los proyectos", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<ProyectoNot>> call, Throwable t) {
                 Log.e("NtfProyectos", "Error en la solicitud: " + t.getMessage());
+                Toast.makeText(NtfProyectos.this, "Error al cargar los proyectos", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 
@@ -82,6 +86,7 @@ public class NtfProyectos extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         } else {
             Log.e("NtfProyectos", "Lista de proyectos es nula o está vacía.");
+            Toast.makeText(this, "No se encontraron proyectos", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -33,10 +33,12 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.Proyec
         holder.estado.setText(proyecto.getEstado());
     }
 
+
     @Override
     public int getItemCount() {
-        return proyectos.size();
+        return proyectos != null ? proyectos.size() : 0;
     }
+
 
     public static class ProyectoViewHolder extends RecyclerView.ViewHolder {
         TextView titulo, fecha, descripcion, estado;

@@ -49,6 +49,9 @@
         <activity
             android:name=".UsuarioEditar"
             android:exported="false" />
+
+        <activity android:name=".NtfProyectos"
+            android:exported="false"/>
     </application>
 
 </manifest>
