@@ -1,6 +1,5 @@
 package com.edinson.agroemnew;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import retrofit2.Call;
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.Notificacion;
-import com.edinson.agroemnew.modelApi.NotificacionAdapter;
+import com.edinson.agroemnew.adapters.NotificacionAdapter;
 
 public class Notificaciones extends AppCompatActivity {
     private RecyclerView recyclerView;

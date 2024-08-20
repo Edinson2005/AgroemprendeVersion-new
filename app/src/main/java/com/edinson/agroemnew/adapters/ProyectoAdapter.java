@@ -1,4 +1,4 @@
-package com.edinson.agroemnew.modelApi;
+package com.edinson.agroemnew.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,8 +6,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.edinson.agroemnew.NtfProyectos;
 import com.edinson.agroemnew.R;
+import com.edinson.agroemnew.modelApi.ProyectoNot;
+
 import java.util.List;
 public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ProyectoViewHolder> {
 

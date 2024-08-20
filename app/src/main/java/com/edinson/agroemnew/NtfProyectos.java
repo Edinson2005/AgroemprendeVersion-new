@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.ProyectoAdapter;
+import com.edinson.agroemnew.adapters.ProyectoAdapter;
 import com.edinson.agroemnew.modelApi.ProyectoNot;
 
 import java.util.List;

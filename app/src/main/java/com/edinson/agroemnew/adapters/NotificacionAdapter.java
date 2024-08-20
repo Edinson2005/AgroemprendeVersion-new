@@ -1,9 +1,7 @@
-package com.edinson.agroemnew.modelApi;
+package com.edinson.agroemnew.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edinson.agroemnew.R;
+import com.edinson.agroemnew.modelApi.Notificacion;
 
 import java.util.List;
 public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapter.NotificacionViewHolder> {
