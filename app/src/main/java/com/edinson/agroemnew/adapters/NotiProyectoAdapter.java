@@ -10,46 +10,51 @@ import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ProyectoNot;
 
 import java.util.List;
-public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapter.ProyectoViewHolder> {
+public class NotiProyectoAdapter   extends RecyclerView.Adapter<NotiProyectoAdapter.ViewHolder> {
 
-    private List<ProyectoNot> proyectos;
+    private List<ProyectoNot> notificaciones;
 
-    public NotiProyectoAdapter(List<ProyectoNot> proyectos) {
-        this.proyectos = proyectos;
+    public NotiProyectoAdapter(List<ProyectoNot> notificaciones) {
+        this.notificaciones = notificaciones;
     }
 
     @NonNull
     @Override
-    public ProyectoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_proyecto, parent, false);
-        return new ProyectoViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProyectoViewHolder holder, int position) {
-        ProyectoNot proyecto = proyectos.get(position);
-        holder.titulo.setText(proyecto.getTitulo());
-        holder.fecha.setText(proyecto.getFecha());
-        holder.descripcion.setText(proyecto.getDescripcion());
-        holder.estado.setText(proyecto.getEstado());
-    }
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ProyectoNot notificacion = notificaciones.get(position);
 
+        if (holder.titleTextView != null) {
+            holder.titleTextView.setText(notificacion.getTitle()); // Corregido
+        } else {
+            // Aquí puedes agregar un log si es necesario
+        }
+
+        if (holder.bodyTextView != null) {
+            holder.bodyTextView.setText(notificacion.getBody());
+        } else {
+            // Aquí puedes agregar un log si es necesario
+        }
+    }
 
     @Override
     public int getItemCount() {
-        return proyectos != null ? proyectos.size() : 0;
+        return notificaciones.size();
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView titleTextView;
+        TextView bodyTextView;
 
-    public static class ProyectoViewHolder extends RecyclerView.ViewHolder {
-        TextView titulo, fecha, descripcion, estado;
-
-        public ProyectoViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            titulo = itemView.findViewById(R.id.tituloTextView);
-            fecha = itemView.findViewById(R.id.fechaTextView);
-            descripcion = itemView.findViewById(R.id.descripcionTextView);
-            estado = itemView.findViewById(R.id.estadoTextView);
+            titleTextView = itemView.findViewById(R.id.titleTextView);
+            bodyTextView = itemView.findViewById(R.id.bodyTextView);
         }
     }
 }

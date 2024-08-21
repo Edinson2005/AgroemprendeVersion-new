@@ -38,7 +38,7 @@ public class NtfProyectos extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        recyclerView = findViewById(R.id.recyclerviewntfproyectos);
+        recyclerView = findViewById(R.id.recyclerviewNotificacion);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);

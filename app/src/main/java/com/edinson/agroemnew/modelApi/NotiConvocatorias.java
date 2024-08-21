@@ -1,6 +1,6 @@
 package com.edinson.agroemnew.modelApi;
 
-public class Notificacion {
+public class NotiConvocatorias {
     private String id;
     private String title;
     private String body;
@@ -9,10 +9,10 @@ public class Notificacion {
     private boolean vista;
 
 
-    public Notificacion() {}
+    public NotiConvocatorias() {}
 
 
-    public Notificacion(String id, String title, String body, String url, String estado, String fechaCierre) {
+    public NotiConvocatorias(String id, String title, String body, String url, String estado, String fechaCierre) {
         this.id = id;
         this.title = title;
         this.body = body;

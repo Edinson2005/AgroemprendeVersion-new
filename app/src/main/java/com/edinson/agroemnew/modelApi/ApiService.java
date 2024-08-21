@@ -36,39 +36,27 @@ public interface ApiService {
     Call<Forgot> forgotPassword(@Body Forgot forgot);
 
 
+    ////PROYECTOS
+
+    //DETALLES DE PROYECTOS
     @GET("proyectos/{id}")
     Call<ProyectoDetails> getProyectoDetails(@Header("Authorization") String token, @Path("id") String id);
 
-
-
+    //TODOS LOS MIS PROYECTOS
     @GET("/proyectos/mis-proyectos")
     Call<List<Proyecto>> getProyecto(@Header("Authorization") String token);
 
 
 
-
+    /////NOTIFICACIONES
 
     // Métodos para Notificaciones
     @GET("notificaciones/convocatoria")
-    Call<List<Notificacion>> getNotificaciones(@Header("Authorization") String token);
-
-    @GET("notificaciones/{id}")
-    Call<Notificacion> getNotificacionById(
-            @Path("id") String id,
-            @Header("Authorization") String token
-    );
-
-    @POST("notificaciones")
-    Call<Notificacion> createNotificacion(
-            @Body Notificacion notificacion,
-            @Header("Authorization") String token
-    );
-
+    Call<List<NotiConvocatorias>> getNotificaciones(@Header("Authorization") String token);
 
 
     @GET("/notificaciones/mis-proyectos")
     Call<List<ProyectoNot>> getProyectos(@Header("Authorization") String token);
 
-    @GET("/notificaciones/mis-proyectos/{id}")
-    Call<ProyectoNot> getProyectoById(@Header("Authorization") String token, @Path("id") String id);
+
 }

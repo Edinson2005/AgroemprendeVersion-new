@@ -1,45 +1,38 @@
 package com.edinson.agroemnew.modelApi;
 
+import java.util.List;
+
 public class ProyectoNot {
+    private String title; // Correspondiente a "title" en el JSON
+    private String body; // Correspondiente a "body" en el JSON
+    private String url; // Correspondiente a "url" en el JSON
+    private String estado; // Correspondiente a "estado" en el JSON
+    private Proyecto proyecto; // Correspondiente a "proyecto" en el JSON
 
-    private String titulo;
-    private String fecha;
-    private String descripcion;
-    private String estado;
+    // Getters y Setters
 
-    public ProyectoNot() {}
-
-
-    public ProyectoNot(String titulo, String fecha, String descripcion, String estado) {
-        this.titulo = titulo;
-        this.fecha = fecha;
-        this.descripcion = descripcion;
-        this.estado = estado;
+    public String getTitle() {
+        return title;
     }
 
-
-    public String getTitulo() {
-        return titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public String getBody() {
+        return body;
     }
 
-    public String getFecha() {
-        return fecha;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public String getUrl() {
+        return url;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getEstado() {
@@ -48,5 +41,13 @@ public class ProyectoNot {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
     }
 }

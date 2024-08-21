@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.Notificacion;
+import com.edinson.agroemnew.modelApi.NotiConvocatorias;
 import com.edinson.agroemnew.adapters.NotificacionAdapter;
 
 public class Notificaciones extends AppCompatActivity {
@@ -57,11 +57,11 @@ public class Notificaciones extends AppCompatActivity {
 
     private void cargarNotificaciones() {
         // Usar el token para realizar la solicitud a la API
-        apiService.getNotificaciones("Bearer " + token).enqueue(new Callback<List<Notificacion>>() {
+        apiService.getNotificaciones("Bearer " + token).enqueue(new Callback<List<NotiConvocatorias>>() {
             @Override
-            public void onResponse(Call<List<Notificacion>> call, Response<List<Notificacion>> response) {
+            public void onResponse(Call<List<NotiConvocatorias>> call, Response<List<NotiConvocatorias>> response) {
                 if (response.isSuccessful()) {
-                    List<Notificacion> notificaciones = response.body();
+                    List<NotiConvocatorias> notificaciones = response.body();
                     Log.d("Notificaciones", "Datos recibidos: " + notificaciones);
                     mostrarNotificaciones(notificaciones);
                 } else {
@@ -70,13 +70,13 @@ public class Notificaciones extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Notificacion>> call, Throwable t) {
+            public void onFailure(Call<List<NotiConvocatorias>> call, Throwable t) {
                 Log.e("Notificaciones", "Error en la solicitud: " + t.getMessage());
             }
         });
     }
 
-    private void mostrarNotificaciones(List<Notificacion> notificaciones) {
+    private void mostrarNotificaciones(List<NotiConvocatorias> notificaciones) {
         if (notificaciones != null && !notificaciones.isEmpty()) {
             // Pasar el contexto junto con la lista de notificaciones
             adapter = new NotificacionAdapter(notificaciones, this);

@@ -12,15 +12,15 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edinson.agroemnew.R;
-import com.edinson.agroemnew.modelApi.Notificacion;
+import com.edinson.agroemnew.modelApi.NotiConvocatorias;
 
 import java.util.List;
 public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapter.NotificacionViewHolder> {
 
-    private List<Notificacion> notificaciones;
+    private List<NotiConvocatorias> notificaciones;
     private Context context;
 
-    public NotificacionAdapter(List<Notificacion> notificaciones, Context context) {
+    public NotificacionAdapter(List<NotiConvocatorias> notificaciones, Context context) {
         this.notificaciones = notificaciones;
         this.context = context;
     }
@@ -35,14 +35,14 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
     @Override
     public void onBindViewHolder(@NonNull NotificacionViewHolder holder, int position) {
         if (notificaciones != null && position < notificaciones.size()) {
-            Notificacion notificacion = notificaciones.get(position);
-            holder.titulo.setText(notificacion.getTitle());
-            holder.cuerpo.setText(notificacion.getBody());
-            holder.url.setText(notificacion.getUrl());
-            holder.estado.setText(notificacion.getEstado());
+            NotiConvocatorias notiConvocatorias = notificaciones.get(position);
+            holder.titulo.setText(notiConvocatorias.getTitle());
+            holder.cuerpo.setText(notiConvocatorias.getBody());
+            holder.url.setText(notiConvocatorias.getUrl());
+            holder.estado.setText(notiConvocatorias.getEstado());
 
             // Cargar estado 'vista' desde SharedPreferences
-            boolean vista = cargarEstadoVista(notificacion.getId());
+            boolean vista = cargarEstadoVista(notiConvocatorias.getId());
 
             // Cambiar el color del fondo según el estado 'vista'
             if (vista) {
@@ -53,8 +53,8 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
 
             // Evento click para marcar la notificación como vista
             holder.itemView.setOnClickListener(v -> {
-                notificacion.setVista(true);
-                guardarEstadoVista(notificacion.getId(), true);
+                notiConvocatorias.setVista(true);
+                guardarEstadoVista(notiConvocatorias.getId(), true);
                 notifyItemChanged(position);
             });
         }
