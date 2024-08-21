@@ -14,48 +14,62 @@ import com.edinson.agroemnew.modelApi.Proyecto;
 
 import java.util.List;
 
-public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ProyectoViewHolder> {
-    private List<Proyecto> proyectos;
+public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHolder> {
     private Context context;
+    private List<Proyecto> proyectoList;
+    private OnItemClickListener onItemClickListener;
 
-    public ProyectoAdapter(Context context, List<Proyecto> proyectos) {
+    public ProyectoAdapter(Context context, List<Proyecto> proyectoList, OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.proyectos = proyectos;
+        this.proyectoList = proyectoList;
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String proyectoId);
     }
 
     @NonNull
     @Override
-    public ProyectoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_proyecto, parent, false);
-        return new ProyectoViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProyectoViewHolder holder, int position) {
-        Proyecto proyecto = proyectos.get(position);
-        holder.tituloTextView.setText(proyecto.getTitulo());
-        holder.fechaTextView.setText(proyecto.getFecha());
-        holder.estadoTextView.setText(proyecto.getEstado());
-        holder.descripcionTextView.setText(proyecto.getDescripcion());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Proyecto proyecto = proyectoList.get(position);
+        holder.bind(proyecto);
     }
 
     @Override
     public int getItemCount() {
-        return proyectos.size();
+        return proyectoList.size();
     }
 
-    public static class ProyectoViewHolder extends RecyclerView.ViewHolder {
-        TextView tituloTextView;
-        TextView fechaTextView;
-        TextView estadoTextView;
-        TextView descripcionTextView;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView tituloTextView;
+        private TextView fechaTextView;
 
-        public ProyectoViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tituloTextView = itemView.findViewById(R.id.tituloTextView);
             fechaTextView = itemView.findViewById(R.id.fechaTextView);
-            estadoTextView = itemView.findViewById(R.id.estadoTextView);
-            descripcionTextView = itemView.findViewById(R.id.descripcionTextView);
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Proyecto proyecto = proyectoList.get(position);
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onItemClick(proyecto.get_id());
+                    }
+                }
+            });
+        }
+
+        public void bind(Proyecto proyecto) {
+            tituloTextView.setText(proyecto.getTitulo());
+            fechaTextView.setText(proyecto.getFecha());
         }
     }
 }

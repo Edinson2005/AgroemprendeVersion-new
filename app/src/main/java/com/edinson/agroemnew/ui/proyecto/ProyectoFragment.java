@@ -1,6 +1,7 @@
 package com.edinson.agroemnew.ui.proyecto;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edinson.agroemnew.InformacionProyecto;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.databinding.FragmentProyectoBinding;
 import com.edinson.agroemnew.modelApi.ApiLogin;
@@ -44,8 +46,17 @@ public class ProyectoFragment extends Fragment {
         // Inicializa tu ApiService aquí usando ApiLogin
         apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
 
-        // Inicializa el adaptador antes de establecer los datos
-        proyectoAdapter = new ProyectoAdapter(getContext(), proyectoList);
+        // Inicializa el adaptador con el OnItemClickListener
+        proyectoAdapter = new ProyectoAdapter(getContext(), proyectoList, proyectoId -> {
+            SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("SelectID", proyectoId);
+            editor.apply();
+
+            Intent intent = new Intent(getContext(), InformacionProyecto.class);
+            startActivity(intent);
+        });
+
         recyclerViewProyectos.setAdapter(proyectoAdapter);
 
         obtenerProyectos();
@@ -56,7 +67,7 @@ public class ProyectoFragment extends Fragment {
     private void obtenerProyectos() {
         // Recupera el token de SharedPreferences
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("UserToken", ""); // Recupera el token con la clave correcta
+        String token = sharedPreferences.getString("UserToken", "");
 
         if (token.isEmpty()) {
             Toast.makeText(getContext(), "Token de autenticación no encontrado", Toast.LENGTH_LONG).show();
@@ -72,16 +83,14 @@ public class ProyectoFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     proyectoList.clear();
                     proyectoList.addAll(response.body());
-                    proyectoAdapter.notifyDataSetChanged(); // Notifica al adaptador que los datos han cambiado
+                    proyectoAdapter.notifyDataSetChanged();
                 } else {
-                    // Maneja el caso cuando la respuesta no es exitosa
                     Toast.makeText(getContext(), "Error en la respuesta de la API: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Proyecto>> call, @NonNull Throwable t) {
-                // Maneja errores de la llamada a la API aquí
                 Toast.makeText(getContext(), "Error al conectar con la API: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

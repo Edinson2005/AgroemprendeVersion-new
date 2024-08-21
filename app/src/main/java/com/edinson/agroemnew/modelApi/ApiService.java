@@ -39,6 +39,8 @@ public interface ApiService {
     @GET("proyectos/{id}")
     Call<ProyectoDetails> getProyectoDetails(@Header("Authorization") String token, @Path("id") String id);
 
+
+
     @GET("/proyectos/mis-proyectos")
     Call<List<Proyecto>> getProyecto(@Header("Authorization") String token);
 
