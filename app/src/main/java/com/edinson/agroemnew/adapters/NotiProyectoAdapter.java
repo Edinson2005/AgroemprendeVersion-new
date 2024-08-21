@@ -21,7 +21,7 @@ public class NotiProyectoAdapter   extends RecyclerView.Adapter<NotiProyectoAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_proyecto, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notifproyecto, parent, false);
         return new ViewHolder(view);
     }
 
@@ -50,11 +50,14 @@ public class NotiProyectoAdapter   extends RecyclerView.Adapter<NotiProyectoAdap
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TextView bodyTextView;
+        TextView urlTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             bodyTextView = itemView.findViewById(R.id.bodyTextView);
+            urlTextView = itemView.findViewById(R.id.urlTextView);
+
         }
     }
 }
