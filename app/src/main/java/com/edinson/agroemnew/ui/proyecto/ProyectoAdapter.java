@@ -1,14 +1,12 @@
 package com.edinson.agroemnew.ui.proyecto;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
-import androidx.annotation.ContentView;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edinson.agroemnew.R;
@@ -16,46 +14,29 @@ import com.edinson.agroemnew.modelApi.Proyecto;
 
 import java.util.List;
 
-public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHolder> {
+public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ProyectoViewHolder> {
     private List<Proyecto> proyectos;
-    private OnItemClickListener onItemClickListener;
+    private Context context;
 
-    public interface OnItemClickListener {
-        void onItemClick(String projectId);
-    }
-
-    public ProyectoAdapter(List<Proyecto> proyectos, OnItemClickListener onItemClickListener) {
+    public ProyectoAdapter(Context context, List<Proyecto> proyectos) {
+        this.context = context;
         this.proyectos = proyectos;
-        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_proyecto, parent, false);
-        return new ViewHolder(view);
+    public ProyectoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_proyecto, parent, false);
+        return new ProyectoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProyectoViewHolder holder, int position) {
         Proyecto proyecto = proyectos.get(position);
         holder.tituloTextView.setText(proyecto.getTitulo());
         holder.fechaTextView.setText(proyecto.getFecha());
         holder.estadoTextView.setText(proyecto.getEstado());
         holder.descripcionTextView.setText(proyecto.getDescripcion());
-
-        //Configuracion para cambiar el color de (En progreso/ Revisado)
-        switch (proyecto.getEstado()){
-            case "En progreso":
-                holder.estadoTextView.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.En_progreso));
-                break;
-            case "Revisado":
-                holder.estadoTextView.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.revisado));
-                break;
-        }
-
-        // Configura el clic
-        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(proyecto.get_id()));
     }
 
     @Override
@@ -63,10 +44,13 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
         return proyectos.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tituloTextView, fechaTextView, estadoTextView, descripcionTextView;
+    public static class ProyectoViewHolder extends RecyclerView.ViewHolder {
+        TextView tituloTextView;
+        TextView fechaTextView;
+        TextView estadoTextView;
+        TextView descripcionTextView;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ProyectoViewHolder(@NonNull View itemView) {
             super(itemView);
             tituloTextView = itemView.findViewById(R.id.tituloTextView);
             fechaTextView = itemView.findViewById(R.id.fechaTextView);

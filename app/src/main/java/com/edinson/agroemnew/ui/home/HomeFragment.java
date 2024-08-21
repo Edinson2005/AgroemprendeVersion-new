@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -32,6 +33,7 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -40,27 +42,24 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
-
+        if (getActivity() != null) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            if (activity.getSupportActionBar() != null) {
+                activity.getSupportActionBar().hide();
+            }
+        }
 
         ImageButton imageButton = binding.btnNotificaciones;
         imageButton.setOnClickListener(v -> {
-
             Intent intent = new Intent(getActivity(), NtfProyectos.class);
             startActivity(intent);
         });
 
-// Configura el segundo botón
         Button btnOtraActividad = binding.Buttonconvocatoria;
-        btnOtraActividad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Crear un Intent para iniciar la otra actividad
-                Intent intent = new Intent(getActivity(), Notificaciones.class); // Reemplaza con la actividad deseada
-                startActivity(intent);
-            }
+        btnOtraActividad.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Notificaciones.class);
+            startActivity(intent);
         });
-
 
         return root;
     }

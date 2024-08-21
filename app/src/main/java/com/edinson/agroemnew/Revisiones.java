@@ -56,7 +56,7 @@ public class Revisiones extends AppCompatActivity {
         if (token != null){
             ApiService apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
 
-            Call<ProyectoDetails> call = apiService.getProjectDetails("Bearer " + token, projectId);
+            Call<ProyectoDetails> call = apiService.getProyectoDetails("Bearer " + token, projectId);
             call.enqueue(new Callback<ProyectoDetails>() {
                 @Override
                 public void onResponse(Call<ProyectoDetails> call, Response<ProyectoDetails> response) {

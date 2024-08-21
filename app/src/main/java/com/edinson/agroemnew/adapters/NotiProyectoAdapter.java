@@ -10,11 +10,11 @@ import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ProyectoNot;
 
 import java.util.List;
-public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ProyectoViewHolder> {
+public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapter.ProyectoViewHolder> {
 
     private List<ProyectoNot> proyectos;
 
-    public ProyectoAdapter(List<ProyectoNot> proyectos) {
+    public NotiProyectoAdapter(List<ProyectoNot> proyectos) {
         this.proyectos = proyectos;
     }
 

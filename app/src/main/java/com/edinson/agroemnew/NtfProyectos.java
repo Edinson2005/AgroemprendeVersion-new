@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edinson.agroemnew.adapters.NotiProyectoAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.adapters.ProyectoAdapter;
 import com.edinson.agroemnew.modelApi.ProyectoNot;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class NtfProyectos extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ProyectoAdapter adapter;
+    private NotiProyectoAdapter adapter;
     private ApiService apiService;
     private String token;
 
@@ -82,7 +82,7 @@ public class NtfProyectos extends AppCompatActivity {
 
     private void mostrarProyectos(List<ProyectoNot> proyectos) {
         if (proyectos != null && !proyectos.isEmpty()) {
-            adapter = new ProyectoAdapter(proyectos);
+            adapter = new NotiProyectoAdapter(proyectos);
             recyclerView.setAdapter(adapter);
         } else {
             Log.e("NtfProyectos", "Lista de proyectos es nula o está vacía.");

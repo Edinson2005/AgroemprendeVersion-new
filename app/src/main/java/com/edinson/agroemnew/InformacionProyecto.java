@@ -84,7 +84,7 @@ public class InformacionProyecto  extends AppCompatActivity {
             ApiService apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
 
             // Hacer la llamada a la API
-            Call<ProyectoDetails> call = apiService.getProjectDetails("Bearer " + token, projectId);
+            Call<ProyectoDetails> call = apiService.getProyectoDetails("Bearer " + token, projectId);
             call.enqueue(new Callback<ProyectoDetails>() {
                 @Override
                 public void onResponse(Call<ProyectoDetails> call, Response<ProyectoDetails> response) {
