@@ -48,13 +48,15 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tituloTextView;
-        private TextView fechaTextView;
+        private TextView tituloTextView, estadoTextView,fechaTextView, descripcionTextView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tituloTextView = itemView.findViewById(R.id.tituloTextView);
             fechaTextView = itemView.findViewById(R.id.fechaTextView);
+            estadoTextView = itemView.findViewById(R.id.estadoTextView);
+            descripcionTextView = itemView.findViewById(R.id.descripcionTextView);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -70,6 +72,17 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
         public void bind(Proyecto proyecto) {
             tituloTextView.setText(proyecto.getTitulo());
             fechaTextView.setText(proyecto.getFecha());
+            estadoTextView.setText(proyecto.getEstado());
+            descripcionTextView.setText(proyecto.getDescripcion());
+
+            String estado = proyecto.getEstado().toLowerCase();
+            if (estado.contains("en progreso")) {
+                estadoTextView.setTextColor(context.getResources().getColor(R.color.En_progreso));
+            } else if (estado.contains("revisado")) {
+                estadoTextView.setTextColor(context.getResources().getColor(R.color.revisado));
+            } else {
+                estadoTextView.setTextColor(context.getResources().getColor(R.color.black));
+            }
         }
     }
 }
