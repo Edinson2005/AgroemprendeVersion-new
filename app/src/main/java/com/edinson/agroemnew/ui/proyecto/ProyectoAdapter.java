@@ -1,6 +1,7 @@
 package com.edinson.agroemnew.ui.proyecto;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,11 +78,17 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
 
             String estado = proyecto.getEstado().toLowerCase();
             if (estado.contains("en progreso")) {
-                estadoTextView.setTextColor(context.getResources().getColor(R.color.En_progreso));
+                int color = context.getResources().getColor(R.color.En_progreso);
+                estadoTextView.setTextColor(color);
+            } else if (estado.contains("revisado con errores")) {
+                int color = context.getResources().getColor(R.color.Error);
+                estadoTextView.setTextColor(color);
             } else if (estado.contains("revisado")) {
-                estadoTextView.setTextColor(context.getResources().getColor(R.color.revisado));
+                int color = context.getResources().getColor(R.color.revisado);
+                estadoTextView.setTextColor(color);
             } else {
-                estadoTextView.setTextColor(context.getResources().getColor(R.color.black));
+                int color = context.getResources().getColor(R.color.black);
+                estadoTextView.setTextColor(color);
             }
         }
     }
