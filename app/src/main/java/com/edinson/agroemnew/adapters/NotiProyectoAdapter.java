@@ -40,6 +40,12 @@ public class NotiProyectoAdapter   extends RecyclerView.Adapter<NotiProyectoAdap
         } else {
             // Aquí puedes agregar un log si es necesario
         }
+        if (holder.urlTextView != null){
+            holder.urlTextView.setText(notificacion.getUrl());
+        }
+        if (holder.estadoTextView != null){
+            holder.estadoTextView.setText(notificacion.getEstado());
+        }
     }
 
     @Override
@@ -51,13 +57,14 @@ public class NotiProyectoAdapter   extends RecyclerView.Adapter<NotiProyectoAdap
         TextView titleTextView;
         TextView bodyTextView;
         TextView urlTextView;
+        TextView estadoTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             bodyTextView = itemView.findViewById(R.id.bodyTextView);
             urlTextView = itemView.findViewById(R.id.urlTextView);
-
+            estadoTextView = itemView.findViewById(R.id.estadoTextView);
         }
     }
 }

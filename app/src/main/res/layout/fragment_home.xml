@@ -38,6 +38,7 @@
             android:layout_marginLeft="313dp"
             android:layout_marginTop="53dp"
             android:layout_marginRight="313dp"
+            android:background="@android:color/transparent"
             app:srcCompat="@drawable/notificaciones" />
 
 
