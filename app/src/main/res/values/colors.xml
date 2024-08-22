@@ -17,4 +17,5 @@
     <color name="Rechazado">#E49191</color>
     <color name="colorVista">#E49191</color>
     <color name="colorNoVista">#E49191</color>
+    <color name="Error">#FF0B0B</color>
 </resources>

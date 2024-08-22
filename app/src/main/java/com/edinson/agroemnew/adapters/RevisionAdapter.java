@@ -57,14 +57,14 @@
                 int color;
                 if (estado.equalsIgnoreCase("aprobado")) {
                     color = ContextCompat.getColor(holder.itemView.getContext(), R.color.Aprovado);
-                    Log.d("RevisionAdapter", "Aplicando color Aprobado");
                 } else if (estado.equalsIgnoreCase("desaprobado")) {
                     color = ContextCompat.getColor(holder.itemView.getContext(), R.color.Rechazado);
-                    Log.d("RevisionAdapter", "Aplicando color Desaprobado");
+                } else if (estado.equalsIgnoreCase(" revisado con errores")) {
+                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.Error);
                 } else {
                     color = ContextCompat.getColor(holder.itemView.getContext(), R.color.white);
-                    Log.d("RevisionAdapter", "Aplicando color por defecto (blanco)");
                 }
+
 
                 holder.itemView.setBackgroundColor(color);
                 Log.d("RevisionAdapter", "Color aplicado: " + color);
