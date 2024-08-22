@@ -91,11 +91,12 @@
             android:background="@drawable/text_background"
             android:ems="10"
             android:hint="Fecha de nacimiento"
-            android:inputType="date"
+            android:inputType="none"
             android:padding="14dp"
             android:textColor="#555555"
             android:textSize="18sp"
             android:textStyle="bold" />
+
 
         <TextView
             android:id="@+id/tvTelefonoLabel"
