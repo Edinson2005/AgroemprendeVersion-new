@@ -15,6 +15,11 @@
     <color name="revisado">#1E90FF</color>
     <color name="Aprovado">#E3E9EF</color>
     <color name="Rechazado">#E49191</color>
-    <color name="colorVista">#E49191</color>
+    <color name="colorVista">#1976D2</color>
     <color name="colorNoVista">#E49191</color>
+    <color name="azilvioleta">#F5F5F5</color>
+    <color name="proguesoproyecto">#FFC107</color>
+    <color name="revisadoproyect">#4CAF50</color>
+
+
 </resources>

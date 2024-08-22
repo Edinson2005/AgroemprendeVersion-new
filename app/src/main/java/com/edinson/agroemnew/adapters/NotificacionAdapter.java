@@ -41,20 +41,23 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
             holder.url.setText(notiConvocatorias.getUrl());
             holder.estado.setText(notiConvocatorias.getEstado());
 
-            // Cargar estado 'vista' desde SharedPreferences
-            boolean vista = cargarEstadoVista(notiConvocatorias.getId());
+            // No aplicar color adicional, usar el color de fondo predeterminado
+            // Puedes hacer esto con un fondo transparente
+            // holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent));
 
-            // Cambiar el color del fondo según el estado 'vista'
-            if (vista) {
-                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.black)); // Color cuando se ha visto
-            } else {
-                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorVista)); // Color cuando no se ha visto
-            }
+            // Si quieres que el color de fondo sea el predeterminado sin aplicar cambios
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent));
 
             // Evento click para marcar la notificación como vista
             holder.itemView.setOnClickListener(v -> {
-                notiConvocatorias.setVista(true);
+                // Guardar el estado como 'vista' en SharedPreferences
                 guardarEstadoVista(notiConvocatorias.getId(), true);
+
+                // Cambiar el color del fondo inmediatamente
+                // Puedes comentar esta línea si no deseas cambiar el color en el clic
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent));
+
+                // Notificar que el ítem ha cambiado
                 notifyItemChanged(position);
             });
         }

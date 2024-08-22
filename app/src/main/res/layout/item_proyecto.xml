@@ -4,15 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="?attr/selectableItemBackground"
+    android:elevation="4dp"
+    android:background="@drawable/card_border"
     app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="@color/white"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="5dp">
 
     <LinearLayout
+        app:cornerRadius="14dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/card_border"
         android:paddingLeft="10dp"
         android:orientation="vertical">
 
@@ -21,18 +23,19 @@
         android:id="@+id/tituloTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="19sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:text="Título del Proyecto"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="6dp"/>
 
     <TextView
         android:id="@+id/fechaTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:text="Fecha del Proyecto"
         android:layout_marginBottom="4dp"/>
 
@@ -40,8 +43,9 @@
         android:id="@+id/estadoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/azul"
-        android:textSize="14sp"
+        android:textColor="@color/colortexto"
+        android:textStyle="bold"
+        android:textSize="15sp"
         android:text="Estado del Proyecto"
         android:layout_marginBottom="8dp"/>
 
@@ -49,9 +53,9 @@
         android:id="@+id/descripcionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:textColor="@android:color/black"
         android:text="Descripción del Proyecto"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginBottom="9dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

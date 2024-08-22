@@ -17,6 +17,14 @@ import com.edinson.agroemnew.adapters.SeccionAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.ProyectoDetails;
+import com.edinson.agroemnew.modelApi.Seccion;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,7 +59,6 @@ public class InformacionProyecto  extends AppCompatActivity {
         seccionesRecyclerView = findViewById(R.id.seccionesRecyclerView);
         //revisionesRecyclerView = findViewById(R.id.revisionesRecyclerView);
         revisionesButton = findViewById(R.id.revisionesButton);
-
 
 
         // Configuración de RecyclerView
@@ -118,7 +125,7 @@ public class InformacionProyecto  extends AppCompatActivity {
         estadoTextView.setText(proyecto.getEstado());
         descripcionTextView.setText(proyecto.getDescripcion());
 
-        //cambiar el color al estado
+        // Cambiar el color del estado
         String estado = proyecto.getEstado().toLowerCase();
         Log.d(TAG, "Estado del proyecto: " + estado);
         if (estado.contains("en progreso")) {
@@ -129,10 +136,40 @@ public class InformacionProyecto  extends AppCompatActivity {
             estadoTextView.setTextColor(getResources().getColor(R.color.black));
         }
 
+        // Obtener la lista de secciones
+        List<Seccion> secciones = proyecto.getSecciones();
 
-        SeccionAdapter adapter = new SeccionAdapter(proyecto.getSecciones());
-        seccionesRecyclerView.setAdapter(adapter);
+        if (secciones != null) {
+            // Imprimir fechas antes de ordenar
+            for (Seccion seccion : secciones) {
+                Log.d(TAG, "Fecha antes de ordenar: " + seccion.getFechaCreacion());
+            }
 
+            // Ordenar la lista de secciones por fecha en orden descendente
+            Collections.sort(secciones, (s1, s2) -> {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                try {
+                    Date fecha1 = format.parse(s1.getFechaCreacion());
+                    Date fecha2 = format.parse(s2.getFechaCreacion());
+                    // Ordenar de más reciente a menos reciente
+                    return fecha2.compareTo(fecha1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return 0;
+                }
+            });
 
+            // Imprimir fechas después de ordenar
+            for (Seccion seccion : secciones) {
+                Log.d(TAG, "Fecha después de ordenar: " + seccion.getFechaCreacion());
+            }
+
+            // Asignar el adaptador a RecyclerView
+            SeccionAdapter adapter = new SeccionAdapter(secciones);
+            seccionesRecyclerView.setAdapter(adapter);
+        } else {
+            // Manejar el caso en que la lista de secciones es null
+            Toast.makeText(this, "No hay secciones disponibles", Toast.LENGTH_SHORT).show();
+        }
     }
 }
