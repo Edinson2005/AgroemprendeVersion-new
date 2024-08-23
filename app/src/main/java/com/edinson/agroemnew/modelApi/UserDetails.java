@@ -43,7 +43,7 @@ public class UserDetails {
         private String caracterizacion;
         private String contrasena;
         private String role;
-        private List<String> proyectos; // Lista de IDs de proyectos como cadenas
+        private List<Proyecto> proyectos; // Lista de objetos Proyecto
         private int __v;
 
         // Getters y setters
@@ -127,11 +127,11 @@ public class UserDetails {
             this.role = role;
         }
 
-        public List<String> getProyectos() {
+        public List<Proyecto> getProyectos() {
             return proyectos;
         }
 
-        public void setProyectos(List<String> proyectos) {
+        public void setProyectos(List<Proyecto> proyectos) {
             this.proyectos = proyectos;
         }
 
