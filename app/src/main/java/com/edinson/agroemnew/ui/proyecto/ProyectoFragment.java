@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,7 +41,10 @@ public class ProyectoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_proyecto, container, false);
 
         recyclerViewProyectos = view.findViewById(R.id.recyclerViewProyectos);
-        recyclerViewProyectos.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Configura el GridLayoutManager con 2 columnas
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerViewProyectos.setLayoutManager(gridLayoutManager);
 
         // Inicializa tu ApiService aquí usando ApiLogin
         apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
