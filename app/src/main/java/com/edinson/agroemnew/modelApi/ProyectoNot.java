@@ -1,15 +1,23 @@
 package com.edinson.agroemnew.modelApi;
 
-import java.util.List;
-
 public class ProyectoNot {
-    private String title; // Correspondiente a "title" en el JSON
-    private String body; // Correspondiente a "body" en el JSON
-    private String url; // Correspondiente a "url" en el JSON
-    private String estado; // Correspondiente a "estado" en el JSON
-    private Proyecto proyecto; // Correspondiente a "proyecto" en el JSON
+
+    private String _id;
+    private String title;
+    private String body;
+    private String url;
+    private String estado;
+    private Proyecto proyecto;  // Campo de tipo Proyecto
 
     // Getters y Setters
+
+    public String getId() {
+        return _id;
+    }
+
+    public void setId(String _id) {
+        this._id = _id;
+    }
 
     public String getTitle() {
         return title;
@@ -50,4 +58,28 @@ public class ProyectoNot {
     public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
     }
+
+    public static class Proyecto {
+        private String _id;
+        private String usuarioId;
+
+        // Getters y Setters
+
+        public String getId() {
+            return _id;
+        }
+
+        public void setId(String _id) {
+            this._id = _id;
+        }
+
+        public String getUsuarioId() {
+            return usuarioId;
+        }
+
+        public void setUsuarioId(String usuarioId) {
+            this.usuarioId = usuarioId;
+        }
+    }
 }
+

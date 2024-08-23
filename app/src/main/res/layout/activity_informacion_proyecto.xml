@@ -29,17 +29,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginTop="45dp"
+                        android:layout_marginTop="65dp"
                         android:layout_marginBottom="10dp"
                         android:text="Título del proyecto"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:textAllCaps="true"
-                        android:textSize="25sp" />
+                        android:textSize="26sp" />
 
 
                     <ImageButton
                         android:id="@+id/revisionesButton"
-                        android:layout_width="35dp"
+                        android:layout_width="45dp"
                         android:layout_height="25dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
@@ -72,8 +72,8 @@
                         android:id="@+id/estadoTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="Estado"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>

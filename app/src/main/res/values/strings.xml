@@ -4,7 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="MenuTitulo">Agro Emprende</string>
     <string name="title_notifications">Notifications</string>
-    <string name="tituloladding">Utiliza IA para formular proyectos y permite a los administradores revisar y asegurar su calidad. Optimiza tu gestión de proyectos con tecnología avanzada y supervisión experta.</string>
+    <string name="tituloladding">Optimiza tu gestión de proyectos con tecnología avanzada y supervisión experta.</string>
     <string name="no_proyectos_encontrados">No se encontraron proyectos</string>
     <string name="error_cargar_perfil">Error al cargar el perfil: </string>
     <string name="error_red">Error de red: </string>
