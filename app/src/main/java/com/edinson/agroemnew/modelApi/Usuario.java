@@ -37,10 +37,13 @@ public class Usuario {
     private String role;
 
     @SerializedName("proyectos")
-    private List<String> proyectos;
+    private List<String> proyectos; // Lista de objetos Proyecto
 
     @SerializedName("__v")
     private int version;
+
+    @SerializedName("updatedAt")
+    private String updatedAt; // Añadido para `updatedAt`
 
     // Getters y setters
 
@@ -139,5 +142,12 @@ public class Usuario {
     public void setVersion(int version) {
         this.version = version;
     }
-}
 
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+}
