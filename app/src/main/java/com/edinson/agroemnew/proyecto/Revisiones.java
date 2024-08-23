@@ -37,44 +37,43 @@ public class Revisiones extends AppCompatActivity {
         revisionesRecyclerView = findViewById(R.id.revisionesRecyclerView);
         revisionesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        String projectId  = getIntent().getStringExtra("projectId");
-        if (projectId != null){
+        String projectId = getIntent().getStringExtra("projectId");
+        if (projectId != null) {
             loadProjectDetails(projectId);
         } else {
             Toast.makeText(this, "ID del proyecto no encontrado", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void loadProjectDetails (String projectId){
+    private void loadProjectDetails(String projectId) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
-        String token =  sharedPreferences.getString("UserToken", null);
+        String token = sharedPreferences.getString("UserToken", null);
 
-        if (token != null){
+        if (token != null) {
             ApiService apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
 
             Call<ProyectoDetails> call = apiService.getProyectoDetails("Bearer " + token, projectId);
             call.enqueue(new Callback<ProyectoDetails>() {
                 @Override
                 public void onResponse(Call<ProyectoDetails> call, Response<ProyectoDetails> response) {
-                    if (response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         ProyectoDetails proyecto = response.body();
-                        if (proyecto != null){
+                        if (proyecto != null) {
                             setupRevisionesRecyclerView(proyecto.getRevisiones());
-                        }else {
+                        } else {
                             Toast.makeText(Revisiones.this, "No se encontraron detalles del proyecto", Toast.LENGTH_SHORT).show();
                         }
-                    }else {
+                    } else {
                         Toast.makeText(Revisiones.this, "Error al cargar los detalles del proyecto", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ProyectoDetails> call, Throwable t) {
-                    Toast.makeText(Revisiones.this,"Error: "+ t.getMessage(),Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(Revisiones.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-        }else{
+        } else {
             Toast.makeText(this, "No se encontró el token de autorización", Toast.LENGTH_SHORT).show();
         }
     }
@@ -83,5 +82,4 @@ public class Revisiones extends AppCompatActivity {
         RevisionAdapter revisionAdapter = new RevisionAdapter(revisiones);
         revisionesRecyclerView.setAdapter(revisionAdapter);
     }
-
 }

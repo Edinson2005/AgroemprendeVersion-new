@@ -4,6 +4,7 @@
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.ImageView;
         import android.widget.TextView;
 
         import androidx.annotation.NonNull;
@@ -45,26 +46,28 @@
                 holder.descripcionTextView.setText(revision.getDescripcion());
                 holder.fechaRevisionTextView.setText(revision.getFechaRevision());
 
-                //Formatear fecha
+                // Formatear fecha
                 String fechaRevision = revision.getFechaRevision();
                 String fechaFormateada = formatFecha(fechaRevision);
                 holder.fechaRevisionTextView.setText(fechaFormateada);
 
-                //Cambiar el color del fondo segun su estado (Aprovado-Rechazado)
+                // Cambiar el color del fondo según su estado (Aprobado-Rechazado)
                 String estado = revision.getEstado().toLowerCase();
                 Log.d("RevisionAdapter", "Estado: " + estado);
 
                 int color;
-                if (estado.equalsIgnoreCase("aprobado")) {
+                if (estado.equalsIgnoreCase("APROBADO")) {
                     color = ContextCompat.getColor(holder.itemView.getContext(), R.color.Aprovado);
-                } else if (estado.equalsIgnoreCase("desaprobado")) {
+                    holder.iconoEstadoImageView.setImageResource(R.drawable.img_10);
+                    holder.iconoEstadoImageView.setVisibility(View.VISIBLE);
+                } else if (estado.equalsIgnoreCase("DESAPROBADO")) {
                     color = ContextCompat.getColor(holder.itemView.getContext(), R.color.Rechazado);
-                } else if (estado.equalsIgnoreCase(" revisado con errores")) {
-                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.Error);
+                    holder.iconoEstadoImageView.setImageResource(R.drawable.img_11);
+                    holder.iconoEstadoImageView.setVisibility(View.VISIBLE);
                 } else {
                     color = ContextCompat.getColor(holder.itemView.getContext(), R.color.white);
+                    holder.iconoEstadoImageView.setVisibility(View.GONE);
                 }
-
 
                 holder.itemView.setBackgroundColor(color);
                 Log.d("RevisionAdapter", "Color aplicado: " + color);
@@ -81,6 +84,7 @@
                 TextView sugerenciaTextView;
                 TextView descripcionTextView;
                 TextView fechaRevisionTextView;
+                ImageView iconoEstadoImageView; // ImageView para el icono de estado
 
                 public RevisionViewHolder(@NonNull View itemView) {
                     super(itemView);
@@ -89,18 +93,19 @@
                     sugerenciaTextView = itemView.findViewById(R.id.sugerenciaTextView);
                     descripcionTextView = itemView.findViewById(R.id.descripcionTextView);
                     fechaRevisionTextView = itemView.findViewById(R.id.fechaRevisionTextView);
+                    iconoEstadoImageView = itemView.findViewById(R.id.aprobadoimagen); // Enlazar el ImageView
                 }
             }
 
-            public String formatFecha(String fecha){
+            public String formatFecha(String fecha) {
                 SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                 SimpleDateFormat formatoSalida = new SimpleDateFormat("yyy-MM-dd", Locale.getDefault());
-                try{
+                try {
                     Date fechaDate = formatoEntrada.parse(fecha);
-                    if (fechaDate != null){
+                    if (fechaDate != null) {
                         return formatoSalida.format(fechaDate);
                     }
-                }catch (ParseException e){
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 return fecha;
