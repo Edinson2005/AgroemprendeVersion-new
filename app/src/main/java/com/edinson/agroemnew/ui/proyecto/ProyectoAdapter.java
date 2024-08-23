@@ -49,8 +49,7 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tituloTextView, estadoTextView,fechaTextView, descripcionTextView;
-
+        private TextView tituloTextView, estadoTextView, fechaTextView, descripcionTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
