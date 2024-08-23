@@ -6,6 +6,7 @@
     app:cardElevation="5dp"
  android:layout_marginRight="12dp"
     android:layout_marginTop="33dp"
+    app:cardBackgroundColor="@color/nieve"
     android:layout_marginBottom="33dp"
     android:layout_marginLeft="12dp"
     android:layout_height="match_parent"
@@ -17,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- IMAGEN Y BOTON DE REVISIONES-->
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -28,16 +29,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="45dp"
                         android:layout_marginBottom="10dp"
                         android:text="Título del proyecto"
                         android:textColor="@color/black"
+                        android:textAllCaps="true"
                         android:textSize="25sp" />
 
-                    <!-- ImageButton alineado a la derecha -->
+
                     <ImageButton
                         android:id="@+id/revisionesButton"
-                        android:layout_width="25dp"
+                        android:layout_width="35dp"
                         android:layout_height="25dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
@@ -46,6 +48,35 @@
                         android:scaleType="fitCenter"
                         android:src="@drawable/revisiones" />
                 </RelativeLayout>
+
+
+
+                <!-- Estado del proyecto -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Estado: "
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/estadoTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Estado"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
                 <!-- Fecha del proyecto -->
                 <LinearLayout
@@ -57,10 +88,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+
                         android:text="Fecha: "
+                        android:layout_marginLeft="15dp"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/fechaTextView"
@@ -68,32 +101,7 @@
                         android:layout_height="wrap_content"
                         android:text="Fecha"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <!-- Estado del proyecto -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="Estado: "
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/estadoTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:text="Estado"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <!-- Descripción del proyecto -->
@@ -107,27 +115,29 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:text="Descripción: "
+                        android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/descripcioTextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:text="Descripción"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <!-- RecyclerView para secciones del proyecto -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/seccionesRecyclerView"
+                    android:layout_marginTop="-23dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginBottom="20dp" />
             </LinearLayout>
 

@@ -6,20 +6,21 @@
     android:padding="8dp">
 
 
-
     <TextView
         android:id="@+id/nombreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="Nombre"/>
+        android:textStyle="bold"
+    android:text="Nombre"/>
 
     <TextView
         android:id="@+id/contenidoTextView"
         android:layout_width="wrap_content"
-        android:textColor="@color/black"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textSize="15sp"
+        android:textStyle="normal"
         android:text="Contenido"/>
 </LinearLayout>
