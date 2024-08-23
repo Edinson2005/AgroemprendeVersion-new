@@ -1,4 +1,4 @@
-package com.edinson.agroemnew;
+package com.edinson.agroemnew.Usuario;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,10 +10,8 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.Forgot;

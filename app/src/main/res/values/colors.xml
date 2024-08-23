@@ -20,6 +20,6 @@
     <color name="azilvioleta">#F5F5F5</color>
     <color name="proguesoproyecto">#FFC107</color>
     <color name="revisadoproyect">#4CAF50</color>
-
+    <color name="Error">#FF0000</color>
 
 </resources>

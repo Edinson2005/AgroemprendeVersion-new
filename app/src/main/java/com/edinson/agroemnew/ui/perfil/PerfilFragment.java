@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,10 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
-import com.edinson.agroemnew.MainActivity;
-import com.edinson.agroemnew.UsuarioEditar;
+import com.edinson.agroemnew.Usuario.UsuarioEditar;
 import com.edinson.agroemnew.databinding.FragmentPerfilBinding;
 import com.edinson.agroemnew.modelApi.UserDetails;
 

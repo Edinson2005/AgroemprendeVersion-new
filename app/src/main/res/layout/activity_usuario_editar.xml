@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UsuarioEditar">
+    tools:context=".Usuario.UsuarioEditar">
 
     <androidx.cardview.widget.CardView
         android:layout_width="315dp"

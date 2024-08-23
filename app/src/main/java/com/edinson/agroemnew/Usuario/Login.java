@@ -1,10 +1,8 @@
-package com.edinson.agroemnew;
+package com.edinson.agroemnew.Usuario;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,17 +12,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.Token;
 import com.edinson.agroemnew.modelApi.UserDetails;
-import com.edinson.agroemnew.ui.home.HomeFragment;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;

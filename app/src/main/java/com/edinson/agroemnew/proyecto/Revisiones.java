@@ -1,4 +1,4 @@
-package com.edinson.agroemnew;
+package com.edinson.agroemnew.proyecto;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -6,20 +6,16 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.adapters.RevisionAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.Proyecto;
 import com.edinson.agroemnew.modelApi.ProyectoDetails;
 import com.edinson.agroemnew.modelApi.Revision;
 
-import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;

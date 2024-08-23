@@ -17,16 +17,16 @@
         android:theme="@style/Theme.AgroemNew"
         tools:targetApi="31">
         <activity
-            android:name=".Revisiones"
+            android:name=".proyecto.Revisiones"
             android:exported="false" />
         <activity
-            android:name=".InformacionProyecto"
+            android:name=".proyecto.InformacionProyecto"
             android:exported="false" />
         <activity
-            android:name=".Notificaciones"
+            android:name=".proyecto.Notificaciones"
             android:exported="false" />
         <activity
-            android:name=".LadinPrincipal"
+            android:name=".Usuario.LadinPrincipal"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,22 +35,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".Usuario.Login"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Usuario.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Registro"
+            android:name=".Usuario.Registro"
             android:exported="false" />
         <activity
-            android:name=".RecuperarPassword"
+            android:name=".Usuario.RecuperarPassword"
             android:exported="false" />
         <activity
-            android:name=".UsuarioEditar"
+            android:name=".Usuario.UsuarioEditar"
             android:exported="false" />
 
-        <activity android:name=".NtfProyectos"
+        <activity android:name=".proyecto.NtfProyectos"
             android:exported="false"/>
     </application>
 

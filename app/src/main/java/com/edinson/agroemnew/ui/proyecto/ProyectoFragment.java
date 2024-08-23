@@ -15,9 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.edinson.agroemnew.InformacionProyecto;
+import com.edinson.agroemnew.proyecto.InformacionProyecto;
 import com.edinson.agroemnew.R;
-import com.edinson.agroemnew.databinding.FragmentProyectoBinding;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.Proyecto;

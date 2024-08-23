@@ -6,27 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.edinson.agroemnew.Notificaciones;
-import com.edinson.agroemnew.NtfProyectos;
+import com.edinson.agroemnew.proyecto.Notificaciones;
+import com.edinson.agroemnew.proyecto.NtfProyectos;
 import com.edinson.agroemnew.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {

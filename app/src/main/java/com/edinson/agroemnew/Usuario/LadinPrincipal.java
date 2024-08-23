@@ -1,9 +1,8 @@
-package com.edinson.agroemnew;
+package com.edinson.agroemnew.Usuario;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -15,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.edinson.agroemnew.R;
 
 public class LadinPrincipal extends AppCompatActivity {
 

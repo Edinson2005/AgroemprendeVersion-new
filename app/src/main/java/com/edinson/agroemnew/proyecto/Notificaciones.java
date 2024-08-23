@@ -1,4 +1,4 @@
-package com.edinson.agroemnew;
+package com.edinson.agroemnew.proyecto;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.NotiConvocatorias;
