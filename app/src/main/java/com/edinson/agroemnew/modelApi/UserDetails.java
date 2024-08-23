@@ -43,7 +43,7 @@ public class UserDetails {
         private String caracterizacion;
         private String contrasena;
         private String role;
-        private List<Proyecto> proyectos; // Lista de objetos Proyecto
+        private List<Proyecto> proyectos; // Lista de objetos Proyecto en lugar de List<String>
         private int __v;
 
         // Getters y setters
