@@ -12,6 +12,7 @@
         android:layout_height="598dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="90dp"
+        android:backgroundTint="@color/Cards"
         android:layout_marginRight="40dp"
         app:cardCornerRadius="23dp">
 
@@ -33,6 +34,7 @@
             android:layout_marginLeft="19dp"
             android:layout_marginTop="86dp"
             android:text="Nombre:"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -56,6 +58,7 @@
             android:layout_marginLeft="19dp"
             android:layout_marginTop="169dp"
             android:text="Apellido:"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -79,6 +82,7 @@
             android:layout_marginLeft="19dp"
             android:layout_marginTop="255dp"
             android:text="Fecha de nacimiento:"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -104,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="19dp"
             android:layout_marginTop="338dp"
+            android:textColor="@color/black"
             android:text="Teléfono:"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -130,6 +135,7 @@
             android:layout_marginLeft="19dp"
             android:layout_marginTop="419dp"
             android:text="Número de identificación:"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -156,6 +162,7 @@
             android:layout_marginLeft="19dp"
             android:layout_marginTop="500dp"
             android:text="Correo electrónico:"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold" />
 
