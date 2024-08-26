@@ -1,10 +1,10 @@
 package com.edinson.agroemnew.proyecto;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,9 +18,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-
-
 
 public class NtfProyectos extends AppCompatActivity {
 
@@ -77,14 +74,15 @@ public class NtfProyectos extends AppCompatActivity {
                 Log.e("NtfProyectos", "Error en la solicitud: " + t.getMessage());
                 Toast.makeText(NtfProyectos.this, "Error al cargar los proyectos", Toast.LENGTH_SHORT).show();
             }
-
         });
     }
 
     private void mostrarProyectos(List<ProyectoNot> proyectos) {
+        Log.d("NtfProyectos", "Mostrar proyectos: " + proyectos);
         if (proyectos != null && !proyectos.isEmpty()) {
             adapter = new NotiProyectoAdapter(proyectos);
             recyclerView.setAdapter(adapter);
+            Log.d("NtfProyectos", "Adapter configurado.");
         } else {
             Log.e("NtfProyectos", "Lista de proyectos es nula o está vacía.");
             Toast.makeText(this, "No se encontraron proyectos", Toast.LENGTH_SHORT).show();

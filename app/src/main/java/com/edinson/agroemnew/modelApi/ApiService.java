@@ -22,7 +22,7 @@ public interface ApiService {
 
     @POST("auth/usuario")
     Call<Void> registerUser (@Body RegisterRequest registerRequest);
-    @GET("auth/profile")
+    @GET("/auth/profile")
     Call<UserDetails> getUserDetails(@Header("Authorization") String token);
 
     @HTTP(method = "PATCH", path = "auth/usuario/{userId}", hasBody = true)
@@ -51,7 +51,7 @@ public interface ApiService {
     /////NOTIFICACIONES
 
     // Métodos para Notificaciones
-    @GET("notificaciones/convocatoria")
+    @GET("/notificaciones/convocatoria")
     Call<List<NotiConvocatorias>> getNotificaciones(@Header("Authorization") String token);
 
 
