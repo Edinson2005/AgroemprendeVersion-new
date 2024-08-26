@@ -85,7 +85,7 @@ public class NtfProyectos extends AppCompatActivity {
             Log.d("NtfProyectos", "Adapter configurado.");
         } else {
             Log.e("NtfProyectos", "Lista de proyectos es nula o está vacía.");
-            Toast.makeText(this, "No se encontraron proyectos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No hay notificaciones ", Toast.LENGTH_SHORT).show();
         }
     }
 }

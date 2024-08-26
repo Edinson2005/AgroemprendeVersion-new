@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.edinson.agroemnew.modelApi.Project;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ProyectoViewModel extends ViewModel {
@@ -27,6 +29,15 @@ public class ProyectoViewModel extends ViewModel {
     }
 
     public void setPruebas(List<Project> projects) {
+        // Ordena la lista de proyectos por fecha de forma descendente (más reciente primero)
+        Collections.sort(projects, new Comparator<Project>() {
+            @Override
+            public int compare(Project p1, Project p2) {
+                // Supongamos que getFecha() devuelve la fecha en formato "yyyy-MM-dd"
+                // Aquí debes implementar el código necesario para comparar las fechas adecuadamente
+                return p2.getFecha().compareTo(p1.getFecha()); // Orden descendente
+            }
+        });
         pruebaLiveData.setValue(projects);
     }
 

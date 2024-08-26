@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Define aquí los colores para el modo oscuro -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFAAAAAA</color> <!-- Más oscuro para el fondo en modo oscuro -->
+    <color name="azul">#BA79EC</color>
+    <color name="purple">#B691D2</color>
+    <color name="colortexto">#A78BFA</color>
+    <color name="nieve">#FF333333</color> <!-- Color de fondo más oscuro -->
+    <color name="En_progreso">#B0B0B0</color>
+    <color name="revisado">#1E90FF</color>
+    <color name="Aprovado">#F0C7E0C7</color>
+    <color name="Rechazado">#D5B0B0</color>
+    <color name="colorVista">#1976D2</color>
+    <color name="colorNoVista">#E49191</color>
+    <color name="azilvioleta">#333333</color> <!-- Color de fondo más oscuro -->
+    <color name="proguesoproyecto">#FFC107</color>
+    <color name="revisadoproyect">#4CAF50</color>
+    <color name="Error">#FF0000</color>
+    <color name="Cards">#212121</color>
+</resources>

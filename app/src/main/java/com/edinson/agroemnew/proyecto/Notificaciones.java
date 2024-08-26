@@ -7,6 +7,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import java.util.List;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,7 +86,7 @@ public class Notificaciones extends AppCompatActivity {
             adapter = new NotificacionAdapter(notificaciones, this);
             recyclerView.setAdapter(adapter);
         } else {
-            Log.e("Notificaciones", "Lista de notificaciones es nula o está vacía.");
+            Toast.makeText(this, "No hay convocatorias disponibles", Toast.LENGTH_SHORT).show();
         }
     }
 }

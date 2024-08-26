@@ -53,7 +53,7 @@
 
                 // Cambiar el color del fondo según su estado (Aprobado-Rechazado)
                 String estado = revision.getEstado().toLowerCase();
-                Log.d("RevisionAdapter", "Estado: " + estado);
+
 
                 int color;
                 if (estado.equalsIgnoreCase("APROBADO")) {
@@ -70,7 +70,7 @@
                 }
 
                 holder.itemView.setBackgroundColor(color);
-                Log.d("RevisionAdapter", "Color aplicado: " + color);
+
             }
 
             @Override

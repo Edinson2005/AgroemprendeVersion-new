@@ -33,6 +33,7 @@ public class ProyectoFragment extends Fragment {
     private ProyectoAdapter proyectoAdapter;
     private List<Project> projectList = new ArrayList<>();
     private ApiService apiService;
+    private ProyectoViewModel proyectoViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -45,8 +46,11 @@ public class ProyectoFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerViewProyectos.setLayoutManager(gridLayoutManager);
 
-        // Inicializa tu ApiService aquí usando ApiLogin
+        // Inicializa el ApiService
         apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
+
+        // Inicializa el ViewModel
+        proyectoViewModel = new ProyectoViewModel();
 
         // Inicializa el adaptador con el OnItemClickListener
         proyectoAdapter = new ProyectoAdapter(getContext(), projectList, pruebaId -> {
@@ -79,12 +83,13 @@ public class ProyectoFragment extends Fragment {
         // Agrega "Bearer " al token
         String authToken = "Bearer " + token;
 
-        apiService.getPrueba(authToken).enqueue(new Callback<List<Project>>() { // Cambiado de getProyecto a getPrueba
+        apiService.getPrueba(authToken).enqueue(new Callback<List<Project>>() {
             @Override
             public void onResponse(@NonNull Call<List<Project>> call, @NonNull Response<List<Project>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     projectList.clear();
                     projectList.addAll(response.body());
+                    proyectoViewModel.setPruebas(projectList); // Actualiza el ViewModel con la lista ordenada
                     proyectoAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(getContext(), "Error en la respuesta de la API: " + response.message(), Toast.LENGTH_LONG).show();

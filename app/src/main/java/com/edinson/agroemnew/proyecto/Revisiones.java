@@ -79,7 +79,13 @@ public class Revisiones extends AppCompatActivity {
     }
 
     private void setupRevisionesRecyclerView(List<Revision> revisiones) {
-        RevisionAdapter revisionAdapter = new RevisionAdapter(revisiones);
-        revisionesRecyclerView.setAdapter(revisionAdapter);
+        if(revisiones == null || revisiones.isEmpty()){
+            Toast.makeText(this, "No hay revisiones disponibles", Toast.LENGTH_SHORT).show();
+
+        }else{
+            RevisionAdapter revisionAdapter = new RevisionAdapter(revisiones);
+            revisionesRecyclerView.setAdapter(revisionAdapter);
+        }
+
     }
 }
