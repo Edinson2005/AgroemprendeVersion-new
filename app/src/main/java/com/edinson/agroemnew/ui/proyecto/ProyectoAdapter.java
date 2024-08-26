@@ -1,7 +1,6 @@
 package com.edinson.agroemnew.ui.proyecto;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edinson.agroemnew.R;
-import com.edinson.agroemnew.modelApi.Proyecto;
+import com.edinson.agroemnew.modelApi.Project;
 
 import java.util.List;
 
 public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHolder> {
     private Context context;
-    private List<Proyecto> proyectoList;
+    private List<Project> projectList;
     private OnItemClickListener onItemClickListener;
 
-    public ProyectoAdapter(Context context, List<Proyecto> proyectoList, OnItemClickListener onItemClickListener) {
+    public ProyectoAdapter(Context context, List<Project> projectList, OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.proyectoList = proyectoList;
+        this.projectList = projectList;
         this.onItemClickListener = onItemClickListener;
     }
 
     public interface OnItemClickListener {
-        void onItemClick(String proyectoId);
+        void onItemClick(String pruebaId);
     }
 
     @NonNull
@@ -39,13 +38,13 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Proyecto proyecto = proyectoList.get(position);
-        holder.bind(proyecto);
+        Project project = projectList.get(position);
+        holder.bind(project);
     }
 
     @Override
     public int getItemCount() {
-        return proyectoList.size();
+        return projectList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,21 +60,21 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    Proyecto proyecto = proyectoList.get(position);
+                    Project project = projectList.get(position);
                     if (onItemClickListener != null) {
-                        onItemClickListener.onItemClick(proyecto.get_id());
+                        onItemClickListener.onItemClick(project.get_id());
                     }
                 }
             });
         }
 
-        public void bind(Proyecto proyecto) {
-            tituloTextView.setText(proyecto.getTitulo());
-            fechaTextView.setText(proyecto.getFecha());
-            estadoTextView.setText(proyecto.getEstado());
-            descripcionTextView.setText(proyecto.getDescripcion());
+        public void bind(Project project) {
+            tituloTextView.setText(project.getTitulo());
+            fechaTextView.setText(project.getFecha());
+            estadoTextView.setText(project.getEstado());
+            descripcionTextView.setText(project.getDescripcion());
 
-            String estado = proyecto.getEstado().toLowerCase();
+            String estado = project.getEstado().toLowerCase();
             if (estado.contains("en progreso")) {
                 int color = context.getResources().getColor(R.color.En_progreso);
                 estadoTextView.setTextColor(color);

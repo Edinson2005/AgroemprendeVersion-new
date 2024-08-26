@@ -44,7 +44,7 @@ public interface ApiService {
 
     //TODOS LOS MIS PROYECTOS
     @GET("/proyectos/mis-proyectos")
-    Call<List<Proyecto>> getProyecto(@Header("Authorization") String token);
+    Call<List<Project>> getPrueba(@Header("Authorization") String token);
 
 
 

@@ -55,6 +55,10 @@ public class PerfilFragment extends Fragment {
     }
 
     private void updateUI(UserDetails.Sub userData) {
+        if (userData == null) {
+            Log.d("PerfilFragment", "UserData es nulo");
+            return;
+        }
         Log.d("PerfilFragment", "Actualizando UI con datos: " + userData.toString());
         binding.tvNombre.setText(userData.getNombre() + " " + userData.getApellido());
         binding.tvEmail.setText(userData.getEmail());
@@ -78,7 +82,6 @@ public class PerfilFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EDITAR_USUARIO_REQUEST && resultCode == Activity.RESULT_OK) {
             if (data != null && data.getBooleanExtra("DATOS_ACTUALIZADOS", false)) {
-                // Forzar una actualización inmediata desde la API
                 perfilViewModel.updateUserInterface(true);
                 Toast.makeText(getContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
             }

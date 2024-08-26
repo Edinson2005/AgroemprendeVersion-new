@@ -4,32 +4,13 @@ import java.util.List;
 
 public class UserDetails {
     private Sub sub;
-    private String role;
-    private long iat;
 
-    // Getters y setters
     public Sub getSub() {
         return sub;
     }
 
     public void setSub(Sub sub) {
         this.sub = sub;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public long getIat() {
-        return iat;
-    }
-
-    public void setIat(long iat) {
-        this.iat = iat;
     }
 
     public static class Sub {
@@ -43,10 +24,12 @@ public class UserDetails {
         private String caracterizacion;
         private String contrasena;
         private String role;
-        private List<Proyecto> proyectos; // Lista de objetos Proyecto en lugar de List<String>
+        private List<Proyecto> proyectos;
         private int __v;
+        private String updatedAt;
 
-        // Getters y setters
+        // Getters and Setters for all fields
+
         public String get_id() {
             return _id;
         }
@@ -141,6 +124,14 @@ public class UserDetails {
 
         public void set__v(int __v) {
             this.__v = __v;
+        }
+
+        public String getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(String updatedAt) {
+            this.updatedAt = updatedAt;
         }
     }
 }

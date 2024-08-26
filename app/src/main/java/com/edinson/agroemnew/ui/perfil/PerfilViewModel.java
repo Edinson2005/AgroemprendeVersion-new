@@ -43,6 +43,7 @@
 
             private void fetchUserDetails(boolean forceUpdate) {
                 String token = sharedPreferences.getString("UserToken", null);
+                Log.d("PerfilViewModel", "Token usado para la solicitud: " + token);
 
                 if (token == null) {
                     _errorMessage.setValue("Token no encontrado");

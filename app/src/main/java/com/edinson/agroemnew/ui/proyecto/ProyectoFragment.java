@@ -13,14 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edinson.agroemnew.modelApi.Project;
 import com.edinson.agroemnew.proyecto.InformacionProyecto;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.Proyecto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ import retrofit2.Response;
 public class ProyectoFragment extends Fragment {
     private RecyclerView recyclerViewProyectos;
     private ProyectoAdapter proyectoAdapter;
-    private List<Proyecto> proyectoList = new ArrayList<>();
+    private List<Project> projectList = new ArrayList<>();
     private ApiService apiService;
 
     @Override
@@ -50,10 +49,10 @@ public class ProyectoFragment extends Fragment {
         apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
 
         // Inicializa el adaptador con el OnItemClickListener
-        proyectoAdapter = new ProyectoAdapter(getContext(), proyectoList, proyectoId -> {
+        proyectoAdapter = new ProyectoAdapter(getContext(), projectList, pruebaId -> {
             SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("SelectID", proyectoId);
+            editor.putString("SelectID", pruebaId); // Cambiado de proyectoId a pruebaId
             editor.apply();
 
             Intent intent = new Intent(getContext(), InformacionProyecto.class);
@@ -80,12 +79,12 @@ public class ProyectoFragment extends Fragment {
         // Agrega "Bearer " al token
         String authToken = "Bearer " + token;
 
-        apiService.getProyecto(authToken).enqueue(new Callback<List<Proyecto>>() {
+        apiService.getPrueba(authToken).enqueue(new Callback<List<Project>>() { // Cambiado de getProyecto a getPrueba
             @Override
-            public void onResponse(@NonNull Call<List<Proyecto>> call, @NonNull Response<List<Proyecto>> response) {
+            public void onResponse(@NonNull Call<List<Project>> call, @NonNull Response<List<Project>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    proyectoList.clear();
-                    proyectoList.addAll(response.body());
+                    projectList.clear();
+                    projectList.addAll(response.body());
                     proyectoAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(getContext(), "Error en la respuesta de la API: " + response.message(), Toast.LENGTH_LONG).show();
@@ -93,7 +92,7 @@ public class ProyectoFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Proyecto>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<Project>> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "Error al conectar con la API: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
