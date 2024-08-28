@@ -22,7 +22,9 @@
     <color name="revisadoproyect">#4CAF50</color>
     <color name="Error">#FF0000</color>
     <color name="Cards">#FFFFFF</color>
-    <color name="noLeida">#9C9C9C</color>
-    <color name="leida">#80007BFF</color>
+    <color name="noLeida">#8385CD</color>
+    <color name="leida">#00000000</color>
+    <color name="le">#00000000</color>
+    <color name="border_color">#2c3e50</color>
 
 </resources>

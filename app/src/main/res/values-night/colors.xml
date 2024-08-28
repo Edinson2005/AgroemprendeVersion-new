@@ -23,4 +23,5 @@
     <color name="revisadoproyect">#4CAF50</color>
     <color name="Error">#FF0000</color>
     <color name="Cards">#2E2D2D</color>
+    <color name="border_color">#FFFFFF</color>
 </resources>
