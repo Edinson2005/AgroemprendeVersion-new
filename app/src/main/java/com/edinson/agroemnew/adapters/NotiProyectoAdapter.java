@@ -18,6 +18,7 @@ public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapte
 
     private List<ProyectoNot> notificaciones;
     private OnItemClickListener onItemClickListener;
+    private String selectedProjectId;
 
     public NotiProyectoAdapter(List<ProyectoNot> notificaciones, OnItemClickListener onItemClickListener) {
         this.notificaciones = notificaciones;
@@ -37,7 +38,12 @@ public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapte
 
         holder.titleTextView.setText(notificacion.getTitle());
         holder.bodyTextView.setText(notificacion.getBody());
-        holder.estadoTextView.setText(notificacion.getEstado());
+
+        if (notificacion.getProyecto().getId().equals(selectedProjectId)) {
+            holder.itemView.setBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.));
+        } else {
+            holder.itemView.setBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.default_background_color));
+        }
 
         holder.itemView.setOnClickListener(v -> {
             if (onItemClickListener != null) {
@@ -58,13 +64,13 @@ public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TextView bodyTextView;
-        TextView estadoTextView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             bodyTextView = itemView.findViewById(R.id.bodyTextView);
-            estadoTextView = itemView.findViewById(R.id.estadoTextView);
+
         }
     }
 }

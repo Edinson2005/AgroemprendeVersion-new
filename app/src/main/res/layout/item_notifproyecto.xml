@@ -46,13 +46,6 @@
         android:textColor="@android:color/holo_blue_dark" />
 
 
-    <TextView
-        android:id="@+id/estadoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:layout_marginBottom="4dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorVista" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
