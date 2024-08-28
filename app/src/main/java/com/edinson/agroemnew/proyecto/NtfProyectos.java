@@ -1,5 +1,6 @@
 package com.edinson.agroemnew.proyecto;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NtfProyectos extends AppCompatActivity {
+
 
     private RecyclerView recyclerView;
     private NotiProyectoAdapter adapter;
@@ -80,12 +82,22 @@ public class NtfProyectos extends AppCompatActivity {
     private void mostrarProyectos(List<ProyectoNot> proyectos) {
         Log.d("NtfProyectos", "Mostrar proyectos: " + proyectos);
         if (proyectos != null && !proyectos.isEmpty()) {
-            adapter = new NotiProyectoAdapter(proyectos);
+            adapter = new NotiProyectoAdapter(proyectos, projectId -> {
+                // Guardar el ID del proyecto en SharedPreferences
+                SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("SelectID", projectId);
+                editor.apply();
+
+                // Iniciar la actividad InformacionProyecto
+                Intent intent = new Intent(NtfProyectos.this, InformacionProyecto.class);
+                startActivity(intent);
+            });
             recyclerView.setAdapter(adapter);
             Log.d("NtfProyectos", "Adapter configurado.");
         } else {
             Log.e("NtfProyectos", "Lista de proyectos es nula o está vacía.");
-            Toast.makeText(this, "No hay notificaciones ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No hay notificaciones", Toast.LENGTH_SHORT).show();
         }
     }
 }

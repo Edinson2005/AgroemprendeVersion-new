@@ -3,21 +3,25 @@ package com.edinson.agroemnew.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ProyectoNot;
+import com.edinson.agroemnew.ui.proyecto.ProyectoAdapter;
 
 import java.util.List;
 
 public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapter.ViewHolder> {
 
     private List<ProyectoNot> notificaciones;
+    private OnItemClickListener onItemClickListener;
 
-    public NotiProyectoAdapter(List<ProyectoNot> notificaciones) {
+    public NotiProyectoAdapter(List<ProyectoNot> notificaciones, OnItemClickListener onItemClickListener) {
         this.notificaciones = notificaciones;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -34,12 +38,21 @@ public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapte
         holder.titleTextView.setText(notificacion.getTitle());
         holder.bodyTextView.setText(notificacion.getBody());
         holder.estadoTextView.setText(notificacion.getEstado());
-    }
 
+        holder.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(notificacion.getProyecto().getId());
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {
         return notificaciones.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String projectId);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
