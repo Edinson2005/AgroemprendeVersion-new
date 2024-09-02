@@ -6,14 +6,27 @@ import androidx.lifecycle.ViewModel;
 
 public class HomeViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<Integer> projectCountLiveData;
+    private final MutableLiveData<String> errorMessage;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        projectCountLiveData = new MutableLiveData<>();
+        errorMessage = new MutableLiveData<>();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<Integer> getProjectCount() {
+        return projectCountLiveData;
+    }
+
+    public LiveData<String> getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setProjectCount(int count) {
+        projectCountLiveData.setValue(count);
+    }
+
+    public void setErrorMessage(String message) {
+        errorMessage.setValue(message);
     }
 }

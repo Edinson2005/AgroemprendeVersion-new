@@ -7,28 +7,16 @@
     tools:context=".ui.home.HomeFragment">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="wrap_content"
-        android:layout_height="978dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="-59dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="-20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="40dp"
         android:backgroundTint="@color/nieve"
         app:cardCornerRadius="10dp">
-
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="337dp"
-            android:layout_height="220dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="153dp"
-            android:layout_marginRight="30dp"
-            app:srcCompat="@drawable/img_5" />
-
-
-
 
         <ImageButton
             android:id="@+id/btnNotificaciones"
@@ -40,8 +28,6 @@
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/notificaciones" />
 
-
-
         <Button
             android:id="@+id/Buttonconvocatoria"
             android:layout_width="wrap_content"
@@ -49,8 +35,14 @@
             android:layout_gravity="center"
             android:layout_marginTop="36dp"
             android:backgroundTint="@color/colortexto"
-            android:text="Convocatorias"/>
-
-
+            android:text="Convocatorias" />
     </androidx.cardview.widget.CardView>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/cardView"
+        android:layout_marginTop="126dp" />
+
 </RelativeLayout>
