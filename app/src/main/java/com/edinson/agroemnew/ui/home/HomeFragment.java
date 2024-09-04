@@ -3,6 +3,7 @@ package com.edinson.agroemnew.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -94,9 +95,24 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupPieChart(PieChart pieChart) {
+        //Detecta el modo oscuro y claro
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        int centerTextColor;
+        int holeColor;
+
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_YES){
+            //modo oscuro
+            centerTextColor = Color.WHITE;
+            holeColor = Color.BLACK;
+        }else {
+            //modo claro
+            centerTextColor = Color.BLACK;
+            holeColor = Color.WHITE;
+        }
         pieChart.setCenterText("Cargando...");
         pieChart.setCenterTextSize(24f);
-        pieChart.setCenterTextColor(Color.BLACK); // Puedes usar cualquier color aquí
+        pieChart.setCenterTextColor(centerTextColor);
+        pieChart.setHoleColor(holeColor);
     }
 
     private void updatePieChart(PieChart pieChart, int projectCount) {
@@ -112,7 +128,23 @@ public class HomeFragment extends Fragment {
         pieChart.setData(pieData);
         pieChart.invalidate(); // Refresca el gráfico para mostrar los cambios
 
-        pieChart.setCenterText("Total de Proyectos: " + projectCount);
+
+        //Detectar el modo oscuro y claro
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        int centerTextColor;
+        int holeColor;
+
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_YES){
+            centerTextColor = Color.WHITE;
+            holeColor = Color.BLACK;
+        }else {
+            centerTextColor = Color.BLACK;
+            holeColor = Color.WHITE;
+        }
+
+        pieChart.setCenterText("Proyectos: " + projectCount);
+        pieChart.setCenterTextColor(centerTextColor);
+        pieChart.setHoleColor(holeColor);
     }
 
     private void obtenerNumeroDeProyectos() {
