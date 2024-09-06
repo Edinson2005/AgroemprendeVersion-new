@@ -16,34 +16,47 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
     android:orientation="vertical">
 
-<RelativeLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-<!-- Título del proyecto centrado -->
-<TextView
-    android:id="@+id/tituloTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:layout_marginTop="65dp"
-    android:layout_marginBottom="10dp"
-    android:text="Título del proyecto"
-    android:textStyle="bold"
-    android:textColor="@color/black"
-    android:textSize="26sp" />
+        <!-- Botón de porcentaje alineado a la izquierda -->
+        <ImageButton
+            android:id="@+id/porcentaje"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/porcentaje" />
 
-<ImageButton
-    android:id="@+id/revisionesButton"
-    android:layout_width="45dp"
-    android:layout_height="25dp"
-    android:layout_alignParentEnd="true"
-    android:layout_centerVertical="true"
-    android:layout_marginEnd="10dp"
-    android:background="@android:color/transparent"
-    android:scaleType="fitCenter"
-    android:src="@drawable/revisiones" />
-</RelativeLayout>
+        <!-- Título del proyecto centrado -->
+        <TextView
+            android:id="@+id/tituloTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="65dp"
+            android:layout_marginBottom="10dp"
+            android:text="Título del proyecto"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+
+        <!-- Botón de revisiones alineado a la derecha -->
+        <ImageButton
+            android:id="@+id/revisionesButton"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/revisiones" />
+    </RelativeLayout>
 
     <!-- Estado del proyecto -->
 <LinearLayout

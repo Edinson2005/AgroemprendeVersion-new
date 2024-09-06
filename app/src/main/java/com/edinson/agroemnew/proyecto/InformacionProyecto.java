@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edinson.agroemnew.PorcentajeProyecto;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.adapters.SeccionAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
@@ -34,14 +35,11 @@ public class InformacionProyecto  extends AppCompatActivity {
 
     private static final String TAG = "InformacionProyecto";
 
-    private TextView tituloTextView;
-    private TextView fechaTextView;
-    private TextView estadoTextView;
-    private TextView descripcionTextView;
-    private ImageButton revisionesButton;
+    private TextView tituloTextView,fechaTextView,estadoTextView,descripcionTextView;
+    private ImageButton revisionesButton, porcentaje;
 
     private RecyclerView seccionesRecyclerView;
-    private RecyclerView revisionesRecyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +57,7 @@ public class InformacionProyecto  extends AppCompatActivity {
         seccionesRecyclerView = findViewById(R.id.seccionesRecyclerView);
         //revisionesRecyclerView = findViewById(R.id.revisionesRecyclerView);
         revisionesButton = findViewById(R.id.revisionesButton);
+        porcentaje = findViewById(R.id.porcentaje);
 
 
         // Configuración de RecyclerView
@@ -79,6 +78,12 @@ public class InformacionProyecto  extends AppCompatActivity {
             intent.putExtra("projectId", projectId);
             startActivity(intent);
         });
+        porcentaje.setOnClickListener(v -> {
+            Intent intent = new Intent(InformacionProyecto.this, PorcentajeProyecto.class);
+            startActivity(intent);
+
+        });
+
     }
 
     private void loadProjectDetails(String projectId) {
