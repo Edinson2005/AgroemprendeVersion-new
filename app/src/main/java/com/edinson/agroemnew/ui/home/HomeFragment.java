@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
         setupPieChart(pieChart);
 
         // Observa el LiveData del número de proyectos
-        homeViewModel.getProjectCount().observe(getViewLifecycleOwner(), count -> {
+        homeViewModel.getProjectList().observe(getViewLifecycleOwner(), count -> {
             updatePieChart(pieChart, count);
         });
 
@@ -115,11 +115,42 @@ public class HomeFragment extends Fragment {
         pieChart.setHoleColor(holeColor);
     }
 
-    private void updatePieChart(PieChart pieChart, int projectCount) {
-        ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(projectCount, "Proyectos"));
+    private void updatePieChart(PieChart pieChart, List<Proyecto> proyectos) {
 
-        PieDataSet dataSet = new PieDataSet(entries, "Número de Proyectos");
+        if ((proyectos == null || proyectos.isEmpty())){
+            pieChart.setCenterText("Proyectos: 0");
+            return;
+        }
+        //contadores para cada estado
+        int completado = 0;
+        int resultErrores = 0;
+        int revisado = 0;
+        int enProgreso = 0;
+
+        //contar proyectos segun su estado
+        for(Proyecto proyecto : proyectos) {
+            switch (proyecto.getEstado().toLowerCase()){
+                case "completado":
+                    completado++;
+                    break;
+                case "revisado con errores":
+                    resultErrores++;
+                    break;
+                case "revisado":
+                    revisado++;
+                    break;
+                case "en progreso":
+                    enProgreso++;
+                    break;
+            }
+        }
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        if(completado > 0) entries.add(new PieEntry(completado, "Completado"));
+        if(resultErrores > 0) entries.add(new PieEntry(resultErrores, "Con Errores"));
+        if(revisado > 0) entries.add(new PieEntry(revisado, "Revisado"));
+        if(enProgreso > 0) entries.add(new PieEntry(enProgreso, "En progreso"));
+
+        PieDataSet dataSet = new PieDataSet(entries, "Estados de Proyectos");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS); // Usa colores predeterminados
         dataSet.setValueTextSize(16f);
 
@@ -142,7 +173,8 @@ public class HomeFragment extends Fragment {
             holeColor = Color.WHITE;
         }
 
-        pieChart.setCenterText("Proyectos: " + projectCount);
+        int totalProyectos = completado + enProgreso + revisado + resultErrores;
+        pieChart.setCenterText("Proyectos: " + totalProyectos);
         pieChart.setCenterTextColor(centerTextColor);
         pieChart.setHoleColor(holeColor);
     }
@@ -156,7 +188,6 @@ public class HomeFragment extends Fragment {
             homeViewModel.setErrorMessage("Token de autenticación no encontrado");
             return;
         }
-
         // Agrega "Bearer " al token
         String authToken = "Bearer " + token;
 
@@ -167,8 +198,8 @@ public class HomeFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     UserDetails userDetails = response.body();
                     List<Proyecto> proyectos = userDetails.getSub().getProyectos();
-                    int projectCount = (proyectos != null) ? proyectos.size() : 0;
-                    homeViewModel.setProjectCount(projectCount);
+                    homeViewModel.setProjectList(proyectos);
+                    updatePieChart(binding.pieChart, proyectos);
                 } else {
                     homeViewModel.setErrorMessage("Error en la respuesta de la API: " + response.message());
                 }
