@@ -1,5 +1,6 @@
 package com.edinson.agroemnew;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
@@ -121,13 +123,13 @@ public class PorcentajeProyecto extends AppCompatActivity {
             Toast.makeText(this, "No se encontro el token", Toast.LENGTH_SHORT).show();
         }
     }
-    private void processRevisiones(List<Revision> revisions, PieChart pieChart){
+    private void processRevisiones(List<Revision> revisions, PieChart pieChart) {
         int aprobadas = 0;
-        int rechazadas =0;
+        int rechazadas = 0;
 
-        for(Revision revision : revisions){
-            //asume que el estado de las revisiones es aprobado o rechazado
-            if("APROBADO".equalsIgnoreCase(revision.getEstado())){
+        for (Revision revision : revisions) {
+            // Asume que el estado de las revisiones es aprobado o rechazado
+            if ("APROBADO".equalsIgnoreCase(revision.getEstado())) {
                 aprobadas++;
             } else if ("DESAPROBADO".equalsIgnoreCase(revision.getEstado())) {
                 rechazadas++;
@@ -137,15 +139,21 @@ public class PorcentajeProyecto extends AppCompatActivity {
         int total = aprobadas + rechazadas;
         float porcentajeAprobadas = (total > 0) ? (aprobadas * 100f / total) : 0f;
 
-        ///configuracion las entrdas del pieChart
+        // Configuración de las entradas del PieChart
         ArrayList<PieEntry> entries = new ArrayList<>();
         entries.add(new PieEntry(aprobadas, "Completado"));
         entries.add(new PieEntry(rechazadas, "Falta"));
 
+        // Definir colores personalizados para las secciones
         PieDataSet dataSet = new PieDataSet(entries, "Revisiones");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        // Asignar colores específicos
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(ContextCompat.getColor(this, R.color.revisadoproyect));  // Verde para "Completado"
+        colors.add(Color.RED);    // Rojo para "Falta"
+        dataSet.setColors(colors);  // Aplicar los colores
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(16f);
@@ -153,19 +161,19 @@ public class PorcentajeProyecto extends AppCompatActivity {
 
         pieChart.setData(data);
 
-        //Actualizar el texto del centro segun el porcentaje de aprobadas
-        if(porcentajeAprobadas == 100f){
+        // Actualizar el texto del centro según el porcentaje de aprobadas
+        if (porcentajeAprobadas == 100f) {
             pieChart.setCenterText("Proyecto Completado");
-        } else{
+        } else {
             pieChart.setCenterText(String.format("En progreso: %.2f%%", porcentajeAprobadas));
         }
 
-        //Detectar el modo oscuro o clsro para actualizar los colores
+        // Detectar el modo oscuro o claro para actualizar los colores
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         int centerTextColor;
         int holecolor;
 
-        if(currentNightMode == Configuration.UI_MODE_NIGHT_YES){
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
             centerTextColor = Color.WHITE;
             holecolor = Color.BLACK;
         } else {
@@ -176,4 +184,5 @@ public class PorcentajeProyecto extends AppCompatActivity {
         pieChart.setHoleColor(holecolor);
         pieChart.invalidate();
     }
+
 }

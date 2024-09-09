@@ -55,7 +55,7 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
             tituloTextView = itemView.findViewById(R.id.tituloTextView);
             fechaTextView = itemView.findViewById(R.id.fechaTextView);
             estadoTextView = itemView.findViewById(R.id.estadoTextView);
-            descripcionTextView = itemView.findViewById(R.id.descripcionTextView);
+            //descripcionTextView = itemView.findViewById(R.id.descripcionTextView);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -72,7 +72,7 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
             tituloTextView.setText(project.getTitulo());
             fechaTextView.setText(project.getFecha());
             estadoTextView.setText(project.getEstado());
-            descripcionTextView.setText(project.getDescripcion());
+          ////  descripcionTextView.setText(project.getDescripcion());
 
             String estado = project.getEstado().toLowerCase();
             if (estado.contains("en progreso")) {

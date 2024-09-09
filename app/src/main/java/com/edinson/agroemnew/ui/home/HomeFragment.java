@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -151,7 +152,15 @@ public class HomeFragment extends Fragment {
         if(enProgreso > 0) entries.add(new PieEntry(enProgreso, "En progreso"));
 
         PieDataSet dataSet = new PieDataSet(entries, "Estados de Proyectos");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS); // Usa colores predeterminados
+        //define los colores personalizados para cada estado
+
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(ContextCompat.getColor(requireContext(), R.color.revisadoproyect));  //completado
+        colors.add(ContextCompat.getColor(requireContext(), R.color.revisado));  // Revisado
+        colors.add(ContextCompat.getColor(requireContext(), R.color.En_progreso));// En Progreso
+        colors.add(ContextCompat.getColor(requireContext(), R.color.Error));//Error
+
+        dataSet.setColors(colors); // Usa colores predeterminados
         dataSet.setValueTextSize(16f);
 
         PieData pieData = new PieData(dataSet);
