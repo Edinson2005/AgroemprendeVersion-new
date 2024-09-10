@@ -17,6 +17,9 @@
         android:theme="@style/Theme.AgroemNew"
         tools:targetApi="31">
         <activity
+            android:name=".DetalleConvocatoria"
+            android:exported="false" />
+        <activity
             android:name=".PorcentajeProyecto"
             android:exported="false" />
         <activity
@@ -39,7 +42,7 @@
         </activity>
         <activity
             android:name=".Usuario.Login"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Usuario.MainActivity"
             android:exported="false" />

@@ -13,7 +13,7 @@ import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.adapters.NotiProyectoAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.ProyectoNot;
+import com.edinson.agroemnew.modelApi.notificaciones.ProyectoNot;
 
 import java.util.List;
 import retrofit2.Call;

@@ -1,5 +1,15 @@
 package com.edinson.agroemnew.modelApi;
 
+import com.edinson.agroemnew.modelApi.notificaciones.Convocatoria;
+import com.edinson.agroemnew.modelApi.notificaciones.NotiConvocatorias;
+import com.edinson.agroemnew.modelApi.notificaciones.ProyectoNot;
+import com.edinson.agroemnew.modelApi.proyecto.Project;
+import com.edinson.agroemnew.modelApi.proyecto.ProyectoDetails;
+import com.edinson.agroemnew.modelApi.proyecto.RegisterRequest;
+import com.edinson.agroemnew.modelApi.usuario.Token;
+import com.edinson.agroemnew.modelApi.usuario.UserDetails;
+import com.edinson.agroemnew.modelApi.usuario.UserUpdate;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -53,6 +63,10 @@ public interface ApiService {
     // Métodos para Notificaciones
     @GET("/notificaciones/convocatoria")
     Call<List<NotiConvocatorias>> getNotificaciones(@Header("Authorization") String token);
+
+    @GET("/notificaciones/convocatoria/{id}")
+    Call<Convocatoria> getConvocatoria(@Header("Authorization") String token, @Path("id") String id);
+
 
 
     @GET("/notificaciones/mis-proyectos")

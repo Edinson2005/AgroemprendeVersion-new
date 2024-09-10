@@ -1,6 +1,5 @@
         package com.edinson.agroemnew.adapters;
 
-        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -12,7 +11,7 @@
         import androidx.recyclerview.widget.RecyclerView;
 
         import com.edinson.agroemnew.R;
-        import com.edinson.agroemnew.modelApi.Revision;
+        import com.edinson.agroemnew.modelApi.proyecto.Revision;
 
         import java.text.ParseException;
         import java.text.SimpleDateFormat;

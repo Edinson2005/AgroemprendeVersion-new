@@ -11,7 +11,7 @@
 
         import com.edinson.agroemnew.modelApi.ApiLogin;
         import com.edinson.agroemnew.modelApi.ApiService;
-        import com.edinson.agroemnew.modelApi.UserDetails;
+        import com.edinson.agroemnew.modelApi.usuario.UserDetails;
 
         import retrofit2.Call;
         import retrofit2.Callback;

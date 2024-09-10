@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.edinson.agroemnew.Usuario.UsuarioEditar;
 import com.edinson.agroemnew.databinding.FragmentPerfilBinding;
-import com.edinson.agroemnew.modelApi.UserDetails;
+import com.edinson.agroemnew.modelApi.usuario.UserDetails;
 
 
 public class PerfilFragment extends Fragment {

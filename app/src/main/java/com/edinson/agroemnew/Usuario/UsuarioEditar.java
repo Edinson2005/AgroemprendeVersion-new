@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.UserDetails;
-import com.edinson.agroemnew.modelApi.UserUpdate;
+import com.edinson.agroemnew.modelApi.usuario.UserDetails;
+import com.edinson.agroemnew.modelApi.usuario.UserUpdate;
 import com.google.gson.Gson;
 
 import java.io.IOException;

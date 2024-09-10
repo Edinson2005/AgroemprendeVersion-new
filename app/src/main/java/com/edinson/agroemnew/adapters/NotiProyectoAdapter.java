@@ -1,18 +1,15 @@
 package com.edinson.agroemnew.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edinson.agroemnew.R;
-import com.edinson.agroemnew.modelApi.ProyectoNot;
-import com.edinson.agroemnew.ui.proyecto.ProyectoAdapter;
+import com.edinson.agroemnew.modelApi.notificaciones.ProyectoNot;
 
 import java.util.List;
 

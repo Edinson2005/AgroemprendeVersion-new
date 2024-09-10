@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.edinson.agroemnew.modelApi.Project;
+import com.edinson.agroemnew.modelApi.proyecto.Project;
 
 import java.util.Collections;
 import java.util.Comparator;

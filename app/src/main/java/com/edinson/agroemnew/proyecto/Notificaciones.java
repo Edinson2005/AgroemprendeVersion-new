@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.NotiConvocatorias;
+import com.edinson.agroemnew.modelApi.notificaciones.NotiConvocatorias;
 import com.edinson.agroemnew.adapters.NotificacionAdapter;
 
 public class Notificaciones extends AppCompatActivity {

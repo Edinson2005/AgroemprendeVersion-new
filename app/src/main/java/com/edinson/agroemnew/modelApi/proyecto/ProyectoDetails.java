@@ -1,27 +1,50 @@
-package com.edinson.agroemnew.modelApi;
+package com.edinson.agroemnew.modelApi.proyecto;
+
+import com.edinson.agroemnew.modelApi.usuario.Usuario;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Project {
-    private String _id;
+public class ProyectoDetails {
+
+    @SerializedName("_id")
+    private String id;
+
+    @SerializedName("titulo")
     private String titulo;
+
+    @SerializedName("fecha")
     private String fecha;
+
+    @SerializedName("estado")
     private String estado;
+
+    @SerializedName("descripcion")
     private String descripcion;
+
+    @SerializedName("usuarioId")
     private Usuario usuarioId;
-    private List<Seccion> secciones;
-    private List<Revision> revisiones;
+
+    @SerializedName("files")
     private List<String> files;
-    private int __v;
 
-    // Getters and Setters for all fields
+    @SerializedName("secciones")
+    private List<Seccion> secciones;
 
-    public String get_id() {
-        return _id;
+    @SerializedName("revisiones")
+    private List<Revision> revisiones;
+
+    @SerializedName("__v")
+    private int version;
+
+    // Getters y setters
+
+    public String getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -64,6 +87,14 @@ public class Project {
         this.usuarioId = usuarioId;
     }
 
+    public List<String> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<String> files) {
+        this.files = files;
+    }
+
     public List<Seccion> getSecciones() {
         return secciones;
     }
@@ -80,19 +111,11 @@ public class Project {
         this.revisiones = revisiones;
     }
 
-    public List<String> getFiles() {
-        return files;
+    public int getVersion() {
+        return version;
     }
 
-    public void setFiles(List<String> files) {
-        this.files = files;
-    }
-
-    public int get__v() {
-        return __v;
-    }
-
-    public void set__v(int __v) {
-        this.__v = __v;
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

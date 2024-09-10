@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.RegisterRequest;
+import com.edinson.agroemnew.modelApi.proyecto.RegisterRequest;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

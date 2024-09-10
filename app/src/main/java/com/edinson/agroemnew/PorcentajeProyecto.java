@@ -1,6 +1,5 @@
 package com.edinson.agroemnew;
 
-import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,13 +11,12 @@ import androidx.core.content.ContextCompat;
 
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.ProyectoDetails;
-import com.edinson.agroemnew.modelApi.Revision;
+import com.edinson.agroemnew.modelApi.proyecto.ProyectoDetails;
+import com.edinson.agroemnew.modelApi.proyecto.Revision;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;

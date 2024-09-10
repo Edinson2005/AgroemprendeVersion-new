@@ -1,6 +1,7 @@
 package com.edinson.agroemnew.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.edinson.agroemnew.DetalleConvocatoria;
 import com.edinson.agroemnew.R;
-import com.edinson.agroemnew.modelApi.NotiConvocatorias;
+import com.edinson.agroemnew.modelApi.notificaciones.NotiConvocatorias;
 
 import java.util.List;
 public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapter.NotificacionViewHolder> {
@@ -38,28 +40,35 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
             NotiConvocatorias notiConvocatorias = notificaciones.get(position);
             holder.titulo.setText(notiConvocatorias.getTitle());
             holder.cuerpo.setText(notiConvocatorias.getBody());
-            holder.url.setText(notiConvocatorias.getUrl());
             holder.estado.setText(notiConvocatorias.getEstado());
 
-            // No aplicar color adicional, usar el color de fondo predeterminado
-            // Puedes hacer esto con un fondo transparente
-            // holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent));
-
-            // Si quieres que el color de fondo sea el predeterminado sin aplicar cambios
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent));
-
-            // Evento click para marcar la notificación como vista
-            holder.itemView.setOnClickListener(v -> {
-                // Guardar el estado como 'vista' en SharedPreferences
-                guardarEstadoVista(notiConvocatorias.getId(), true);
-
-                // Cambiar el color del fondo inmediatamente
-                // Puedes comentar esta línea si no deseas cambiar el color en el clic
+            //cambiar el color segun el estado de la vista
+            if (notiConvocatorias.isVista()) {
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.darker_gray));
+            } else {
                 holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent));
-
-                // Notificar que el ítem ha cambiado
+            }
+            //evento click para marcar la notificacion como vista y navegar
+            holder.itemView.setOnClickListener(v -> {
+                //Guardar el estado como 'vista'
+                guardarEstadoVista(notiConvocatorias.getId(), true);
+                //notificar que el item ha cambiado para actualizar el estadp
                 notifyItemChanged(position);
+
+                //obtengo el token
+                SharedPreferences sharedPreferences = context.getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+                String token = sharedPreferences.getString("UserToken", null);
+
+                // Guardar el ID de la convocatoria en SharedPreferences o pasar directamente
+                Intent intent = new Intent(context, DetalleConvocatoria.class);
+                intent.putExtra("convocatoria_id", notiConvocatorias.getConvocatoria().get_id());
+                intent.putExtra("convocatoria_title", notiConvocatorias.getConvocatoria().getTitle());
+                intent.putExtra("convocatoria_descripcion", notiConvocatorias.getConvocatoria().getDescripcion());
+                intent.putExtra("convocatoria_fechaInicio", notiConvocatorias.getConvocatoria().getFechaInicio());
+                intent.putExtra("authorization", token);
+                context.startActivity(intent);
             });
+
         }
     }
 
@@ -75,22 +84,15 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
         editor.apply();
     }
 
-    private boolean cargarEstadoVista(String idNotificacion) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("Notificaciones", Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("vista_" + idNotificacion, false); // false por defecto si no existe
-    }
-
     public static class NotificacionViewHolder extends RecyclerView.ViewHolder {
         TextView titulo;
         TextView cuerpo;
-        TextView url;
         TextView estado;
 
         public NotificacionViewHolder(@NonNull View itemView) {
             super(itemView);
             titulo = itemView.findViewById(R.id.titleNotificacion);
             cuerpo = itemView.findViewById(R.id.bodyNotificacion);
-            url = itemView.findViewById(R.id.urlNotificacion);
             estado = itemView.findViewById(R.id.estadoconvocatoria);
         }
     }

@@ -1,4 +1,4 @@
-package com.edinson.agroemnew.modelApi;
+package com.edinson.agroemnew.modelApi.usuario;
 
 import com.google.gson.annotations.SerializedName;
 

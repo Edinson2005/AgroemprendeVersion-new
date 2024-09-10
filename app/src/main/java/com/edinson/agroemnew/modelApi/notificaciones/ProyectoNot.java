@@ -1,4 +1,4 @@
-package com.edinson.agroemnew.modelApi;
+package com.edinson.agroemnew.modelApi.notificaciones;
 
 public class ProyectoNot {
 

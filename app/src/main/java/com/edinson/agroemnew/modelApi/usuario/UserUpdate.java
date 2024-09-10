@@ -1,26 +1,26 @@
-package com.edinson.agroemnew.modelApi;
+package com.edinson.agroemnew.modelApi.usuario;
 
-public class RegisterRequest {
+public class UserUpdate {
     private String nombre;
     private String apellido;
     private String email;
     private String numIdentificacion;
     private String telefono;
     private String fechaNacimiento;
-    private String caracterizacion;
-    private String contrasena;
-    private String role;
 
-    public RegisterRequest(String nombre, String apellido, String email, String contrasena,String numIdentificacion, String telefono, String fechaNacimiento, String caracterizacion,  String role) {
+
+    public UserUpdate() {
+    }
+
+    public UserUpdate(String nombre, String apellido, String email, String numIdentificacion, String telefono, String fechaNacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.contrasena = contrasena;
         this.numIdentificacion = numIdentificacion;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
-        this.caracterizacion = caracterizacion;
-        this.role = role;
+
+
     }
 
     public String getNombre() {
@@ -67,31 +67,10 @@ public class RegisterRequest {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimieto) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getCaracterizacion() {
-        return caracterizacion;
-    }
 
-    public void setCaracterizacion(String caracterizacion) {
-        this.caracterizacion = caracterizacion;
-    }
 
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

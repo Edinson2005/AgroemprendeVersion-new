@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.edinson.agroemnew.R;
-import com.edinson.agroemnew.modelApi.Project;
+import com.edinson.agroemnew.modelApi.proyecto.Project;
 
 import java.util.List;
 

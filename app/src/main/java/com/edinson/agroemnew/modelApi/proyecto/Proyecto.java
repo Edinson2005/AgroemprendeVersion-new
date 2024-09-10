@@ -1,4 +1,4 @@
-    package com.edinson.agroemnew.modelApi;
+    package com.edinson.agroemnew.modelApi.proyecto;
 
     import java.util.List;
 

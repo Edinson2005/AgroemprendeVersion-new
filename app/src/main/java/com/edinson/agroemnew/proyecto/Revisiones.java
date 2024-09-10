@@ -13,8 +13,8 @@ import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.adapters.RevisionAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.ProyectoDetails;
-import com.edinson.agroemnew.modelApi.Revision;
+import com.edinson.agroemnew.modelApi.proyecto.ProyectoDetails;
+import com.edinson.agroemnew.modelApi.proyecto.Revision;
 
 import java.util.List;
 

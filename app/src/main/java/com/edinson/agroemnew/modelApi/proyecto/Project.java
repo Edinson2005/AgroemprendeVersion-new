@@ -1,49 +1,29 @@
-package com.edinson.agroemnew.modelApi;
+package com.edinson.agroemnew.modelApi.proyecto;
 
-import com.google.gson.annotations.SerializedName;
+import com.edinson.agroemnew.modelApi.usuario.Usuario;
 
 import java.util.List;
 
-public class ProyectoDetails {
-
-    @SerializedName("_id")
-    private String id;
-
-    @SerializedName("titulo")
+public class Project {
+    private String _id;
     private String titulo;
-
-    @SerializedName("fecha")
     private String fecha;
-
-    @SerializedName("estado")
     private String estado;
-
-    @SerializedName("descripcion")
     private String descripcion;
-
-    @SerializedName("usuarioId")
     private Usuario usuarioId;
-
-    @SerializedName("files")
-    private List<String> files;
-
-    @SerializedName("secciones")
     private List<Seccion> secciones;
-
-    @SerializedName("revisiones")
     private List<Revision> revisiones;
+    private List<String> files;
+    private int __v;
 
-    @SerializedName("__v")
-    private int version;
+    // Getters and Setters for all fields
 
-    // Getters y setters
-
-    public String getId() {
-        return id;
+    public String get_id() {
+        return _id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getTitulo() {
@@ -86,14 +66,6 @@ public class ProyectoDetails {
         this.usuarioId = usuarioId;
     }
 
-    public List<String> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<String> files) {
-        this.files = files;
-    }
-
     public List<Seccion> getSecciones() {
         return secciones;
     }
@@ -110,11 +82,19 @@ public class ProyectoDetails {
         this.revisiones = revisiones;
     }
 
-    public int getVersion() {
-        return version;
+    public List<String> getFiles() {
+        return files;
     }
 
-    public void setVersion(int version) {
-        this.version = version;
+    public void setFiles(List<String> files) {
+        this.files = files;
+    }
+
+    public int get__v() {
+        return __v;
+    }
+
+    public void set__v(int __v) {
+        this.__v = __v;
     }
 }

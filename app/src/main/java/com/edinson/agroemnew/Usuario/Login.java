@@ -17,8 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.Token;
-import com.edinson.agroemnew.modelApi.UserDetails;
+import com.edinson.agroemnew.modelApi.usuario.Token;
+import com.edinson.agroemnew.modelApi.usuario.UserDetails;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;

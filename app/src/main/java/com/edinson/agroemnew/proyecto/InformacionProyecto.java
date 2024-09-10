@@ -17,8 +17,8 @@ import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.adapters.SeccionAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
-import com.edinson.agroemnew.modelApi.ProyectoDetails;
-import com.edinson.agroemnew.modelApi.Seccion;
+import com.edinson.agroemnew.modelApi.proyecto.ProyectoDetails;
+import com.edinson.agroemnew.modelApi.proyecto.Seccion;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
