@@ -109,26 +109,27 @@ public class HomeFragment extends Fragment {
             holeColor = Color.WHITE;
         }
         pieChart.setCenterText("Cargando...");
-        pieChart.setCenterTextSize(24f);
+        pieChart.setCenterTextSize(20f);
         pieChart.setCenterTextColor(centerTextColor);
         pieChart.setHoleColor(holeColor);
+        pieChart.getDescription().setEnabled(false);
     }
 
     private void updatePieChart(PieChart pieChart, List<Proyecto> proyectos) {
-
-        if ((proyectos == null || proyectos.isEmpty())){
+        if (proyectos == null || proyectos.isEmpty()) {
             pieChart.setCenterText("Proyectos: 0");
             return;
         }
-        //contadores para cada estado
+
+        // Contadores para cada estado
         int completado = 0;
         int resultErrores = 0;
         int revisado = 0;
         int enProgreso = 0;
 
-        //contar proyectos segun su estado
-        for(Proyecto proyecto : proyectos) {
-            switch (proyecto.getEstado().toLowerCase()){
+        // Contar proyectos según su estado
+        for (Proyecto proyecto : proyectos) {
+            switch (proyecto.getEstado().toLowerCase()) {
                 case "completado":
                     completado++;
                     break;
@@ -143,39 +144,45 @@ public class HomeFragment extends Fragment {
                     break;
             }
         }
+
         ArrayList<PieEntry> entries = new ArrayList<>();
-        if(completado > 0) entries.add(new PieEntry(completado, "Completado"));
-        if(resultErrores > 0) entries.add(new PieEntry(resultErrores, "Con Errores"));
-        if(revisado > 0) entries.add(new PieEntry(revisado, "Revisado"));
-        if(enProgreso > 0) entries.add(new PieEntry(enProgreso, "En progreso"));
-
-        PieDataSet dataSet = new PieDataSet(entries, "Estados de Proyectos");
-        //define los colores personalizados para cada estado
-
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(ContextCompat.getColor(requireContext(), R.color.revisadoproyect));  //completado
-        colors.add(ContextCompat.getColor(requireContext(), R.color.revisado));  // Revisado
-        colors.add(ContextCompat.getColor(requireContext(), R.color.En_progreso));// En Progreso
-        colors.add(ContextCompat.getColor(requireContext(), R.color.Error));//Error
 
-        dataSet.setColors(colors); // Usa colores predeterminados
-        dataSet.setValueTextSize(16f);
+        if (completado > 0) {
+            entries.add(new PieEntry(completado, "Completado"));
+            colors.add(ContextCompat.getColor(requireContext(), R.color.revisadoproyect));
+        }
+        if (resultErrores > 0) {
+            entries.add(new PieEntry(resultErrores, "Con Errores"));
+            colors.add(ContextCompat.getColor(requireContext(), R.color.Error));
+        }
+        if (revisado > 0) {
+            entries.add(new PieEntry(revisado, "Revisado"));
+            colors.add(ContextCompat.getColor(requireContext(), R.color.revisado));
+        }
+        if (enProgreso > 0) {
+            entries.add(new PieEntry(enProgreso, "En Progreso"));
+            colors.add(ContextCompat.getColor(requireContext(), R.color.En_progreso));
+        }
 
-        PieData pieData = new PieData(dataSet);
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(colors);
 
-        pieChart.setData(pieData);
+        PieData data = new PieData(dataSet);
+        data.setValueTextSize(12f);
+
+        pieChart.setData(data);
         pieChart.invalidate(); // Refresca el gráfico para mostrar los cambios
 
-
-        //Detectar el modo oscuro y claro
+        // Detectar el modo oscuro y claro
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         int centerTextColor;
         int holeColor;
 
-        if (currentNightMode == Configuration.UI_MODE_NIGHT_YES){
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
             centerTextColor = Color.WHITE;
             holeColor = Color.BLACK;
-        }else {
+        } else {
             centerTextColor = Color.BLACK;
             holeColor = Color.WHITE;
         }
@@ -184,7 +191,12 @@ public class HomeFragment extends Fragment {
         pieChart.setCenterText("Proyectos: " + totalProyectos);
         pieChart.setCenterTextColor(centerTextColor);
         pieChart.setHoleColor(holeColor);
+
+        // Refrescar la vista
+        pieChart.notifyDataSetChanged();
+        pieChart.invalidate();
     }
+
 
     private void obtenerNumeroDeProyectos() {
         // Recupera el token de SharedPreferences

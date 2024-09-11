@@ -43,17 +43,10 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
             holder.estado.setText(notiConvocatorias.getEstado());
 
             //cambiar el color segun el estado de la vista
-            if (notiConvocatorias.isVista()) {
-                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.darker_gray));
-            } else {
-                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent));
-            }
+
             //evento click para marcar la notificacion como vista y navegar
             holder.itemView.setOnClickListener(v -> {
-                //Guardar el estado como 'vista'
-                guardarEstadoVista(notiConvocatorias.getId(), true);
-                //notificar que el item ha cambiado para actualizar el estadp
-                notifyItemChanged(position);
+
 
                 //obtengo el token
                 SharedPreferences sharedPreferences = context.getSharedPreferences("MyApp", Context.MODE_PRIVATE);

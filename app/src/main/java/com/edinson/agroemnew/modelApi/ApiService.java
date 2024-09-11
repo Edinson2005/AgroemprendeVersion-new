@@ -64,8 +64,8 @@ public interface ApiService {
     @GET("/notificaciones/convocatoria")
     Call<List<NotiConvocatorias>> getNotificaciones(@Header("Authorization") String token);
 
-    @GET("/notificaciones/convocatoria/{id}")
-    Call<Convocatoria> getConvocatoria(@Header("Authorization") String token, @Path("id") String id);
+    @GET("/convocatoria/{id}")
+    Call<Convocatoria> getConvocatoria(@Header("Authorization") String token, @Path("id") String convocatoriaId);
 
 
 

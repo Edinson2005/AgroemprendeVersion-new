@@ -9,7 +9,8 @@ public class Convocatoria {
     private String descripcion;
     private String fechaCierre;
     private String estado;
-    private List<Template> template;
+    private List<String> files;
+    private List<String> template; // Cambiado a List<String>
 
     public String get_id() {
         return _id;
@@ -59,11 +60,19 @@ public class Convocatoria {
         this.estado = estado;
     }
 
-    public List<Template> getTemplate() {
+    public List<String> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<String> files) {
+        this.files = files;
+    }
+
+    public List<String> getTemplate() {
         return template;
     }
 
-    public void setTemplate(List<Template> template) {
+    public void setTemplate(List<String> template) {
         this.template = template;
     }
 }
