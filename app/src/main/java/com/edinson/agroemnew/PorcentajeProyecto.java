@@ -146,15 +146,15 @@ public class PorcentajeProyecto extends AppCompatActivity {
         PieDataSet dataSet = new PieDataSet(entries, "Revisiones");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
+        dataSet.setValueTextSize(90f);
 
-        // Asignar colores específicos
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(ContextCompat.getColor(this, R.color.revisadoproyect));  // Verde para "Completado"
         colors.add(Color.RED);    // Rojo para "Falta"
         dataSet.setColors(colors);  // Aplicar los colores
 
         PieData data = new PieData(dataSet);
-        data.setValueTextSize(16f);
+        data.setValueTextSize(14f);
         data.setValueTextColor(Color.BLACK);
 
         pieChart.setData(data);

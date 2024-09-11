@@ -14,6 +14,7 @@ import com.edinson.agroemnew.adapters.NotiProyectoAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.notificaciones.ProyectoNot;
+import com.edinson.agroemnew.proyecto.NotificationHelper;
 
 import java.util.List;
 import retrofit2.Call;
@@ -21,7 +22,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NtfProyectos extends AppCompatActivity {
-
 
     private RecyclerView recyclerView;
     private NotiProyectoAdapter adapter;
@@ -32,6 +32,9 @@ public class NtfProyectos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ntf_proyectos);
+
+        // Crear el canal de notificaciones
+        NotificationHelper.createNotificationChannel(this);
 
         // Ocultar la barra de acción si existe
         if (getSupportActionBar() != null) {
@@ -95,6 +98,9 @@ public class NtfProyectos extends AppCompatActivity {
             });
             recyclerView.setAdapter(adapter);
             Log.d("NtfProyectos", "Adapter configurado.");
+
+            // Enviar notificación
+            NotificationHelper.sendNotification(this, "Nuevos Proyectos", "Tienes nuevos proyectos disponibles.");
         } else {
             Log.e("NtfProyectos", "Lista de proyectos es nula o está vacía.");
             Toast.makeText(this, "No hay notificaciones", Toast.LENGTH_SHORT).show();

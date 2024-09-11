@@ -59,6 +59,10 @@ public class ProyectoNot {
         this.proyecto = proyecto;
     }
 
+    public Comparable<Object> getFecha() {
+        return null;
+    }
+
     public static class Proyecto {
         private String _id;
         private String usuarioId;

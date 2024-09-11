@@ -5,16 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <Button
-        android:id="@+id/Buttonconvocatoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/colortexto"
-        android:text="Convocatorias" />
-
     <ImageButton
         android:id="@+id/btnNotificaciones"
         android:layout_width="59dp"
@@ -29,7 +19,19 @@
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@id/Buttonconvocatoria"
-        android:layout_marginTop="83dp" />
+        android:layout_below="@id/btnNotificaciones"
+        android:layout_marginTop="30dp" />
 
+    <Button
+        android:id="@+id/Buttonconvocatoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pieChart"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="104dp"
+        android:layout_marginLeft="-23dp"
+        android:layout_marginTop="81dp"
+        android:backgroundTint="@color/colortexto"
+        android:text="Convocatorias" />
 </RelativeLayout>
