@@ -63,6 +63,11 @@
             android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
 
+        <LinearLayout
+            android:id="@+id/llFiles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
         <!-- Lista de templates -->
         <LinearLayout
             android:id="@+id/llTemplates"
