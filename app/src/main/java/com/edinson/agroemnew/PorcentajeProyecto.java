@@ -14,6 +14,7 @@ import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.proyecto.ProyectoDetails;
 import com.edinson.agroemnew.modelApi.proyecto.Revision;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -84,6 +85,16 @@ public class PorcentajeProyecto extends AppCompatActivity {
         pieChart.getDescription().setEnabled(false);
         pieChart.setCenterTextColor(centerTextColor);
         pieChart.setHoleColor(holeColor);
+
+        //configuracion de legend
+        Legend legend = pieChart.getLegend();
+        legend.setEnabled(true); // Habilita la leyenda
+        legend.setTextSize(16f);
+        legend.setTextColor(centerTextColor);
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        legend.setDrawInside(false);
     }
 
     private void loadProjectDetails(String projectId, PieChart pieChart) {

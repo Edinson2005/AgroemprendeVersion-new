@@ -28,6 +28,7 @@ import com.edinson.agroemnew.proyecto.Notificaciones;
 import com.edinson.agroemnew.proyecto.NtfProyectos;
 import com.edinson.agroemnew.databinding.FragmentHomeBinding;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -113,6 +114,16 @@ public class HomeFragment extends Fragment {
         pieChart.setCenterTextColor(centerTextColor);
         pieChart.setHoleColor(holeColor);
         pieChart.getDescription().setEnabled(false);
+
+        //configuracion de legend
+        Legend legend = pieChart.getLegend();
+        legend.setEnabled(true); // Habilita la leyenda
+        legend.setTextSize(16f);
+        legend.setTextColor(centerTextColor);
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+        legend.setDrawInside(false);
     }
 
     private void updatePieChart(PieChart pieChart, List<Proyecto> proyectos) {
