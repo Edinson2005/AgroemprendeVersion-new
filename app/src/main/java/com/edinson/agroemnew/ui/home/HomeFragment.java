@@ -28,6 +28,7 @@ import com.edinson.agroemnew.proyecto.Notificaciones;
 import com.edinson.agroemnew.proyecto.NtfProyectos;
 import com.edinson.agroemnew.databinding.FragmentHomeBinding;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -113,6 +114,16 @@ public class HomeFragment extends Fragment {
         pieChart.setCenterTextColor(centerTextColor);
         pieChart.setHoleColor(holeColor);
         pieChart.getDescription().setEnabled(false);
+
+        //configuracion de legend
+        Legend legend = pieChart.getLegend();
+        legend.setEnabled(true); // Habilita la leyenda
+        legend.setTextSize(16f);
+        legend.setTextColor(centerTextColor);
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+        legend.setDrawInside(false);
     }
 
     private void updatePieChart(PieChart pieChart, List<Proyecto> proyectos) {
@@ -126,6 +137,7 @@ public class HomeFragment extends Fragment {
         int resultErrores = 0;
         int revisado = 0;
         int enProgreso = 0;
+        int enRevision = 0;
 
         // Contar proyectos según su estado
         for (Proyecto proyecto : proyectos) {
@@ -141,6 +153,9 @@ public class HomeFragment extends Fragment {
                     break;
                 case "en progreso":
                     enProgreso++;
+                    break;
+                case "en revision":
+                    enRevision++;
                     break;
             }
         }
@@ -163,6 +178,10 @@ public class HomeFragment extends Fragment {
         if (enProgreso > 0) {
             entries.add(new PieEntry(enProgreso, "En Progreso"));
             colors.add(ContextCompat.getColor(requireContext(), R.color.En_progreso));
+        }
+        if(enRevision > 0){
+            entries.add(new PieEntry(enRevision, "En Revision"));
+            colors.add(ContextCompat.getColor(requireContext(), R.color.Aprovado));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -187,7 +206,8 @@ public class HomeFragment extends Fragment {
             holeColor = Color.WHITE;
         }
 
-        int totalProyectos = completado + enProgreso + revisado + resultErrores;
+        ///contar total de proyctos
+        int totalProyectos = completado + enProgreso + revisado + resultErrores + enRevision;
         pieChart.setCenterText("Proyectos: " + totalProyectos);
         pieChart.setCenterTextColor(centerTextColor);
         pieChart.setHoleColor(holeColor);

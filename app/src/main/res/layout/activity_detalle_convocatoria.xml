@@ -2,74 +2,147 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetalleConvocatoria">
+    tools:context=".DetalleConvocatoria"
+    android:padding="16dp"
+    android:background="@color/white">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvTituloConvocatoria"
-            android:layout_width="wrap_content"
+        <!-- Card para el título -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Título de la Convocatoria"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
 
-        <TextView
-            android:id="@+id/tvDescripcionConvocatoria"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvTituloConvocatoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Título de la Convocatoria"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card para la descripción -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción de la convocatoria"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
 
-        <TextView
-            android:id="@+id/tvFechaInicio"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvDescripcionConvocatoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Descripción de la convocatoria"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Fecha de inicio y cierre -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fecha de Inicio: "
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"/>
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
 
-        <TextView
-            android:id="@+id/tvFechaCierre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fecha de Cierre: "
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp"/>
+            <TextView
+                android:id="@+id/tvFechaInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de Inicio: "
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:layout_weight="1"
+                android:gravity="center"/>
 
+            <TextView
+                android:id="@+id/tvFechaCierre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de Cierre: "
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:layout_weight="1"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <!-- Estado -->
         <TextView
             android:id="@+id/tvEstadoConvocatoria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Estado: "
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Divider line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Documentos -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Documentos:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginBottom="8dp"/>
 
+        <LinearLayout
+            android:id="@+id/llFiles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"/>
+
+        <!-- Divider line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Templates -->
         <TextView
             android:id="@+id/tvTemplates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Templates:"
+            android:text="Plantillas:"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginBottom="4dp"/>
+            android:textColor="@color/black"
+            android:layout_marginBottom="8dp"/>
 
-        <!-- Lista de templates -->
         <LinearLayout
             android:id="@+id/llTemplates"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"/>
 
     </LinearLayout>
-
 </ScrollView>

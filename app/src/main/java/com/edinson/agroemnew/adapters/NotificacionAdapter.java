@@ -40,7 +40,7 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
             NotiConvocatorias notiConvocatorias = notificaciones.get(position);
             holder.titulo.setText(notiConvocatorias.getTitle());
             holder.cuerpo.setText(notiConvocatorias.getBody());
-            holder.estado.setText(notiConvocatorias.getEstado());
+            //holder.estado.setText(notiConvocatorias.getEstado());
 
             //cambiar el color segun el estado de la vista
 
@@ -80,13 +80,13 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
     public static class NotificacionViewHolder extends RecyclerView.ViewHolder {
         TextView titulo;
         TextView cuerpo;
-        TextView estado;
+        //TextView estado;
 
         public NotificacionViewHolder(@NonNull View itemView) {
             super(itemView);
             titulo = itemView.findViewById(R.id.titleNotificacion);
             cuerpo = itemView.findViewById(R.id.bodyNotificacion);
-            estado = itemView.findViewById(R.id.estadoconvocatoria);
+            //estado = itemView.findViewById(R.id.estadoconvocatoria);
         }
     }
 }
