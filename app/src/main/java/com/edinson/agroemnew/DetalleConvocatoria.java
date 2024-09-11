@@ -18,7 +18,11 @@ import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.notificaciones.Convocatoria;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,13 +78,18 @@ public class DetalleConvocatoria extends AppCompatActivity {
                     // Mostrar los detalles en la UI
                     tvTituloConvocatoria.setText(convocatoria.getTitle());
                     tvDescripcionConvocatoria.setText(convocatoria.getDescripcion());
-                    tvFechaInicio.setText("Fecha de Inicio: " + convocatoria.getFechaInicio());
-                    tvFechaCierre.setText("Fecha de Cierre: " + convocatoria.getFechaCierre());
+
+                    // Cambiar el formato de las fechas
+                    String fechaInicioFormato = formatearFecha(convocatoria.getFechaInicio(), "yyyy-MM-dd", "dd/MM/yyyy");
+                    String fechaCierreFormato = formatearFecha(convocatoria.getFechaCierre(), "yyyy-MM-dd", "dd/MM/yyyy");
+
+                    tvFechaInicio.setText("Fecha de Inicio: " + fechaInicioFormato);
+                    tvFechaCierre.setText("Fecha de Cierre: " + fechaCierreFormato);
                     tvEstadoConvocatoria.setText("Estado: " + convocatoria.getEstado());
 
                     // Mostrar los templates
                     mostrarTemplates(convocatoria.getTemplate());
-                    //mostrar los archivos
+                    // Mostrar los archivos
                     mostrarFiles(convocatoria.getFiles());
                 } else {
                     Log.e("DetalleConvocatoria", "Error en la respuesta: " + response.code() + " - " + response.message());
@@ -127,14 +136,30 @@ public class DetalleConvocatoria extends AppCompatActivity {
         }
     }
 
-    private  void descargarArchivo (String url){
+    // Método para descargar archivos
+    private void descargarArchivo(String url) {
+        Toast.makeText(DetalleConvocatoria.this, "Descargando archivo...", Toast.LENGTH_SHORT).show();
+
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setTitle("Descargando archivo");
         request.setDescription("Descargando el archivo desde la convocatoria");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, url.substring(url.lastIndexOf('/')+ 1));
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, url.substring(url.lastIndexOf('/') + 1));
 
         DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         downloadManager.enqueue(request);
+    }
+
+    // Método para cambiar el formato de las fechas
+    private String formatearFecha(String fechaOriginal, String formatoEntrada, String formatoSalida) {
+        SimpleDateFormat formatoEntradaDate = new SimpleDateFormat(formatoEntrada, Locale.getDefault());
+        SimpleDateFormat formatoSalidaDate = new SimpleDateFormat(formatoSalida, Locale.getDefault());
+        try {
+            Date date = formatoEntradaDate.parse(fechaOriginal);
+            return formatoSalidaDate.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return fechaOriginal;
+        }
     }
 }
