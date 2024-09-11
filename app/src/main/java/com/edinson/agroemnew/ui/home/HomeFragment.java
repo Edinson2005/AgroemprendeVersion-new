@@ -126,6 +126,7 @@ public class HomeFragment extends Fragment {
         int resultErrores = 0;
         int revisado = 0;
         int enProgreso = 0;
+        int enRevision = 0;
 
         // Contar proyectos según su estado
         for (Proyecto proyecto : proyectos) {
@@ -141,6 +142,9 @@ public class HomeFragment extends Fragment {
                     break;
                 case "en progreso":
                     enProgreso++;
+                    break;
+                case "en revision":
+                    enRevision++;
                     break;
             }
         }
@@ -163,6 +167,10 @@ public class HomeFragment extends Fragment {
         if (enProgreso > 0) {
             entries.add(new PieEntry(enProgreso, "En Progreso"));
             colors.add(ContextCompat.getColor(requireContext(), R.color.En_progreso));
+        }
+        if(enRevision > 0){
+            entries.add(new PieEntry(enRevision, "En Revision"));
+            colors.add(ContextCompat.getColor(requireContext(), R.color.Aprovado));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -187,7 +195,8 @@ public class HomeFragment extends Fragment {
             holeColor = Color.WHITE;
         }
 
-        int totalProyectos = completado + enProgreso + revisado + resultErrores;
+        ///contar total de proyctos
+        int totalProyectos = completado + enProgreso + revisado + resultErrores + enRevision;
         pieChart.setCenterText("Proyectos: " + totalProyectos);
         pieChart.setCenterTextColor(centerTextColor);
         pieChart.setHoleColor(holeColor);
