@@ -20,6 +20,8 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -132,16 +134,41 @@ public class PorcentajeProyecto extends AppCompatActivity {
             Toast.makeText(this, "No se encontro el token", Toast.LENGTH_SHORT).show();
         }
     }
-    private void processRevisiones(List<Revision> revisions, PieChart pieChart) {
+    private void processRevisiones(List<Revision> revisiones, PieChart pieChart) {
         int aprobadas = 0;
         int rechazadas = 0;
 
-        for (Revision revision : revisions) {
-            // Asume que el estado de las revisiones es aprobado o rechazado
-            if ("APROBADO".equalsIgnoreCase(revision.getEstado())) {
-                aprobadas++;
-            } else if ("DESAPROBADO".equalsIgnoreCase(revision.getEstado())) {
-                rechazadas++;
+        // Fecha límite para considerar revisiones recientes (hoy)
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date fechaLimite = calendar.getTime();
+
+        boolean hasRecentRevisions = false;
+
+        for (Revision revision : revisiones) {
+            // Filtrar revisiones recientes por fecha (solo del día actual)
+            if (revision.getFechaRevision().after(fechaLimite)) {
+                hasRecentRevisions = true;
+                // Asume que el estado de las revisiones es aprobado o rechazado
+                if ("APROBADO".equalsIgnoreCase(revision.getEstado())) {
+                    aprobadas++;
+                } else if ("DESAPROBADO".equalsIgnoreCase(revision.getEstado())) {
+                    rechazadas++;
+                }
+            }
+        }
+
+        // Si no hay revisiones recientes, usar todas las revisiones disponibles
+        if (!hasRecentRevisions) {
+            for (Revision revision : revisiones) {
+                if ("APROBADO".equalsIgnoreCase(revision.getEstado())) {
+                    aprobadas++;
+                } else if ("DESAPROBADO".equalsIgnoreCase(revision.getEstado())) {
+                    rechazadas++;
+                }
             }
         }
 
@@ -157,7 +184,7 @@ public class PorcentajeProyecto extends AppCompatActivity {
         PieDataSet dataSet = new PieDataSet(entries, "Revisiones");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setValueTextSize(90f);
+        dataSet.setValueTextSize(14f); // Ajusté el tamaño de texto para ser más legible
 
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(ContextCompat.getColor(this, R.color.revisadoproyect));  // Verde para "Completado"
@@ -180,18 +207,21 @@ public class PorcentajeProyecto extends AppCompatActivity {
         // Detectar el modo oscuro o claro para actualizar los colores
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         int centerTextColor;
-        int holecolor;
+        int holeColor;
 
         if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
             centerTextColor = Color.WHITE;
-            holecolor = Color.BLACK;
+            holeColor = Color.BLACK;
         } else {
             centerTextColor = Color.BLACK;
-            holecolor = Color.WHITE;
+            holeColor = Color.WHITE;
         }
         pieChart.setCenterTextColor(centerTextColor);
-        pieChart.setHoleColor(holecolor);
+        pieChart.setHoleColor(holeColor);
         pieChart.invalidate();
     }
+
+
+
 
 }
