@@ -23,7 +23,7 @@
             android:layout_height="80dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            app:srcCompat="@drawable/img_12" />
+            app:srcCompat="@drawable/megafono" />
 
         <TextView
             android:id="@+id/titleTextView"
