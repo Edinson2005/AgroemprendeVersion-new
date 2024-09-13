@@ -88,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="¿No tienes cuenta?"
             android:layout_marginTop="16dp"
+
             android:textStyle="bold"
             android:textColor="@color/black" />
 
