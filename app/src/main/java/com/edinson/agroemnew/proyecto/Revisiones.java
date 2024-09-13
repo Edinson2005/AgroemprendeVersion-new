@@ -1,3 +1,4 @@
+// Actividad Revisiones
 package com.edinson.agroemnew.proyecto;
 
 import android.content.SharedPreferences;
@@ -16,7 +17,10 @@ import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.proyecto.ProyectoDetails;
 import com.edinson.agroemnew.modelApi.proyecto.Revision;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -81,11 +85,25 @@ public class Revisiones extends AppCompatActivity {
     private void setupRevisionesRecyclerView(List<Revision> revisiones) {
         if(revisiones == null || revisiones.isEmpty()){
             Toast.makeText(this, "No hay revisiones disponibles", Toast.LENGTH_SHORT).show();
-
-        }else{
-            RevisionAdapter revisionAdapter = new RevisionAdapter(revisiones);
+        } else {
+            List<Revision> allRevisions = filterAllRevisions(revisiones);
+            RevisionAdapter revisionAdapter = new RevisionAdapter(allRevisions);
             revisionesRecyclerView.setAdapter(revisionAdapter);
         }
-
     }
+
+    private List<Revision> filterAllRevisions(List<Revision> revisiones) {
+        Map<String, Revision> latestRevisions = new HashMap<>();
+
+        for (Revision revision : revisiones) {
+            String tipoSeccion = revision.getTitulo();
+            if (!latestRevisions.containsKey(tipoSeccion) ||
+                    revision.getFechaRevision().after(latestRevisions.get(tipoSeccion).getFechaRevision())) {
+                latestRevisions.put(tipoSeccion, revision);
+            }
+        }
+
+        return new ArrayList<>(latestRevisions.values());
+    }
+
 }

@@ -2,6 +2,8 @@ package com.edinson.agroemnew.modelApi.proyecto;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class Revision {
 
     @SerializedName("_id")
@@ -26,7 +28,7 @@ public class Revision {
     private String descripcion;
 
     @SerializedName("fechaRevision")
-    private String fechaRevision;
+    private Date fechaRevision;
 
     @SerializedName("proyecto")
     private String proyecto;
@@ -91,11 +93,11 @@ public class Revision {
         this.descripcion = descripcion;
     }
 
-    public String getFechaRevision() {
+    public Date getFechaRevision() {
         return fechaRevision;
     }
 
-    public void setFechaRevision(String fechaRevision) {
+    public void setFechaRevision(Date fechaRevision) {
         this.fechaRevision = fechaRevision;
     }
 
