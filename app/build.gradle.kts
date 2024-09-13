@@ -47,6 +47,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
+    implementation ("com.google.guava:guava:31.1-android")
+    implementation ("androidx.work:work-runtime:2.7.1")
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation ("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
     implementation ("com.google.firebase:firebase-messaging:23.0.5")

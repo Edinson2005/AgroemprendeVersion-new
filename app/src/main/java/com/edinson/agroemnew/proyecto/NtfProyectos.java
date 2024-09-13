@@ -8,14 +8,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.adapters.NotiProyectoAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.notificaciones.ProyectoNot;
-import com.edinson.agroemnew.proyecto.NotificationHelper;
-
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,10 +32,8 @@ public class NtfProyectos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ntf_proyectos);
 
-        // Crear el canal de notificaciones
         NotificationHelper.createNotificationChannel(this);
 
-        // Ocultar la barra de acción si existe
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -58,6 +55,9 @@ public class NtfProyectos extends AppCompatActivity {
         }
 
         cargarProyectos();
+
+        // Schedule the Worker
+        scheduleWorker();
     }
 
     private void cargarProyectos() {
@@ -86,24 +86,26 @@ public class NtfProyectos extends AppCompatActivity {
         Log.d("NtfProyectos", "Mostrar proyectos: " + proyectos);
         if (proyectos != null && !proyectos.isEmpty()) {
             adapter = new NotiProyectoAdapter(proyectos, projectId -> {
-                // Guardar el ID del proyecto en SharedPreferences
                 SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("SelectID", projectId);
                 editor.apply();
 
-                // Iniciar la actividad InformacionProyecto
                 Intent intent = new Intent(NtfProyectos.this, InformacionProyecto.class);
                 startActivity(intent);
             });
             recyclerView.setAdapter(adapter);
             Log.d("NtfProyectos", "Adapter configurado.");
-
-            // Enviar notificación
-            NotificationHelper.sendNotification(this, "Nuevos Proyectos", "Tienes nuevos proyectos disponibles.");
         } else {
             Log.e("NtfProyectos", "Lista de proyectos es nula o está vacía.");
             Toast.makeText(this, "No hay notificaciones", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void scheduleWorker() {
+        OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(ProyectoWorker.class)
+                .build();
+        WorkManager.getInstance(this).enqueue(request);
+        Log.d("NtfProyectos", "Worker encolado.");
     }
 }
