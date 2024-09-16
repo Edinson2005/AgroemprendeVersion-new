@@ -1,3 +1,5 @@
+// settings.gradle.kts
+
 pluginManagement {
     repositories {
         google {
@@ -7,7 +9,6 @@ pluginManagement {
                 includeGroupByRegex("androidx.*")
             }
         }
-        jcenter()
 
         gradlePluginPortal()
     }
@@ -17,8 +18,8 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        jcenter()
-        maven("https://jitpack.io")
+        jcenter()  // Aunque JCenter está en desuso, puede ser necesario para algunas dependencias antiguas
+        maven("https://jitpack.io")  // Añadido para resolver dependencias desde JitPack
     }
 }
 
