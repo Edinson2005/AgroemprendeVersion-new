@@ -1,5 +1,7 @@
 plugins {
-    alias(libs.plugins.android.application)
+
+    id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -62,6 +64,8 @@ dependencies {
     implementation ("com.jakewharton.threetenabp:threetenabp:1.3.1")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
 
 
 }
+apply(plugin = "com.google.gms.google-services")

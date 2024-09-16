@@ -25,7 +25,6 @@ import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.proyecto.Proyecto;
 import com.edinson.agroemnew.modelApi.usuario.UserDetails;
 import com.edinson.agroemnew.proyecto.Notificaciones;
-import com.edinson.agroemnew.proyecto.NotificationHelper;
 import com.edinson.agroemnew.proyecto.NtfProyectos;
 import com.edinson.agroemnew.databinding.FragmentHomeBinding;
 import com.github.mikephil.charting.charts.PieChart;

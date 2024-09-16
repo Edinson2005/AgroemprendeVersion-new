@@ -1,7 +1,11 @@
 package com.edinson.agroemnew.Usuario;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -60,6 +64,18 @@ public class LadinPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(LadinPrincipal.this, Login.class);
                 startActivity(intent);
             });
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "CANAL_ID",
+                    "Nombre del Canal",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel.setDescription("Descripción del canal");
+
+            // Registra el canal en el sistema
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }

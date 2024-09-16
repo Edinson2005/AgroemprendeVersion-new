@@ -32,7 +32,7 @@ public class NtfProyectos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ntf_proyectos);
 
-        NotificationHelper.createNotificationChannel(this);
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -56,8 +56,6 @@ public class NtfProyectos extends AppCompatActivity {
 
         cargarProyectos();
 
-        // Schedule the Worker
-        scheduleWorker();
     }
 
     private void cargarProyectos() {
@@ -102,10 +100,5 @@ public class NtfProyectos extends AppCompatActivity {
         }
     }
 
-    private void scheduleWorker() {
-        OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(ProyectoWorker.class)
-                .build();
-        WorkManager.getInstance(this).enqueue(request);
-        Log.d("NtfProyectos", "Worker encolado.");
-    }
+
 }
