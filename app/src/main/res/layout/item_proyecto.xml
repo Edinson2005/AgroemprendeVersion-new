@@ -5,21 +5,21 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="30dp">
 
     <!-- Contenedor principal con altura automática -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/tituloTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/colortexto"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_gravity="center"

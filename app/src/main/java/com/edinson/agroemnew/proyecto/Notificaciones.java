@@ -80,11 +80,16 @@ public class Notificaciones extends AppCompatActivity {
         });
     }
 
-    private void mostrarNotificaciones(List<NotiConvocatorias> notificaciones) {
-        if (notificaciones != null && !notificaciones.isEmpty()) {
-            // Pasar el contexto junto con la lista de notificaciones
-            adapter = new NotificacionAdapter(notificaciones, this);
-            recyclerView.setAdapter(adapter);
+    private void mostrarNotificaciones(List<NotiConvocatorias> nuevasNotificaciones) {
+        if (nuevasNotificaciones != null && !nuevasNotificaciones.isEmpty()) {
+            if (adapter == null) {
+                // Si el adaptador es nulo, inicializa el adaptador con las notificaciones recibidas
+                adapter = new NotificacionAdapter(nuevasNotificaciones, this);
+                recyclerView.setAdapter(adapter);
+            } else {
+                // Si el adaptador ya existe, agregar las nuevas notificaciones al inicio de la lista
+                adapter.agregarNotificaciones(nuevasNotificaciones);
+            }
         } else {
             Toast.makeText(this, "No hay convocatorias disponibles", Toast.LENGTH_SHORT).show();
         }

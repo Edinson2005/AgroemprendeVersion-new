@@ -32,7 +32,7 @@
             android:layout_alignTop="@id/imageView2"
             android:layout_marginStart="16dp"
             android:layout_toEndOf="@id/imageView2"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colortexto"
             android:textSize="16sp"
             android:textStyle="bold" />
 

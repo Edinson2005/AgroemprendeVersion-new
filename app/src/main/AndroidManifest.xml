@@ -33,10 +33,7 @@
         <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more. -->
 
-        <service
-            android:name=".proyecto.NotificationService"
-            android:enabled="true"
-            android:exported="true" />
+
         <!-- Actividades -->
         <activity
             android:name=".DetalleConvocatoria"
@@ -79,6 +76,8 @@
         <activity
             android:name=".proyecto.NtfProyectos"
             android:exported="false" />
+        <activity android:name=".MyApplication"
+            android:exported="false"/>
 
         <service
             android:name=".MyFirebaseMessagingService"

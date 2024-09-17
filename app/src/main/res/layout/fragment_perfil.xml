@@ -40,6 +40,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="57dp"
             android:text="Nombre"
+            android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -48,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
+            android:textColor="@color/black"
             android:layout_marginTop="265dp"
             android:text="Correo Electronico:" />
 
@@ -70,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="19dp"
             android:layout_marginTop="385dp"
+            android:textColor="@color/black"
             android:text="Telefono:" />
 
         <TextView

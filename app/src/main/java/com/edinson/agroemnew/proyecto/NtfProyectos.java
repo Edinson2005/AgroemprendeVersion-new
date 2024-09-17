@@ -15,6 +15,9 @@ import com.edinson.agroemnew.adapters.NotiProyectoAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.notificaciones.ProyectoNot;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,8 +67,26 @@ public class NtfProyectos extends AppCompatActivity {
             public void onResponse(Call<List<ProyectoNot>> call, Response<List<ProyectoNot>> response) {
                 if (response.isSuccessful()) {
                     List<ProyectoNot> proyectos = response.body();
-                    Log.d("NtfProyectos", "Datos recibidos: " + proyectos);
-                    mostrarProyectos(proyectos);
+                    if (proyectos != null) {
+                        // Ordenar las notificaciones por fecha, suponiendo que haya un campo de fecha
+                        // Dentro de tu método cargarProyectos:
+                        Collections.sort(proyectos, new Comparator<ProyectoNot>() {
+                            @Override
+                            public int compare(ProyectoNot n1, ProyectoNot n2) {
+                                if (n1.getFecha() == null && n2.getFecha() == null) {
+                                    return 0; // Si ambas fechas son nulas, son "iguales"
+                                } else if (n1.getFecha() == null) {
+                                    return 1; // Si n1 es nulo, lo ponemos después
+                                } else if (n2.getFecha() == null) {
+                                    return -1; // Si n2 es nulo, lo ponemos después
+                                } else {
+                                    return n2.getFecha().compareTo(n1.getFecha()); // Comparamos las fechas
+                                }
+                            }
+                        });
+
+                        mostrarProyectos(proyectos);
+                    }
                 } else {
                     Log.e("NtfProyectos", "Error al obtener los proyectos: " + response.message());
                     Toast.makeText(NtfProyectos.this, "Error al obtener los proyectos", Toast.LENGTH_SHORT).show();

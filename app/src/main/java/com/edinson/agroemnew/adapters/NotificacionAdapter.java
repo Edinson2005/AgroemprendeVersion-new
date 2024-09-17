@@ -40,15 +40,10 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
             NotiConvocatorias notiConvocatorias = notificaciones.get(position);
             holder.titulo.setText(notiConvocatorias.getTitle());
             holder.cuerpo.setText(notiConvocatorias.getBody());
-            //holder.estado.setText(notiConvocatorias.getEstado());
 
-            //cambiar el color segun el estado de la vista
-
-            //evento click para marcar la notificacion como vista y navegar
+            // Evento click para marcar la notificación como vista y navegar
             holder.itemView.setOnClickListener(v -> {
-
-
-                //obtengo el token
+                // Obtengo el token
                 SharedPreferences sharedPreferences = context.getSharedPreferences("MyApp", Context.MODE_PRIVATE);
                 String token = sharedPreferences.getString("UserToken", null);
 
@@ -61,7 +56,6 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
                 intent.putExtra("authorization", token);
                 context.startActivity(intent);
             });
-
         }
     }
 
@@ -70,23 +64,20 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
         return notificaciones != null ? notificaciones.size() : 0;
     }
 
-    private void guardarEstadoVista(String idNotificacion, boolean vista) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("Notificaciones", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("vista_" + idNotificacion, vista);
-        editor.apply();
+    // Método para agregar nuevas notificaciones al inicio de la lista
+    public void agregarNotificaciones(List<NotiConvocatorias> nuevasNotificaciones) {
+        notificaciones.addAll(0, nuevasNotificaciones);  // Añadir las nuevas notificaciones al inicio
+        notifyDataSetChanged();  // Notificar que los datos han cambiado
     }
 
     public static class NotificacionViewHolder extends RecyclerView.ViewHolder {
         TextView titulo;
         TextView cuerpo;
-        //TextView estado;
 
         public NotificacionViewHolder(@NonNull View itemView) {
             super(itemView);
             titulo = itemView.findViewById(R.id.titleNotificacion);
             cuerpo = itemView.findViewById(R.id.bodyNotificacion);
-            //estado = itemView.findViewById(R.id.estadoconvocatoria);
         }
     }
 }
