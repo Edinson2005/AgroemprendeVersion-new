@@ -1,6 +1,9 @@
 package com.edinson.agroemnew.proyecto;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,14 +11,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.adapters.NotiProyectoAdapter;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.notificaciones.ProyectoNot;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -34,8 +35,6 @@ public class NtfProyectos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ntf_proyectos);
-
-
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -59,6 +58,7 @@ public class NtfProyectos extends AppCompatActivity {
 
         cargarProyectos();
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(notificationReceiver, new IntentFilter("NOTIFICACION_RECIBIDA"));
     }
 
     private void cargarProyectos() {
@@ -68,19 +68,17 @@ public class NtfProyectos extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     List<ProyectoNot> proyectos = response.body();
                     if (proyectos != null) {
-                        // Ordenar las notificaciones por fecha, suponiendo que haya un campo de fecha
-                        // Dentro de tu método cargarProyectos:
                         Collections.sort(proyectos, new Comparator<ProyectoNot>() {
                             @Override
                             public int compare(ProyectoNot n1, ProyectoNot n2) {
                                 if (n1.getFecha() == null && n2.getFecha() == null) {
-                                    return 0; // Si ambas fechas son nulas, son "iguales"
+                                    return 0;
                                 } else if (n1.getFecha() == null) {
-                                    return 1; // Si n1 es nulo, lo ponemos después
+                                    return 1;
                                 } else if (n2.getFecha() == null) {
-                                    return -1; // Si n2 es nulo, lo ponemos después
+                                    return -1;
                                 } else {
-                                    return n2.getFecha().compareTo(n1.getFecha()); // Comparamos las fechas
+                                    return n2.getFecha().compareTo(n1.getFecha());
                                 }
                             }
                         });
@@ -121,5 +119,16 @@ public class NtfProyectos extends AppCompatActivity {
         }
     }
 
+    private BroadcastReceiver notificationReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            cargarProyectos(); // Recargar las notificaciones
+        }
+    };
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(notificationReceiver);
+    }
 }

@@ -177,11 +177,11 @@ public class PorcentajeProyecto extends AppCompatActivity {
 
         // Configuración de las entradas del PieChart
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(aprobadas, "Completado"));
-        entries.add(new PieEntry(rechazadas, "Falta"));
+        entries.add(new PieEntry(aprobadas, "En Progreso"));
+        entries.add(new PieEntry(rechazadas, "Pendiente"));
 
         // Definir colores personalizados para las secciones
-        PieDataSet dataSet = new PieDataSet(entries, "Revisiones");
+        PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
         dataSet.setValueTextSize(14f); // Ajusté el tamaño de texto para ser más legible

@@ -7,10 +7,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.notificaciones.ProyectoNot;
-
 import java.util.List;
 
 public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapter.ViewHolder> {
@@ -34,17 +32,14 @@ public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProyectoNot notificacion = notificaciones.get(position);
-        //Log.d("NotiProyectoAdapter", "Posición: " + position + ", Proyecto ID: " + notificacion.getProyecto().getId());
 
         holder.titleTextView.setText(notificacion.getTitle());
         holder.bodyTextView.setText(notificacion.getBody());
 
         if (notificacion.getProyecto().getId().equals(selectedProjectId)) {
             holder.cardView.setCardBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.leida));
-          //  Log.d("NotiProyectoAdapter", "Color aplicado: LEIDA para el proyecto con ID: " + notificacion.getProyecto().getId());
         } else {
             holder.cardView.setCardBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.noLeida));
-            //Log.d("NotiProyectoAdapter", "Color aplicado: REVISADA para el proyecto con ID: " + notificacion.getProyecto().getId());
         }
 
         holder.itemView.setOnClickListener(v -> {
@@ -70,13 +65,11 @@ public class NotiProyectoAdapter extends RecyclerView.Adapter<NotiProyectoAdapte
         TextView bodyTextView;
         CardView cardView;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             bodyTextView = itemView.findViewById(R.id.bodyTextView);
             cardView = (CardView) itemView;
-
         }
     }
 }

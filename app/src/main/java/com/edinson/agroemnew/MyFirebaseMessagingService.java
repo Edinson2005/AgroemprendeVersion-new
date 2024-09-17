@@ -3,13 +3,11 @@ package com.edinson.agroemnew;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import com.edinson.agroemnew.Usuario.MainActivity;
+import com.edinson.agroemnew.proyecto.NtfProyectos;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -37,49 +35,48 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
         if (message.getData().size() > 0) {
-            Log.d(TAG, "Mensaje de datos recibido: " + message.getData());
-            handleDataMessage(message.getData());
-        }
-
-        if (message.getNotification() != null) {
-            Log.d(TAG, "Mensaje de notificación recibido: " + message.getNotification().getBody());
-            handleNotificationMessage(message.getNotification());
+            Log.d(TAG, "Mensaje de datos: " + message.getData());
+            mostrarNotificacion(message.getData());
+        } else if (message.getNotification() != null) {
+            Log.d(TAG, "Mensaje de notificación: " + message.getNotification().getBody());
+            mostrarNotificacion(message.getNotification().getBody());
         }
     }
 
-    private void handleDataMessage(Map<String, String> data) {
-        String titulo = data.get("title");
-        String cuerpo = data.get("body");
-        Log.d(TAG, "Manejando mensaje de datos. Título: " + titulo + ", Cuerpo: " + cuerpo);
-        mostrarNotificacion(titulo, cuerpo);
-    }
+    private void mostrarNotificacion(Map<String, String> data) {
+        String title = data.get("title");
+        String body = data.get("body");
 
-    private void handleNotificationMessage(RemoteMessage.Notification notification) {
-        String titulo = notification.getTitle();
-        String cuerpo = notification.getBody();
-        Log.d(TAG, "Manejando mensaje de notificación. Título: " + titulo + ", Cuerpo: " + cuerpo);
-        mostrarNotificacion(titulo, cuerpo);
-    }
-
-    private void mostrarNotificacion(String titulo, String cuerpo) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, NtfProyectos.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.megafono)
-                .setContentTitle(titulo)
-                .setContentText(cuerpo)
+                .setContentTitle(title != null ? title : "Nueva Notificación")
+                .setContentText(body != null ? body : "Tienes una nueva notificación")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        try {
-            notificationManager.notify(1, builder.build());
-            Log.d(TAG, "Notificación mostrada con éxito");
-        } catch (SecurityException e) {
-            Log.e(TAG, "No se pudo mostrar la notificación: " + e.getMessage());
-        }
+        notificationManager.notify(0, builder.build());
+    }
+
+    private void mostrarNotificacion(String mensaje) {
+        Intent intent = new Intent(this, NtfProyectos.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.megafono)
+                .setContentTitle("Nueva Notificación")
+                .setContentText(mensaje)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(0, builder.build());
     }
 }

@@ -123,7 +123,7 @@ public class HomeFragment extends Fragment {
         legend.setTextColor(centerTextColor);
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         legend.setDrawInside(false);
     }
 
