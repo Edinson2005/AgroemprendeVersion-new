@@ -35,12 +35,13 @@ android:layout_height="match_parent"
         <!-- Título del proyecto centrado -->
         <TextView
             android:id="@+id/tituloTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="65dp"
             android:layout_marginBottom="10dp"
             android:text="Título del proyecto"
+            android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="26sp" />
