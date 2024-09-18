@@ -120,7 +120,7 @@ public class DetalleConvocatoria extends AppCompatActivity {
             // Iterar por cada objeto Template y mostrar su título
             for (Template template : templateList) {
                 TextView textView = new TextView(this);
-                textView.setText(template.getTitulo());  // Mostrar el título del template
+                textView.setText(template.getTitle());  // Mostrar el título del template
                 llTemplates.addView(textView);
             }
         }
