@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_13"
+    android:background="@drawable/img_14"
     tools:context=".Usuario.LadinPrincipal">
 
 
@@ -18,7 +18,7 @@
     android:layout_gravity="center"
     android:background="@android:color/transparent"
     android:scaleType="fitCenter"
-    android:src="@drawable/img_5" />
+    android:src="@drawable/logo" />
 
     <Button
         android:id="@+id/button"
