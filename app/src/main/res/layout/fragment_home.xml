@@ -1,17 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".ui.home.HomeFragment">
 
     <ImageButton
         android:id="@+id/btnNotificaciones"
         android:layout_width="59dp"
         android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/notificaciones" />
 
@@ -19,20 +19,14 @@
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@id/btnNotificaciones"
         android:layout_marginTop="30dp" />
 
     <Button
         android:id="@+id/Buttonconvocatoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pieChart"
-        android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="130dp"
-        android:layout_marginLeft="-23dp"
-        android:layout_marginTop="77dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/colortexto"
-        android:padding="12dp"
-        android:text="Convocatorias" />
-</RelativeLayout>
+        android:text="Convocatorias"
+        android:padding="12dp" />
+</LinearLayout>

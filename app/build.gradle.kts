@@ -63,7 +63,6 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation ("com.jakewharton.threetenabp:threetenabp:1.3.1")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
 
 

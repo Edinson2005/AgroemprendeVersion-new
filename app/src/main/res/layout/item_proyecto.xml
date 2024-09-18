@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="30dp">
+    app:cardElevation="4dp">
 
     <!-- Contenedor principal con altura automática -->
     <LinearLayout
@@ -46,20 +46,8 @@
             android:text="Estado del Proyecto"/>
 
 
-        <!-- Ajustar el TextView de descripción para permitir el desplazamiento -->
-<!--
-            <TextView
-                android:id="@+id/descripcionTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxHeight="150dp"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:text="Descripción del Proyecto"
-                android:scrollbars="vertical"
-                android:overScrollMode="always"/>
--->
 
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
+
