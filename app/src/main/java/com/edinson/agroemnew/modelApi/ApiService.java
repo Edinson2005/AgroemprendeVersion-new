@@ -3,6 +3,7 @@ package com.edinson.agroemnew.modelApi;
 import com.edinson.agroemnew.modelApi.notificaciones.Convocatoria;
 import com.edinson.agroemnew.modelApi.notificaciones.NotiConvocatorias;
 import com.edinson.agroemnew.modelApi.notificaciones.ProyectoNot;
+import com.edinson.agroemnew.modelApi.notificaciones.TokenRequest;
 import com.edinson.agroemnew.modelApi.proyecto.Project;
 import com.edinson.agroemnew.modelApi.proyecto.ProyectoDetails;
 import com.edinson.agroemnew.modelApi.proyecto.RegisterRequest;
@@ -72,5 +73,7 @@ public interface ApiService {
     @GET("/notificaciones/mis-proyectos")
     Call<List<ProyectoNot>> getProyectos(@Header("Authorization") String token);
 
+    @POST("notificaciones/send")
+    Call<Void> enviarToken(@Body TokenRequest tokenRequest);
 
 }
