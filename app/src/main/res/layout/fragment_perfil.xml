@@ -1,118 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.perfil.PerfilFragment">
 
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="315dp"
-        android:layout_height="566dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="100dp"
-        android:backgroundTint="@color/nieve"
-        app:cardCornerRadius="23dp">
-
-        <ImageButton
-            android:id="@+id/btnEditar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="243dp"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/editar" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="match_parent"
-            android:layout_height="168dp"
-            android:layout_marginTop="40dp"
-            app:srcCompat="@drawable/baseline_account_circle_24" />
-
-        <TextView
-
-            android:id="@+id/tvNombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="57dp"
-            android:text="Nombre"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="265dp"
-            android:text="Correo Electronico:" />
-
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:layout_marginTop="296dp"
-            android:background="@drawable/text_background"
-            android:drawableStart="@drawable/gmail"
-            android:drawablePadding="12dp"
-            android:padding="17dp"
-            android:textColor="#555555"
-            android:textSize="18sp" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:layout_marginTop="385dp"
-            android:textColor="@color/black"
-            android:text="Telefono:" />
-
-        <TextView
-            android:id="@+id/tvTelefono"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp"
-            android:layout_marginTop="416dp"
-            android:background="@drawable/text_background"
-            android:drawableStart="@drawable/telephone"
-            android:drawablePadding="12dp"
-            android:padding="17dp"
-            android:textColor="#555555"
-            android:textSize="18sp" />
-
-
-    </androidx.cardview.widget.CardView>
-
+    <!-- Imagen de fondo que cubre la mitad superior de la pantalla -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="998dp"
-        android:layout_height="390dp"
-        android:layout_marginLeft="-693dp"
-        android:layout_marginTop="-55dp"
-        app:srcCompat="@drawable/img_1" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/img_14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="184dp"
-        android:layout_height="130dp"
-        android:layout_marginLeft="43dp"
-        android:layout_marginTop="50dp"
-        android:text="Perfil"
-        android:textColor="@color/white"
-        android:textSize="32sp"
-        android:textStyle="bold" />
-
-    <com.google.android.material.textfield.TextInputLayout
+    <!-- ScrollView para asegurar que todo el contenido sea accesible en pantallas pequeñas -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    </com.google.android.material.textfield.TextInputLayout>
-</LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- CardView centrada en la pantalla -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/nieve"
+                app:cardCornerRadius="23dp"
+                app:layout_constraintWidth_percent="0.85"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.55">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Botón de editar -->
+                    <ImageButton
+                        android:id="@+id/btnEditar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/editar" />
+
+                    <!-- Imagen de perfil -->
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/baseline_account_circle_24" />
+
+                    <!-- Nombre del usuario -->
+                    <TextView
+                        android:id="@+id/tvNombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:text="Nombre"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <!-- Correo electrónico -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="Correo Electrónico:"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/text_background"
+                        android:drawableStart="@drawable/gmail"
+                        android:drawablePadding="12dp"
+                        android:padding="17dp"
+                        android:textColor="#555555"
+                        android:textSize="16sp" />
+
+                    <!-- Teléfono -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="Teléfono:"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tvTelefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/text_background"
+                        android:drawableStart="@drawable/telephone"
+                        android:drawablePadding="12dp"
+                        android:padding="17dp"
+                        android:textColor="#555555"
+                        android:textSize="16sp" />
+
+                    <!-- Espacio adicional después del campo de teléfono -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
