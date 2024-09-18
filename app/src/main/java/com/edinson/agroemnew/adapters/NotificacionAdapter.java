@@ -16,14 +16,15 @@ import com.edinson.agroemnew.DetalleConvocatoria;
 import com.edinson.agroemnew.R;
 import com.edinson.agroemnew.modelApi.notificaciones.NotiConvocatorias;
 
+import java.util.ArrayList;
 import java.util.List;
 public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapter.NotificacionViewHolder> {
 
     private List<NotiConvocatorias> notificaciones;
     private Context context;
 
-    public NotificacionAdapter(List<NotiConvocatorias> notificaciones, Context context) {
-        this.notificaciones = notificaciones;
+    public NotificacionAdapter(Context context) {
+        this.notificaciones = new ArrayList<>();
         this.context = context;
     }
 
@@ -36,38 +37,33 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
 
     @Override
     public void onBindViewHolder(@NonNull NotificacionViewHolder holder, int position) {
-        if (notificaciones != null && position < notificaciones.size()) {
-            NotiConvocatorias notiConvocatorias = notificaciones.get(position);
-            holder.titulo.setText(notiConvocatorias.getTitle());
-            holder.cuerpo.setText(notiConvocatorias.getBody());
+        NotiConvocatorias notiConvocatorias = notificaciones.get(position);
+        holder.titulo.setText(notiConvocatorias.getTitle());
+        holder.cuerpo.setText(notiConvocatorias.getBody());
 
-            // Evento click para marcar la notificación como vista y navegar
-            holder.itemView.setOnClickListener(v -> {
-                // Obtengo el token
-                SharedPreferences sharedPreferences = context.getSharedPreferences("MyApp", Context.MODE_PRIVATE);
-                String token = sharedPreferences.getString("UserToken", null);
+        holder.itemView.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("UserToken", null);
 
-                // Guardar el ID de la convocatoria en SharedPreferences o pasar directamente
-                Intent intent = new Intent(context, DetalleConvocatoria.class);
-                intent.putExtra("convocatoria_id", notiConvocatorias.getConvocatoria().get_id());
-                intent.putExtra("convocatoria_title", notiConvocatorias.getConvocatoria().getTitle());
-                intent.putExtra("convocatoria_descripcion", notiConvocatorias.getConvocatoria().getDescripcion());
-                intent.putExtra("convocatoria_fechaInicio", notiConvocatorias.getConvocatoria().getFechaInicio());
-                intent.putExtra("authorization", token);
-                context.startActivity(intent);
-            });
-        }
+            Intent intent = new Intent(context, DetalleConvocatoria.class);
+            intent.putExtra("convocatoria_id", notiConvocatorias.getConvocatoria().get_id());
+            intent.putExtra("convocatoria_title", notiConvocatorias.getConvocatoria().getTitle());
+            intent.putExtra("convocatoria_descripcion", notiConvocatorias.getConvocatoria().getDescripcion());
+            intent.putExtra("convocatoria_fechaInicio", notiConvocatorias.getConvocatoria().getFechaInicio());
+            intent.putExtra("authorization", token);
+            context.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return notificaciones != null ? notificaciones.size() : 0;
+        return notificaciones.size();
     }
 
-    // Método para agregar nuevas notificaciones al inicio de la lista
-    public void agregarNotificaciones(List<NotiConvocatorias> nuevasNotificaciones) {
-        notificaciones.addAll(0, nuevasNotificaciones);  // Añadir las nuevas notificaciones al inicio
-        notifyDataSetChanged();  // Notificar que los datos han cambiado
+    public void setNotificaciones(List<NotiConvocatorias> nuevasNotificaciones) {
+        this.notificaciones.clear();
+        this.notificaciones.addAll(nuevasNotificaciones);
+        notifyDataSetChanged();
     }
 
     public static class NotificacionViewHolder extends RecyclerView.ViewHolder {

@@ -1,8 +1,6 @@
 package com.edinson.agroemnew;
 
 import android.app.DownloadManager;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,12 +15,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.notificaciones.Convocatoria;
+import com.edinson.agroemnew.modelApi.notificaciones.Template;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import javax.xml.transform.Templates;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -107,10 +110,19 @@ public class DetalleConvocatoria extends AppCompatActivity {
 
     private void mostrarTemplates(List<String> templates) {
         llTemplates.removeAllViews();
-        for (String template : templates) {
-            TextView textView = new TextView(this);
-            textView.setText(template);
-            llTemplates.addView(textView);
+        Gson gson = new Gson();
+
+        // Deserializar el primer template
+        for (String templateJson : templates) {
+            // Deserializar el JSON que contiene el array de objetos
+            List<Template> templateList = gson.fromJson(templateJson, new TypeToken<List<Template>>() {}.getType());
+
+            // Iterar por cada objeto Template y mostrar su título
+            for (Template template : templateList) {
+                TextView textView = new TextView(this);
+                textView.setText(template.getTitulo());  // Mostrar el título del template
+                llTemplates.addView(textView);
+            }
         }
     }
 
