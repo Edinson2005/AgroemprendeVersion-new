@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="13dp"
         android:orientation="vertical"
-        android:padding="16dp"> <!-- Fondo igual al de la CardView -->
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/texttitulonotificacion"
@@ -32,8 +32,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/revisionesRecyclerView"
-        android:layout_width="372dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="10dp" />

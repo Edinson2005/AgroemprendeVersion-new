@@ -10,7 +10,7 @@
     <color name="white">#FFAAAAAA</color> <!-- Más oscuro para el fondo en modo oscuro -->
     <color name="azul">#BA79EC</color>
     <color name="purple">#B691D2</color>
-    <color name="colortexto">#A78BFA</color>
+    <color name="colortexto">#4caf50</color>
     <color name="nieve">#FF333333</color> <!-- Color de fondo más oscuro -->
     <color name="En_progreso">#B0B0B0</color>
     <color name="revisado">#1E90FF</color>
