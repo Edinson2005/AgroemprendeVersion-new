@@ -79,5 +79,6 @@ public interface ApiService {
     Call<Void> enviarToken(@Body TokenRequest tokenRequest);
 
     @PATCH("/auth/usuario/{id}")
-    Call<Void> actualizarDeviceToken(@Path("userId") String userId, @Body Map<String, String> deviceToken);
+    Call<Void> actualizarDeviceToken(@Path("id") String userId, @Body Map<String, String> deviceToken);
+
 }
