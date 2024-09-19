@@ -25,6 +25,8 @@ import com.edinson.agroemnew.modelApi.notificaciones.TokenRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -69,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
                     // Obtener el nuevo token de registro FCM
                     String token = task.getResult();
-                    SharedPreferences sharedPreferences = getSharedPreferences("SP_FILE", 0);
-                    String tokenGuardado = sharedPreferences.getString("DEVICEID", null);
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+                    String tokenGuardado = sharedPreferences.getString("FCMToken", null);
 
                     // Si el token es diferente o no existe, registrar en el servidor
                     if (token != null) {
@@ -83,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("DEVICEID", token);
                             editor.apply();
 
-                            // Enviar token a la API
-                            enviarTokenApi(token);
+                            actualizarTokenEnServidor();
+
                         }
                     }
 
@@ -97,57 +99,46 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void enviarTokenApi(String token) {
-        Log.d(TAG, "Método enviarTokenApi llamado con token: " + token);
+    private void actualizarTokenEnServidor() {
+        // Obtener el token guardado desde SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
+        String tokenGuardado = sharedPreferences.getString("FCMToken", null);
 
-        ApiService apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
+        // Obtener el ID del usuario desde SharedPreferences
+        String userId = sharedPreferences.getString("UserId", null);
 
-        // Ajustar el constructor de Template según sea necesario
-        Template template = new Template("Planteamiento del problema", "Descripción del problema");
+        if (tokenGuardado != null && userId != null) {
+            // Crear el Map con el token
+            Map<String, String> deviceToken = new HashMap<>();
+            deviceToken.put("deviceToken", tokenGuardado);
 
-        ConvocatoriaNtf convocatoriaNtf = new ConvocatoriaNtf(
-                "2025-06-20",
-                "Proyectos sobre el campo colombiano",
-                "Se reciben proyectos orientados a mejorar la economía campesina",
-                "2024-09-18T22:57:05.211Z",
-                "Activa",
-                "Insertar un archivo que contenga información sobre la convocatoria",
-                template
-        );
+            // Crear una instancia de ApiService
+            ApiService apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
 
-        // Crear el objeto TokenRequest
-        TokenRequest tokenRequest = new TokenRequest(token, "Título de la notificación", "Cuerpo de la notificación", convocatoriaNtf, "Vista");
-
-        // Log para confirmar la creación del objeto TokenRequest
-        Log.d(TAG, "TokenRequest creado: " + tokenRequest.toString());
-
-        // Llamada al endpoint de enviar token
-        apiService.enviarToken(tokenRequest).enqueue(new retrofit2.Callback<Void>() {
-            @Override
-            public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
-                Log.d(TAG, "Respuesta recibida del servidor. Código: " + response.code());
-                if (response.isSuccessful()) {
-                    Log.d(TAG, "Token enviado correctamente al servidor.");
-                    // Mostrar un Toast indicando que el token se envió correctamente
-                    runOnUiThread(() -> Toast.makeText(MainActivity.this, "Token enviado correctamente.", Toast.LENGTH_SHORT).show());
-                } else {
-                    Log.e(TAG, "Error al enviar el token: " + response.code());
-                    // Mostrar un Toast indicando que hubo un error al enviar el token
-                    runOnUiThread(() -> Toast.makeText(MainActivity.this, "Error al enviar el token. Código: " + response.code(), Toast.LENGTH_LONG).show());
+            // Llamar al método para actualizar el token en el servidor
+            apiService.actualizarDeviceToken(userId, deviceToken).enqueue(new retrofit2.Callback<Void>() {
+                @Override
+                public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Log.d(TAG, "Token actualizado correctamente en el servidor.");
+                        Toast.makeText(MainActivity.this, "Token actualizado correctamente.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.e(TAG, "Error al actualizar el token: " + response.code());
+                        Toast.makeText(MainActivity.this, "Error al actualizar el token. Código: " + response.code(), Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(retrofit2.Call<Void> call, Throwable t) {
-                Log.e(TAG, "Fallo en la llamada al enviar token: " + t.getMessage());
-                // Mostrar un Toast indicando que hubo un fallo en la llamada
-                runOnUiThread(() -> Toast.makeText(MainActivity.this, "Fallo en el envío del token: " + t.getMessage(), Toast.LENGTH_LONG).show());
-            }
-        });
-
-        // Log después de llamar a enqueue para verificar que el método se ha ejecutado
-        Log.d(TAG, "Llamada a enqueue realizada.");
+                @Override
+                public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+                    Log.e(TAG, "Fallo en la llamada al actualizar token: " + t.getMessage());
+                    Toast.makeText(MainActivity.this, "Fallo en la actualización del token: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            Log.e(TAG, "Token o ID de usuario no encontrados.");
+        }
     }
+
 
 
 
@@ -165,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     private void saveTokenToPreferences(String token) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyApp", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("FCMToken", token);  // Guardar el token
+        editor.putString("UserToken", token);  // Guardar el token
         editor.apply();
     }
 

@@ -16,6 +16,8 @@ public class UserDetails {
     }
 
     public static class Sub {
+        private String deviceToken;
+        private boolean notificaciones;
         private String _id;
         private String nombre;
         private String apellido;
@@ -31,6 +33,22 @@ public class UserDetails {
         private String updatedAt;
 
         // Getters and Setters for all fields
+
+        public String getDeviceToken() {
+            return deviceToken;
+        }
+
+        public void setDeviceToken(String deviceToken) {
+            this.deviceToken = deviceToken;
+        }
+
+        public boolean isNotificaciones() {
+            return notificaciones;
+        }
+
+        public void setNotificaciones(boolean notificaciones) {
+            this.notificaciones = notificaciones;
+        }
 
         public String get_id() {
             return _id;

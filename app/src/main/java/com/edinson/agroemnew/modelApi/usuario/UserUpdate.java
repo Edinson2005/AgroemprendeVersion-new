@@ -7,20 +7,20 @@ public class UserUpdate {
     private String numIdentificacion;
     private String telefono;
     private String fechaNacimiento;
-
+    private String deviceToken;
 
     public UserUpdate() {
     }
 
-    public UserUpdate(String nombre, String apellido, String email, String numIdentificacion, String telefono, String fechaNacimiento) {
+
+    public UserUpdate(String nombre, String apellido, String email, String numIdentificacion, String telefono, String fechaNacimiento, String deviceToken) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.numIdentificacion = numIdentificacion;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
-
-
+        this.deviceToken = deviceToken;
     }
 
     public String getNombre() {
@@ -71,6 +71,11 @@ public class UserUpdate {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public String getDeviceToken() {
+        return deviceToken;
+    }
 
-
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
 }

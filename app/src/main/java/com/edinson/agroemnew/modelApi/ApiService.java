@@ -18,8 +18,11 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import java.util.List;
+import java.util.Map;
+
 import retrofit2.http.Path;
 
 public interface ApiService {
@@ -69,11 +72,12 @@ public interface ApiService {
     Call<Convocatoria> getConvocatoria(@Header("Authorization") String token, @Path("id") String convocatoriaId);
 
 
-
     @GET("/notificaciones/mis-proyectos")
     Call<List<ProyectoNot>> getProyectos(@Header("Authorization") String token);
 
     @POST("notificaciones/send")
     Call<Void> enviarToken(@Body TokenRequest tokenRequest);
 
+    @PATCH("/auth/usuario/{id}")
+    Call<Void> actualizarDeviceToken(@Path("userId") String userId, @Body Map<String, String> deviceToken);
 }
