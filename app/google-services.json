@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "427039773218",
-    "project_id": "projectwizzard-96db9",
-    "storage_bucket": "projectwizzard-96db9.appspot.com"
+    "project_number": "984843688635",
+    "project_id": "projectwizzard-36cef",
+    "storage_bucket": "projectwizzard-36cef.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:427039773218:android:114feb2c458f725b64b07b",
+        "mobilesdk_app_id": "1:984843688635:android:6d906a2b858c2e1e40279e",
         "android_client_info": {
           "package_name": "com.edinson.agroemnew"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBZYIYUhpxP7zBjRQXgxjoRQsCMBH6roxU"
+          "current_key": "AIzaSyBgIRt4xIGFWyY4ljkGVSxFHP74OEdJTGw"
         }
       ],
       "services": {
