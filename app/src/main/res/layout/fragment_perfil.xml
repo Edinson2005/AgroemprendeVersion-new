@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:background="@android:color/transparent"
-                        app:srcCompat="@drawable/editar" />
+                        app:srcCompat="@drawable/imagen32" />
 
                     <!-- Imagen de perfil -->
                     <ImageView
