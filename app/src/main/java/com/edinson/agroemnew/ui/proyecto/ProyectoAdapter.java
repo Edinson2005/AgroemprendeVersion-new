@@ -48,14 +48,14 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tituloTextView, estadoTextView, fechaTextView, descripcionTextView;
+        private TextView tituloTextView, estadoTextView, fechaTextView, convocatoria;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tituloTextView = itemView.findViewById(R.id.tituloTextView);
             fechaTextView = itemView.findViewById(R.id.fechaTextView);
             estadoTextView = itemView.findViewById(R.id.estadoTextView);
-            //descripcionTextView = itemView.findViewById(R.id.descripcionTextView);
+            convocatoria = itemView.findViewById(R.id.convocatoria);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -72,7 +72,14 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
             tituloTextView.setText(project.getTitulo());
             fechaTextView.setText(project.getFecha());
             estadoTextView.setText(project.getEstado());
-          ////  descripcionTextView.setText(project.getDescripcion());
+
+            //configuracion de convocatoria
+            if (project.getConvocatoria() != null) {
+                convocatoria.setText(project.getConvocatoria().getTitle());
+            } else {
+                convocatoria.setText("No asignada");
+            }
+
 
             String estado = project.getEstado().toLowerCase();
             if (estado.contains("en progreso")) {
@@ -81,10 +88,14 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
             } else if (estado.contains("revisado con errores")) {
                 int color = context.getResources().getColor(R.color.Error);
                 estadoTextView.setTextColor(color);
-            } else if (estado.contains("revisado")) {
+            } else if (estado.contains("en revision")) {
                 int color = context.getResources().getColor(R.color.revisado);
                 estadoTextView.setTextColor(color);
-            } else {
+
+            } else if (estado.contains("completado")) {
+                int color = context.getResources().getColor(R.color.colortexto);
+                estadoTextView.setTextColor(color);
+            }else {
                 int color = context.getResources().getColor(R.color.black);
                 estadoTextView.setTextColor(color);
             }

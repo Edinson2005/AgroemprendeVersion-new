@@ -1,5 +1,6 @@
 package com.edinson.agroemnew.modelApi.proyecto;
 
+import com.edinson.agroemnew.modelApi.notificaciones.Convocatoria;
 import com.edinson.agroemnew.modelApi.usuario.Usuario;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Project {
     private List<Revision> revisiones;
     private List<String> files;
     private int __v;
+    private Convocatoria convocatoria;
 
     // Getters and Setters for all fields
 
@@ -96,5 +98,13 @@ public class Project {
 
     public void set__v(int __v) {
         this.__v = __v;
+    }
+
+    public Convocatoria getConvocatoria() {
+        return convocatoria;
+    }
+
+    public void setConvocatoria(Convocatoria convocatoria) {
+        this.convocatoria = convocatoria;
     }
 }
