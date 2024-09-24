@@ -22,7 +22,9 @@ import com.github.mikephil.charting.data.PieEntry;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,8 +38,7 @@ public class PorcentajeProyecto extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_porcentaje_proyectos);
 
-        //ocultar el action bar de la vista
-
+        // Ocultar el action bar de la vista
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -48,30 +49,29 @@ public class PorcentajeProyecto extends AppCompatActivity {
         // Configuración inicial del gráfico
         setupPieChart(pieChart);
 
-        //obtener el ID del proyecto
+        // Obtener el ID del proyecto
         String projectId = getSharedPreferences("MyApp", MODE_PRIVATE)
                 .getString("SelectID", null);
 
-        if(projectId != null){
+        if (projectId != null) {
             loadProjectDetails(projectId, pieChart);
-        } else{
-            Toast.makeText(this,"ID de proyecto no ecnotrado", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "ID de proyecto no encontrado", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void setupPieChart(PieChart pieChart) {
-
-        //detectar el modo oscuro o claro
-        int currenNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        // Detectar el modo oscuro o claro
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         int centerTextColor;
         int holeColor;
 
-        if(currenNightMode == Configuration.UI_MODE_NIGHT_YES){
-            //modo oscuro
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
+            // Modo oscuro
             centerTextColor = Color.WHITE;
             holeColor = Color.BLACK;
-        } else{
-            //mod claro
+        } else {
+            // Modo claro
             centerTextColor = Color.BLACK;
             holeColor = Color.WHITE;
         }
@@ -88,7 +88,7 @@ public class PorcentajeProyecto extends AppCompatActivity {
         pieChart.setCenterTextColor(centerTextColor);
         pieChart.setHoleColor(holeColor);
 
-        //configuracion de legend
+        // Configuración de la leyenda
         Legend legend = pieChart.getLegend();
         legend.setEnabled(true); // Habilita la leyenda
         legend.setTextSize(16f);
@@ -100,14 +100,14 @@ public class PorcentajeProyecto extends AppCompatActivity {
     }
 
     private void loadProjectDetails(String projectId, PieChart pieChart) {
-        //ontener el token
+        // Obtener el token
         String token = getSharedPreferences("MyApp", MODE_PRIVATE)
                 .getString("UserToken", null);
         if (token != null) {
-            //crear instancia del servidio API
+            // Crear instancia del servicio API
             ApiService apiService = ApiLogin.getRetrofitInstance().create(ApiService.class);
 
-            //hacer el llamdo a la api
+            // Hacer la llamada a la API
             Call<ProyectoDetails> call = apiService.getProyectoDetails("Bearer " + token, projectId);
             call.enqueue(new Callback<ProyectoDetails>() {
                 @Override
@@ -115,7 +115,7 @@ public class PorcentajeProyecto extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         ProyectoDetails proyecto = response.body();
                         if (proyecto != null && proyecto.getRevisiones() != null) {
-                            //procesar revisiones y dividir en aprobadas y rechazadas
+                            // Procesar revisiones y dividir en aprobadas y rechazadas
                             processRevisiones(proyecto.getRevisiones(), pieChart);
                         } else {
                             Toast.makeText(PorcentajeProyecto.this, "No se encontraron revisiones", Toast.LENGTH_SHORT).show();
@@ -127,13 +127,14 @@ public class PorcentajeProyecto extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ProyectoDetails> call, Throwable t) {
-                    Toast.makeText(PorcentajeProyecto.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PorcentajeProyecto.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
-            Toast.makeText(this, "No se encontro el token", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No se encontró el token", Toast.LENGTH_SHORT).show();
         }
     }
+
     private void processRevisiones(List<Revision> revisiones, PieChart pieChart) {
         int aprobadas = 0;
         int rechazadas = 0;
@@ -148,6 +149,8 @@ public class PorcentajeProyecto extends AppCompatActivity {
 
         boolean hasRecentRevisions = false;
 
+        // Usar solo las revisiones más recientes (del día actual)
+        Map<String, Revision> latestRevisions = new HashMap<>();
         for (Revision revision : revisiones) {
             // Filtrar revisiones recientes por fecha (solo del día actual)
             if (revision.getFechaRevision().after(fechaLimite)) {
@@ -158,12 +161,19 @@ public class PorcentajeProyecto extends AppCompatActivity {
                 } else if ("DESAPROBADO".equalsIgnoreCase(revision.getEstado())) {
                     rechazadas++;
                 }
+            } else {
+                // Agregar las revisiones anteriores al mapa para ser procesadas posteriormente
+                String tipoSeccion = revision.getTitulo();
+                if (!latestRevisions.containsKey(tipoSeccion) ||
+                        revision.getFechaRevision().after(latestRevisions.get(tipoSeccion).getFechaRevision())) {
+                    latestRevisions.put(tipoSeccion, revision);
+                }
             }
         }
 
-        // Si no hay revisiones recientes, usar todas las revisiones disponibles
+        // Si no hay revisiones recientes, usar las revisiones anteriores
         if (!hasRecentRevisions) {
-            for (Revision revision : revisiones) {
+            for (Revision revision : latestRevisions.values()) {
                 if ("APROBADO".equalsIgnoreCase(revision.getEstado())) {
                     aprobadas++;
                 } else if ("DESAPROBADO".equalsIgnoreCase(revision.getEstado())) {
@@ -187,9 +197,9 @@ public class PorcentajeProyecto extends AppCompatActivity {
         dataSet.setValueTextSize(14f); // Ajusté el tamaño de texto para ser más legible
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(ContextCompat.getColor(this, R.color.revisadoproyect));  // Verde para "Completado"
-        colors.add(Color.RED);    // Rojo para "Falta"
-        dataSet.setColors(colors);  // Aplicar los colores
+        colors.add(ContextCompat.getColor(this, R.color.revisadoproyect)); // Verde para "Completado"
+        colors.add(Color.RED); // Rojo para "Falta"
+        dataSet.setColors(colors); // Aplicar los colores
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(14f);
@@ -220,10 +230,4 @@ public class PorcentajeProyecto extends AppCompatActivity {
         pieChart.setHoleColor(holeColor);
         pieChart.invalidate();
     }
-
-
-
-
-
-
 }
