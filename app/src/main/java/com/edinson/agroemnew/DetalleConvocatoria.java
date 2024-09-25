@@ -15,8 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.notificaciones.Convocatoria;
-import com.edinson.agroemnew.modelApi.notificaciones.Template;
-import com.google.common.reflect.TypeToken;
+import com.edinson.agroemnew.modelApi.notificaciones.Plantilla;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
@@ -24,8 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import javax.xml.transform.Templates;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,7 +54,6 @@ public class DetalleConvocatoria extends AppCompatActivity {
         llTemplates = findViewById(R.id.llTemplates);
         llFiles = findViewById(R.id.llFiles);
 
-
         // Obtener datos del Intent
         String convocatoriaId = getIntent().getStringExtra("convocatoria_id");
         String token = getIntent().getStringExtra("authorization");
@@ -78,21 +74,23 @@ public class DetalleConvocatoria extends AppCompatActivity {
             public void onResponse(Call<Convocatoria> call, Response<Convocatoria> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Convocatoria convocatoria = response.body();
-                    // Mostrar los detalles en la UI
+
+                    // Mostrar detalles de la convocatoria en la UI
                     tvTituloConvocatoria.setText(convocatoria.getTitle());
                     tvDescripcionConvocatoria.setText(convocatoria.getDescripcion());
 
-                    // Cambiar el formato de las fechas
-                    String fechaInicioFormato = formatearFecha(convocatoria.getFechaInicio(), "yyyy-MM-dd", "dd/MM/yyyy");
-                    String fechaCierreFormato = formatearFecha(convocatoria.getFechaCierre(), "yyyy-MM-dd", "dd/MM/yyyy");
+                    // Formatear fechas
+                    String fechaInicioFormato = formatearFecha(convocatoria.getFechaInicio(), "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", "dd/MM/yyyy");
+                    String fechaCierreFormato = formatearFecha(convocatoria.getFechaCierre(), "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", "dd/MM/yyyy");
 
                     tvFechaInicio.setText("Fecha de Inicio: " + fechaInicioFormato);
                     tvFechaCierre.setText("Fecha de Cierre: " + fechaCierreFormato);
                     tvEstadoConvocatoria.setText("Estado: " + convocatoria.getEstado());
 
-                    // Mostrar los templates
-                    mostrarTemplates(convocatoria.getTemplate());
-                    // Mostrar los archivos
+                    // Mostrar plantilla
+                    mostrarTemplate(convocatoria.getPlantilla());
+
+                    // Mostrar archivos si existen
                     mostrarFiles(convocatoria.getFiles());
                 } else {
                     Log.e("DetalleConvocatoria", "Error en la respuesta: " + response.code() + " - " + response.message());
@@ -100,35 +98,39 @@ public class DetalleConvocatoria extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onFailure(Call<Convocatoria> call, Throwable t) {
-                Log.e("DetalleConvocatoria", "Error de conexión: ", t); // Registra el error completo
+                Log.e("DetalleConvocatoria", "Error de conexión: ", t);
                 Toast.makeText(DetalleConvocatoria.this, "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void mostrarTemplates(List<String> templates) {
-        llTemplates.removeAllViews();
-        Gson gson = new Gson();
+    // Update mostrarTemplate to handle a single Template object
+    private void mostrarTemplate(Plantilla plantilla) {
+        llTemplates.removeAllViews(); // Limpia las vistas existentes
 
-        // Deserializar el primer template
-        for (String templateJson : templates) {
-            // Deserializar el JSON que contiene el array de objetos
-            List<Template> templateList = gson.fromJson(templateJson, new TypeToken<List<Template>>() {}.getType());
-
-            // Iterar por cada objeto Template y mostrar su título
-            for (Template template : templateList) {
-                TextView textView = new TextView(this);
-                textView.setText(template.getTitle());  // Mostrar el título del template
-                llTemplates.addView(textView);
-            }
+        if (plantilla != null) {
+            // Crear un TextView para mostrar la plantilla
+            TextView textView = new TextView(this);
+            textView.setText("Título: " + plantilla.getTitle());
+            llTemplates.addView(textView);
+        } else {
+            // Muestra un mensaje si no hay plantilla disponible
+            TextView textView = new TextView(this);
+            textView.setText("No hay plantillas disponibles");
+            llTemplates.addView(textView);
         }
     }
 
+
+
+
+    // Mostrar los archivos adjuntos
     private void mostrarFiles(List<String> files) {
+        llFiles.removeAllViews();
         if (files != null && !files.isEmpty()) {
-            llFiles.removeAllViews();
             for (String fileUrl : files) {
                 // Crear un ImageView para mostrar el ícono de descarga
                 ImageView imageView = new ImageView(this);

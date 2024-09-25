@@ -7,14 +7,14 @@ public class ConvocatoriaNtf {
     private String fechaCreacion;
     private String estado;
     private String instrucciones;
-    private Template template;
+    private Plantilla template;
 
     // Default constructor
     public ConvocatoriaNtf() {
     }
 
     // Constructor with parameters
-    public ConvocatoriaNtf(String fechaInicio, String titulo, String descripcion, String fechaCreacion, String estado, String instrucciones, Template template) {
+    public ConvocatoriaNtf(String fechaInicio, String titulo, String descripcion, String fechaCreacion, String estado, String instrucciones, Plantilla template) {
         this.fechaInicio = fechaInicio;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -73,11 +73,11 @@ public class ConvocatoriaNtf {
         this.instrucciones = instrucciones;
     }
 
-    public Template getTemplate() {
+    public Plantilla getTemplate() {
         return template;
     }
 
-    public void setTemplate(Template template) {
+    public void setTemplate(Plantilla template) {
         this.template = template;
     }
 }

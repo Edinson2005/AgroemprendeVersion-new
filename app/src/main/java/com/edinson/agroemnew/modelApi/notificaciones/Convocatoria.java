@@ -2,7 +2,7 @@ package com.edinson.agroemnew.modelApi.notificaciones;
 
 import java.util.List;
 
-public class Convocatoria {
+public class Convocatoria{
     private String _id;
     private String fechaInicio;
     private String title;
@@ -10,8 +10,9 @@ public class Convocatoria {
     private String fechaCierre;
     private String estado;
     private List<String> files;
-    private List<String> template; // Cambiado a List<String>
+    private Plantilla plantilla;  // Cambiado a List<String>
 
+    // Getters y setters
     public String get_id() {
         return _id;
     }
@@ -68,11 +69,11 @@ public class Convocatoria {
         this.files = files;
     }
 
-    public List<String> getTemplate() {
-        return template;
+    public Plantilla getPlantilla() {
+        return plantilla;
     }
 
-    public void setTemplate(List<String> template) {
-        this.template = template;
+    public void setPlantilla(Plantilla plantilla) {
+        this.plantilla = plantilla;
     }
 }
