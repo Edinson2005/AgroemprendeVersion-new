@@ -16,10 +16,13 @@ import com.edinson.agroemnew.modelApi.ApiLogin;
 import com.edinson.agroemnew.modelApi.ApiService;
 import com.edinson.agroemnew.modelApi.notificaciones.Convocatoria;
 import com.edinson.agroemnew.modelApi.notificaciones.Plantilla;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -88,7 +91,7 @@ public class DetalleConvocatoria extends AppCompatActivity {
                     tvEstadoConvocatoria.setText("Estado: " + convocatoria.getEstado());
 
                     // Mostrar plantilla
-                    mostrarTemplate(convocatoria.getPlantilla());
+                    mostrarTemplate(convocatoria.getTemplate());
 
                     // Mostrar archivos si existen
                     mostrarFiles(convocatoria.getFiles());
@@ -108,19 +111,46 @@ public class DetalleConvocatoria extends AppCompatActivity {
     }
 
     // Update mostrarTemplate to handle a single Template object
-    private void mostrarTemplate(Plantilla plantilla) {
+    private void mostrarTemplate(List<String> templates) {
         llTemplates.removeAllViews(); // Limpia las vistas existentes
 
-        if (plantilla != null) {
-            // Crear un TextView para mostrar la plantilla
-            TextView textView = new TextView(this);
-            textView.setText("Título: " + plantilla.getTitle());
-            llTemplates.addView(textView);
+        if (templates != null && !templates.isEmpty()) {
+            for (String templateJson : templates) {
+                try {
+
+                    Gson gson = new Gson();
+                    Type listType = new TypeToken<ArrayList<TemplateItem>>(){}.getType();
+                    List<TemplateItem> templateItems = gson.fromJson(templateJson, listType);
+
+                    // Crear un TextView para mostrar los items del template
+                    TextView textView = new TextView(this);
+                    StringBuilder templateContent = new StringBuilder("");
+                    for (TemplateItem item : templateItems) {
+                        templateContent.append("- ").append(item.getTitulo()).append("\n");
+                    }
+                    textView.setText(templateContent.toString());
+                    llTemplates.addView(textView);
+                } catch (Exception e) {
+                    Log.e("DetalleConvocatoria", "Error al parsear template: " + e.getMessage());
+                    TextView errorView = new TextView(this);
+                    errorView.setText("Error al mostrar el template");
+                    llTemplates.addView(errorView);
+                }
+            }
         } else {
-            // Muestra un mensaje si no hay plantilla disponible
+            // Muestra un mensaje si no hay templates disponibles
             TextView textView = new TextView(this);
-            textView.setText("No hay plantillas disponibles");
+            textView.setText("No hay templates disponibles");
             llTemplates.addView(textView);
+        }
+    }
+
+    // Clase interna para representar un item del template
+    private static class TemplateItem {
+        private String titulo;
+
+        public String getTitulo() {
+            return titulo;
         }
     }
 

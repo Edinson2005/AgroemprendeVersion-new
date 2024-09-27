@@ -10,7 +10,7 @@ public class Convocatoria{
     private String fechaCierre;
     private String estado;
     private List<String> files;
-    private Plantilla plantilla;  // Cambiado a List<String>
+    private List <String> template;  // Cambiado a List<String>
 
     // Getters y setters
     public String get_id() {
@@ -69,11 +69,11 @@ public class Convocatoria{
         this.files = files;
     }
 
-    public Plantilla getPlantilla() {
-        return plantilla;
+    public List<String> getTemplate() {
+        return template;
     }
 
-    public void setPlantilla(Plantilla plantilla) {
-        this.plantilla = plantilla;
+    public void setTemplate(List<String> template) {
+        this.template = template;
     }
 }
