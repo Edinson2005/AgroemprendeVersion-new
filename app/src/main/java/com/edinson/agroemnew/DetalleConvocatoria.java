@@ -110,6 +110,9 @@ public class DetalleConvocatoria extends AppCompatActivity {
         });
     }
 
+
+
+
     // Update mostrarTemplate to handle a single Template object
     private void mostrarTemplate(List<String> templates) {
         llTemplates.removeAllViews(); // Limpia las vistas existentes
